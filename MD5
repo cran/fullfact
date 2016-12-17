@@ -1,4 +1,4 @@
-c6faea414cf3eecd06ca77738925e306 *DESCRIPTION
+d2aa6f772ed6289dd55dfc325137a701 *DESCRIPTION
 b2c096e4be592d46196294edd7ac47b2 *NAMESPACE
 b1e5437536f89dd7188dda931d7e8982 *R/JackGlmer.R
 769051a3d548b395aa0f95d3215cd948 *R/JackGlmer2.R
@@ -6,7 +6,7 @@ b1e5437536f89dd7188dda931d7e8982 *R/JackGlmer.R
 f1f21949a208e049dacb546afe92c764 *R/JackLmer.R
 2ea2652044f14789cc9f2982c6753b3a *R/JackLmer2.R
 0df664f5f0ee9ef6c47e6a8c1d5270ac *R/JackLmer3.R
-af59045fcf176d254b6a9a4ef07bacf9 *R/barMANA.R
+21bd97c960a695223f6a03bb22805088 *R/barMANA.R
 d32f5ac505dafbd15fe33281952a8c45 *R/boxMANA.R
 ddc53eb375987f1b04dd835a00ced0b6 *R/buildBinary.R
 5b9b448309c34dd2e527a6b8d85becc0 *R/buildMulti.R
@@ -40,7 +40,7 @@ a3a4112c12f5ed3b8590e331f8aec2a2 *R/resampGlmer2.R
 72baf3fc2b91a06da911cbac119d86fa *R/resampLmer2.R
 0637dc36b15cb07cfe054f904270f7c2 *R/resampLmer3.R
 9cca92192d5834c6e4cc2815949b90b2 *R/resampRepli.R
-aea2301df347e7be241b8801e8337c97 *build/partial.rdb
+9026fd86d14b8b835b18eebcc2c4d0b7 *build/partial.rdb
 ddb660f8f493e70f659b16f0743ade81 *data/chinook_bootL.rda
 c22a37421147692a57f48125d4e7c0d1 *data/chinook_bootS.rda
 533b483127db984a24fe16b6257a7f17 *data/chinook_jackL.rda
@@ -72,7 +72,7 @@ cb744071a4f750f3c60c4243f09a84cc *man/chinook_survival.Rd
 b6a12d32bf3e41698b84b475dbca6ef8 *man/ciMANA2.Rd
 a7b2c0d1837e12b31c028c64ef995756 *man/ciMANA3.Rd
 10ad982b90b5d7e0692ab5cfc1d01443 *man/fullfact-internal.Rd
-91509484997554db24ea5c3050d5403e *man/fullfact-package.Rd
+982ddbf5677184a5ec46e0149a41d38f *man/fullfact-package.Rd
 033b0f40fee0dfae439cafbd99d2b77f *man/observGlmer.Rd
 08081c9e8eef09c9f17f8be60a049b8d *man/observGlmer2.Rd
 d0e74de7f1d64737ec077b1e03c3e391 *man/observGlmer3.Rd

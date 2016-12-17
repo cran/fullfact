@@ -17,9 +17,9 @@ if (!is.null(dat$trait)) { num <- length(levels(dat$trait)); name_lab<- levels(d
   ord[,1][seq(1,3*num,3)]<- which(dat$component=="additive")
   ord[,1][seq(2,3*num,3)]<- which(dat$component=="nonadd")
   ord[,1][seq(3,3*num,3)]<- which(dat$component=="maternal") }
- dat_ci<- matrix(dat[,3][ord],ncol=num,nrow=3) #median/mean
- lwr_ci<- matrix(dat$lower[ord],ncol=num,nrow=3)
- upp_ci<- matrix(dat$upper[ord],ncol=num,nrow=3)
+ dat_ci<- matrix(as.numeric(dat[,3][ord]),ncol=num,nrow=3) #median/mean
+ lwr_ci<- matrix(as.numeric(dat$lower[ord]),ncol=num,nrow=3)
+ upp_ci<- matrix(as.numeric(dat$upper[ord]),ncol=num,nrow=3)
  if (is.null(ymax)) { ymax<- max(dat$upper[ord]) }
  if (!is.null(ymax)) { ymax<- ymax }
  if (is.null(ymin)) { ymin<- 0 }

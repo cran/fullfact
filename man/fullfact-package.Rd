@@ -6,11 +6,34 @@
 \packageTitle{fullfact}
 }
 \description{
-Analysis of full factorial breeding designs. The package incorporates mixed-effects models suited for unbalanced experimental
-designs and non-normal data types. Extracts variance components and significance values for random and fixed effects. Calculates
-the amount of additive genetic, non-additive genetic, and maternal variance explaining phenotypic traits. Produces confidence values
-using a bootstrap resampling routine and can apply bias and acceleration correction. Also includes an option for producing jackknife
-resampling confidence intervals. Calculates the power values of random and fixed effects.
+
+Full factorial breeding designs are useful for quantifying the amount of additive
+genetic, nonadditive genetic, and maternal variance that explain phenotypic
+traits. Such variance estimates are important for examining evolutionary potential.
+Traditionally, full factorial mating designs have been analyzed using a two-
+way analysis of variance, which may produce negative variance values and is
+not suited for unbalanced designs. Mixed-effects models do not produce negative
+variance values and are suited for unbalanced designs. However, extracting
+the variance components, calculating significance values, and estimating confidence
+intervals and/or power values for the components are not straightforward
+using traditional analytic methods.
+
+In this package we address these issues and facilitate the analysis of full factorial mating
+designs with mixed-effects models. The observed data functions extract the variance explained
+by random and fixed effects and provide their significance. We then calculate
+the additive genetic, nonadditive genetic, and maternal variance components
+explaining the phenotype. In particular, we integrate nonnormal error structures for estimating
+these components for nonnormal data types. The resampled data functions are used to produce
+bootstrap confidence intervals, which can then be plotted using a simple function.
+This package will facilitate the analyses of full factorial mating designs in R, especially
+for the analysis of binary, proportion, and/or count data types and for the ability to incorporate
+additional random and fixed effects and power analyses.
+
+The paper associated with the package including worked examples is:
+
+Houde ALS, Pitcher TE. 2016. fullfact: an R package for the analysis of genetic and maternal variance components
+from full factorial mating designs. Ecology and evolution 6 (6), 1656-1665. doi: 10.1002/ece3.1943.
+
 }
 \details{
 
