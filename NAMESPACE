@@ -1,14 +1,11 @@
-import(lme4,afex)
+importFrom("lme4", "lmer", "glmer", "fixef","VarCorr","findbars","nobars")
+importFrom("afex", "mixed")
 
 importFrom("graphics", "arrows", "axis", "barplot", "boxplot","legend")
 importFrom("stats", "anova", "formula", "plogis", "pnorm", "qnorm",
              "qt", "quantile", "rbinom", "reformulate", "rnorm", "rpois",
              "terms", "update", "var")
 importFrom("utils", "read.csv", "stack", "write.table")
-
-#exportPattern("^[[:alpha:]]+")
-
-#exportPattern("^[^\\.]")
 
 export(barMANA,boxMANA,buildBinary,buildMulti,ciJack,ciJack2,ciJack3,ciMANA,ciMANA2,ciMANA3,JackGlmer,JackGlmer2,JackGlmer3,JackLmer,JackLmer2,JackLmer3,
 observGlmer,observGlmer2,observGlmer3,observLmer,observLmer2,observLmer3,powerLmer,powerLmer2,powerLmer3,powerGlmer,powerGlmer2,powerGlmer3,

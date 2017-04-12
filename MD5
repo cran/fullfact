@@ -1,5 +1,5 @@
-d2aa6f772ed6289dd55dfc325137a701 *DESCRIPTION
-b2c096e4be592d46196294edd7ac47b2 *NAMESPACE
+400eca51613af683768a1ce2b07e9cb6 *DESCRIPTION
+a1fa7119c7aa1de581d3edd44e20e4f0 *NAMESPACE
 b1e5437536f89dd7188dda931d7e8982 *R/JackGlmer.R
 769051a3d548b395aa0f95d3215cd948 *R/JackGlmer2.R
 93cd09d02b3e6cf5a1c39e70f073c701 *R/JackGlmer3.R
@@ -40,7 +40,7 @@ a3a4112c12f5ed3b8590e331f8aec2a2 *R/resampGlmer2.R
 72baf3fc2b91a06da911cbac119d86fa *R/resampLmer2.R
 0637dc36b15cb07cfe054f904270f7c2 *R/resampLmer3.R
 9cca92192d5834c6e4cc2815949b90b2 *R/resampRepli.R
-9026fd86d14b8b835b18eebcc2c4d0b7 *build/partial.rdb
+8155646bf1bb0f1de64e5bd5d392113d *build/partial.rdb
 ddb660f8f493e70f659b16f0743ade81 *data/chinook_bootL.rda
 c22a37421147692a57f48125d4e7c0d1 *data/chinook_bootS.rda
 533b483127db984a24fe16b6257a7f17 *data/chinook_jackL.rda
