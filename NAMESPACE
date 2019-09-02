@@ -10,4 +10,3 @@ importFrom("utils", "read.csv", "stack", "write.table")
 export(barMANA,boxMANA,buildBinary,buildMulti,ciJack,ciJack2,ciJack3,ciMANA,ciMANA2,ciMANA3,JackGlmer,JackGlmer2,JackGlmer3,JackLmer,JackLmer2,JackLmer3,
 observGlmer,observGlmer2,observGlmer3,observLmer,observLmer2,observLmer3,powerLmer,powerLmer2,powerLmer3,powerGlmer,powerGlmer2,powerGlmer3,
 resampFamily,resampRepli,resampGlmer,resampGlmer2,resampGlmer3,resampLmer,resampLmer2,resampLmer3)
-

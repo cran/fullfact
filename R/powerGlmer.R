@@ -1,6 +1,6 @@
 powerGlmer <-
 function(varcomp,nval,fam_link,alpha=0.05,nsim=100,poisLog=NULL) {
-  if (missing(varcomp)) stop("Need the variance component vector")  #dam,sire,dxs
+  if (missing(varcomp)) stop("Need the variance component vector")  #dam,sire,dxs,res
   if (missing(nval)) stop("Need the sample size vector") #dam,sire,off
   if (missing(fam_link)) stop("Need the family(link) for the glmer")
   if(paste(fam_link)[2]== "log" && is.null(poisLog)) stop("Need the poisLog variance component")
