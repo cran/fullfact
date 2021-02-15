@@ -12,14 +12,14 @@ ml = F)
 }
 \arguments{
   \item{varcomp}{Vector of known dam, sire, dam by sire, residual, and position and/or
-  block variance components, i.e. c(dam,sire,ds,res,position/block). If there is a
-  position and a block c(..., res, position, block).}
-  \item{nval}{Vector of known dam, sire, offspring per family, and position and/or block
+  block variance components, i.e. c(dam,sire,ds,residual,position/block). If there is a
+  position and a block c(..., residual, position, block).}
+  \item{nval}{Vector of known dam, sire, offspring per family, and offspring per position or number of blocks
   sample sizes, i.e. c(dam,sire,offspring,position/block). If there is a position and a
   block c(..., offspring, position, block).}
   \item{alpha}{Statistical significance value. Default is 0.05.}
   \item{nsim}{Number of simulations. Default is 100.}
-  \item{position}{Optional number of replicates to divide the number of offspring for the number of positions.}
+  \item{position}{Optional number of positions.}
   \item{block}{Optional vector of dams and sires per block, e.g. c(2,2).}
   \item{ml}{Default is FALSE for restricted maximum likelihood. Change to TRUE for maximum likelihood.}
 }
@@ -30,7 +30,7 @@ significance values less than \emph{alpha} for each component (Bolker 2008).
 Significance values for the random effects are determined using likelihood ratio tests (Bolker et al. 2009).
 }
 \value{
-A data frame with the sample sizes, variance component inputs, variance component outputs, and power values.
+Prints a data frame with the sample sizes, variance component inputs, variance component outputs, and power values.
 }
 \references{
 Bolker BM. 2008. Ecological models and data in R. Princeton University Press, New Jersey.
@@ -55,7 +55,5 @@ parameters, but is the preferred method for analyzing large data sets with compl
 \seealso{ \code{\link{powerLmer}}, \code{\link{powerLmer3}} }
 \examples{
 #100 simulations
-\dontrun{pwr_L2<- powerLmer2(varcomp=c(0.19,0.03,0.02,0.66,0.1),nval=c(10,10,20,10),
-position=2)
-pwr_L2}
+\dontrun{powerLmer2(varcomp=c(0.19,0.03,0.02,0.66,0.1),nval=c(10,10,20,10),position=2) }
 }

@@ -21,7 +21,8 @@ if (is.null(comp$trait)) { num<-1; name_lab<- ""
  box_plot<- boxplot(variance~ component, dat, pch=20, las=2, xaxt='n', yaxt='n',
    ylim=c(ymin,ymax),ylab=label,cex.lab=cex_ylab,col=c("gray55","gray","gray95"),at=1:3)
  legend(paste(leg),c("additive","non-additive","maternal"),fill=c("gray55","gray","gray95")) }
-if (!is.null(comp$trait)) { num <- length(levels(comp$trait)); name_lab<- levels(comp$trait)
+if (!is.null(comp$trait)) { comp$trait<- factor(comp$trait)
+  num <- length(levels(comp$trait)); name_lab<- levels(comp$trait)
   dat$trait<- rep(levels(comp$trait),tapply(comp[,1],comp$trait,length))
   full<- 1:(num*4);rem<- seq(4,num*4,4); loc<- full[-rem]
 box_plot<- boxplot(variance~ component + trait, dat, pch=20, las=2, xaxt='n', yaxt='n',

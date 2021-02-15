@@ -41,13 +41,13 @@ if (quasi == T)  {
    colnames(comp)<- c(col_names,"Residual")
    comp$Total<- rowSums(comp)
 colnames(comp)<- gsub(end,'', colnames(comp))
-  colnames(comp)[which(colnames(comp)==dam)]<- "dam"
-  colnames(comp)[which(colnames(comp)==sire)]<- "sire"
-  colnames(comp)[which(colnames(comp)==noquote(paste(dam,":",sire,sep="")))]<- "dam:sire"
-  colnames(comp)[which(colnames(comp)==noquote(paste(dam,".",sire,sep="")))]<- "dam:sire" #weird period sometimes
-  comp$additive<- 4*comp$sire
-  comp$nonadd<- 4*comp$'dam:sire'
-  comp$maternal<- comp$dam- comp$sire
+  temp<- comp #to not override column names
+  colnames(temp)[which(colnames(temp)==dam)]<- "dam"
+  colnames(temp)[which(colnames(temp)==sire)]<- "sire"
+  colnames(temp)[which(colnames(temp)==noquote(paste(dam,":",sire,sep="")))]<- "dam:sire"
+  comp$additive<- 4*temp$sire
+  comp$nonadd<- 4*temp$'dam:sire'
+  comp$maternal<- temp$dam- comp$sire
    print(Sys.time()- time1) #end time
    invisible(comp)  #after time
 }

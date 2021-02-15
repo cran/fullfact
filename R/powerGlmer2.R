@@ -54,10 +54,10 @@ sim_dat<- data.frame(dam_var=numeric(nsim), dam_pval=numeric(nsim), sire_var=num
 for (i in 1:nsim) {
 print(paste0("Starting simulation: ", i))
   damR<- rnorm(damN,0,sd=sqrt(damK));sireR<- rnorm(sireN,0,sd=sqrt(sireK));dxsR<- rnorm(damN*sireN,0,sd=sqrt(dxsK))
-  posR<- rnorm(posN,0,sd=sqrt(posK))
+  posR<- rnorm(position,0,sd=sqrt(posK))
 observ <- expand.grid(off=1:offN, dam=1:damN, sire=1:sireN)
 observ$famil<- rep(1:(damN*sireN),each=offN)
-observ$position<- rep(1:posN,each=offN/position)
+observ$position<- rep(1:position,each=posN)
 observ<- within(observ, { resp<- damR[dam] + sireR[sire] + dxsR[famil] + posR[position] } )  #do not add resR
   if(paste(fam_link)[2]== "logit") { observ<- within(observ, {resp2<- rbinom(nrow(observ),prob=plogis(resp),size=1)}) }
   if(paste(fam_link)[2]== "probit") { observ<- within(observ, {resp2<- rbinom(nrow(observ),prob=pnorm(resp),size=1)}) }
@@ -81,7 +81,7 @@ sim_dat$dam.sire_pval[i]<- p_rand$p.value[which(p_rand$term=="(1 | dam:sire)")]
 sim_dat$pos_pval[i]<- p_rand$p.value[which(p_rand$term=="(1 | position)")]
 } #end position only loop
 pwr_res<- data.frame(term=c("dam","sire","dam.sire","position","residual"),
-  n= c(nval[c(1,2)],damN*sireN,nval[4],NA), var_in= c(varcomp,resK),
+  n= c(nval[c(1,2)],damN*sireN,position,NA), var_in= c(varcomp,resK),
   var_out=c(mean(sim_dat$dam_var),mean(sim_dat$sire_var),mean(sim_dat$dam.sire_var),mean(sim_dat$pos_var),
   mean(sim_dat$residual)), power=c(sum(sim_dat$dam_pval < alpha)/nsim,sum(sim_dat$sire_pval < alpha)/nsim,
   sum(sim_dat$dam.sire_pval < alpha)/nsim,sum(sim_dat$pos_pval < alpha)/nsim,NA))
@@ -147,10 +147,8 @@ sire0<- stack(as.data.frame(matrix(1:(block[2]*blocN),ncol=blocN,nrow=block[2]))
 observ0<- merge(dam0,sire0, by="ind")
 levels(observ0[,1])<- 1:blocN; colnames(observ0)<- c("block","dam","sire")
 observ0$famil<- 1:nrow(observ0)  #add family
-observ1<- do.call("rbind", replicate(position,observ0,simplify=F));rm(observ0) #expand for position
-observ1$position<- sample(rep(1:posN,each=position)) #random assignment
-observ<- do.call("rbind", replicate(offN,observ1,simplify=F)); rm(observ1) #expand for offspring
-observ$off<- rep(1:offN,each=block[1]*block[2]*blocN)
+observ<- do.call("rbind", replicate(offN,observ0,simplify=F));rm(observ0) #expand
+observ$position<- rep(1:position,each=posN*length(dxsR)) 
 observ<- within(observ, { resp<- damR[dam] + sireR[sire] + dxsR[famil] + posR[position] + blocR[block] } )  #do not add resR
   if(paste(fam_link)[2]== "logit") { observ<- within(observ, {resp2<- rbinom(nrow(observ),prob=plogis(resp),size=1)}) }
   if(paste(fam_link)[2]== "probit") { observ<- within(observ, {resp2<- rbinom(nrow(observ),prob=pnorm(resp),size=1)}) }
@@ -176,12 +174,12 @@ sim_dat$pos_pval[i]<- p_rand$p.value[which(p_rand$term=="(1 | position)")]
 sim_dat$bloc_pval[i]<- p_rand$p.value[which(p_rand$term=="(1 | block)")]
 } #end position and block loop
 pwr_res<- data.frame(term=c("dam","sire","dam.sire","position","block","residual"),
-  n= c(nval[c(1,2)],block[1]*block[2]*blocN,nval[c(4,5)],NA), var_in= c(varcomp,resK),
+  n= c(nval[c(1,2)],block[1]*block[2]*blocN,position,nval[5],NA), var_in= c(varcomp,resK),
   var_out=c(mean(sim_dat$dam_var),mean(sim_dat$sire_var),mean(sim_dat$dam.sire_var),mean(sim_dat$pos_var),
   mean(sim_dat$ bloc_var),mean(sim_dat$residual)), power=c(sum(sim_dat$dam_pval < alpha)/nsim,
   sum(sim_dat$sire_pval < alpha)/nsim,sum(sim_dat$dam.sire_pval < alpha)/nsim,sum(sim_dat$pos_pval < alpha)/nsim,
   sum(sim_dat$bloc_pval < alpha)/nsim,NA))
 } #end position and block
   print(Sys.time()- time1) #end time
-  invisible(pwr_res)  #after time
+  return(pwr_res)  #after time
 }

@@ -14,14 +14,14 @@ block = NULL, poisLog = NULL)
   \item{varcomp}{Vector of known dam, sire, dam by sire, and position and/or
   block variance components, i.e. c(dam,sire,ds,position/block). If there is a
   position and a block c(..., ds, position, block).}
-  \item{nval}{Vector of known dam, sire, offspring per family, and position and/or block
+  \item{nval}{Vector of known dam, sire, offspring per family, and offspring per position or number of blocks
   sample sizes, i.e. c(dam,sire,offspring,position/block). If there is a position and a
   block c(..., offspring, position, block).}
   \item{fam_link}{ The family and link in family(link) format. Supported options are binomial(logit),
   binomial(probit), poisson(log), and poisson (sqrt).}
   \item{alpha}{Statistical significance value. Default is 0.05.}
   \item{nsim}{Number of simulations. Default is 100.}
-  \item{position}{Optional number of replicates to divide the number of offspring for the number of positions.}
+  \item{position}{Optional number of positions.}
   \item{block}{Optional vector of dams and sires per block, e.g. c(2,2).}
   \item{poisLog}{Known poisson(log) variance component value.}
 }
@@ -33,7 +33,7 @@ significance values less than \emph{alpha} for each component (Bolker 2008).
 Significance values for the random effects are determined using likelihood ratio tests (Bolker et al. 2009).
 }
 \value{
-A data frame with the sample sizes, variance component inputs, variance component outputs, and power values.
+Prints a data frame with the sample sizes, variance component inputs, variance component outputs, and power values.
 }
 \references{
 Bolker BM. 2008. Ecological models and data in R. Princeton University Press, New Jersey.
@@ -61,7 +61,6 @@ increasing number of random effects.
 \seealso{ \code{\link{powerGlmer}}, \code{\link{powerGlmer3}} }
 \examples{
 #100 simulations
-\dontrun{pwr_G2<- powerGlmer2(varcomp=c(1,0.15,0.11,0.5),nval=c(10,10,20,10),
-fam_link=binomial(logit),position=2)
-pwr_G2}
+\dontrun{powerGlmer2(varcomp=c(1,0.15,0.11,0.5),nval=c(10,10,20,10),fam_link=binomial(logit),
+position=2) }
 }

@@ -9,9 +9,9 @@ function(dat,copy,family,replicate,iter) {
  fam2<- grep(paste(family), colnames(dat))
  rep2<- grep(paste(replicate), colnames(dat))
  families<- length(levels(as.factor(dat[,fam2])))  #count the number of families
- for (fam in 1:families) {
+ for (fam in 1:families) { 
   family2<- levels(as.factor(dat[,fam2]))[fam]
-  print(paste("Starting family: ", fam, " - id", family2, sep=""))
+  print(paste("Starting family: ", fam, " - id: ", family2, sep=""))
   target1<- dat[dat[,fam2]==family2,]
   num_rep<- length(levels(as.factor(target1[,rep2])))
   print(paste("Replicates found: ", num_rep, sep=""))
@@ -24,8 +24,8 @@ function(dat,copy,family,replicate,iter) {
     resamp<- array(0,dim=c(samp,length(copy),iter))
     for (i in 1:samp) { for (j in 1:length(copy)) { for (k in 1:iter) {
       resamp[,1,k]<- sample(1:num,samp,replace=T) }}}  #temporary: column 1 contains the sampled row number
-    for (i in 1:samp) { for (k in 1:iter) { for (z in 1:num) {   #row number gone, copied over
-      if (resamp[i,1,k] == z) { resamp[i,,k][1:length(copy)]<- as.numeric(target[z,][copy]) } }}}
+    for (i in 1:samp) { for (k in 1:iter) { for (z in 1:num) {   #row number gone, copied over   
+      if (resamp[i,1,k] == z) { resamp[i,,k][1:length(copy)]<- as.character(target[z,][copy]) } }}}
     file_name<- paste(family2,"_",rep,"_resampR.csv", sep="")
     write.table(resamp,file_name,sep=",",row.names=F)
   } #end replicant loop

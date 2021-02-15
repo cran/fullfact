@@ -27,7 +27,7 @@ significance values less than \emph{alpha} for each component (Bolker 2008).
 Significance values for the random effects are determined using likelihood ratio tests (Bolker et al. 2009).
 }
 \value{
-A data frame with the sample sizes, variance component inputs, variance component outputs, and power values.
+Prints a data frame with the sample sizes, variance component inputs, variance component outputs, and power values.
 }
 \references{
 Bolker BM. 2008. Ecological models and data in R. Princeton University Press, New Jersey.
@@ -55,6 +55,5 @@ increasing number of random effects.
 \seealso{ \code{\link{powerGlmer2}}, \code{\link{powerGlmer3}} }
 \examples{
 #100 simulations
-\dontrun{pwr_G1<- powerGlmer(varcomp=c(1,0.15,0.11),nval=c(10,10,20),fam_link=binomial(logit))
-pwr_G1}
+\dontrun{powerGlmer(varcomp=c(1,0.15,0.11),nval=c(10,10,20),fam_link=binomial(logit)) }
 }

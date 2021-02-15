@@ -74,11 +74,12 @@ sim_pvalR[,1][i]<- p_rand$p.value[which(p_rand$term=="(1 | dam)")]
 sim_pvalR[,2][i]<- p_rand$p.value[which(p_rand$term=="(1 | sire)")]
 sim_pvalR[,3][i]<- p_rand$p.value[which(p_rand$term=="(1 | dam:sire)")]
 for (p in 1:length(randN)) { sim_pvalR[,(3+p)][i]<- p_rand$p.value[which(p_rand$term==paste0("(1 | ",rNames[p],")"))] }
-if (!is.null(var_fix)) {
-  sim_varF[i]<- var(as.vector(fixef(m) %*% t(m@pp$X)))
-if (ftest=="LR") { f_rand<- fixedGlmer(model=m,observ=observ,fam_link=fam_link)$p.value } #p-value
-if (ftest=="PB") { f_rand<- mixed(m,data=observ,method = "PB",args.test = list(nsim = iter))$anova_table[4] }
-  sim_pvalF[i,]<- as.data.frame(f_rand)[,1]  }  #end fixed effects
+if (!is.null(var_fix)) {  
+  sim_varF[i]<- var(unique(as.vector(fixef(m) %*% t(m@pp$X))))
+if (ftest=="LR") { f_rand<- fixedGlmer(model=m,observ=observ,fam_link=fam_link) 
+  for (p in 1:length(fixN)) { sim_pvalF[,p][i]<- f_rand$p.value[which(f_rand$term==paste0(fNames[p]))] } }
+if (ftest=="PB") { f_rand<- mixed(m,data=observ,method = "PB",args.test = list(nsim = iter))$anova_table 
+  for (p in 1:length(fixN)) { sim_pvalF[,p][i]<- as.numeric(f_rand[which(rownames(f_rand)==paste0(fNames[p])),][4]) } }  } #end fixed
 } #end loop
 pwr_rand<- matrix(0,ncol=5,nrow=length(var_rand)+1)
 pwr_rand[,1]<- c("dam","sire","dam.sire",rNames,"residual")
@@ -99,5 +100,5 @@ pwr_fix2<- matrix(0,ncol=3,nrow=length(n_fix))
   pwr_fix2<- as.data.frame(pwr_fix2); colnames(pwr_fix2)<- c("term","n","power")
   pwr_res<- list(group=pwr_fix1, fixed=pwr_fix2, random=pwr_rand)  } #end fixed
   print(Sys.time()- time1) #end time
-  invisible(pwr_res)  #after time
+  return(pwr_res)  #after time
 }

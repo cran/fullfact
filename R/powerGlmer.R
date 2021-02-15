@@ -48,5 +48,5 @@ sim_dat$dam.sire_pval[i]<- p_rand$p.value[which(p_rand$term=="(1 | dam:sire)")]
   power=c(sum(sim_dat$dam_pval < alpha)/nsim,sum(sim_dat$sire_pval < alpha)/nsim,
   sum(sim_dat$dam.sire_pval < alpha)/nsim,NA))
   print(Sys.time()- time1) #end time
-  invisible(pwr_res)  #after time
+  return(pwr_res)  #after time
 }

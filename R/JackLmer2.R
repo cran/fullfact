@@ -99,12 +99,13 @@ if (!is.null(position) && !is.null(block)) {
   col_names<- c(as.data.frame(VarCorr(m))$grp,"Total")  } #end loop
 }  #end block Jack
  jack<- as.data.frame(jack); colnames(jack)<- col_names
-  colnames(jack)[which(colnames(jack)==dam)]<- "dam"
-  colnames(jack)[which(colnames(jack)==sire)]<- "sire"
-  colnames(jack)[which(colnames(jack)==noquote(paste(dam,":",sire,sep="")))]<- "dam:sire"
-  jack$additive<- 4*jack$sire
-  jack$nonadd<- 4*jack$'dam:sire'
-  jack$maternal<- jack$dam- jack$sire
+  temp<- jack #to not override column names
+  colnames(temp)[which(colnames(temp)==dam)]<- "dam"
+  colnames(temp)[which(colnames(temp)==sire)]<- "sire"
+  colnames(temp)[which(colnames(temp)==noquote(paste(dam,":",sire,sep="")))]<- "dam:sire"
+  jack$additive<- 4*temp$sire
+  jack$nonadd<- 4*temp$'dam:sire'
+  jack$maternal<- temp$dam- temp$sire
  print(Sys.time()- time1) #end time
  invisible(jack)  #after time
 }

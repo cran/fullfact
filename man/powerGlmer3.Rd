@@ -45,7 +45,7 @@ Significance values for any fixed effects are determined using likelihood ratio 
 bootstrap method (Bolker et al. 2009) from the \emph{mixed} function of the \emph{afex} package.
 }
 \value{
-A data frame with the sample sizes, variance component inputs, variance component outputs, and power values.
+Prints a data frame with the sample sizes, variance component inputs, variance component outputs, and power values.
 }
 \references{
 Bolker BM. 2008. Ecological models and data in R. Princeton University Press, New Jersey.
@@ -89,9 +89,6 @@ desn$egg_size<- 1:nrow(desn)
 colnames(desn)[6]<- "egg_size"
 
 #100 simulations
-\dontrun{pwr_G3<- powerGlmer3(var_rand=c(1,0.15,0.11,0.5,0.3),n_rand=c(20,20,40,10,10),
-fam_link=binomial(logit),var_fix=0.1,n_fix=1,design=desn,
-remain="(1|position)+(1|block)+egg_size")
-pwr_G3}
-
+\dontrun{powerGlmer3(var_rand=c(1,0.15,0.11,0.5,0.3),n_rand=c(20,20,40,10,10),fam_link=binomial(logit),
+  var_fix=0.1,n_fix=1,design=desn,remain="(1|position)+(1|block)+egg_size") }
 }

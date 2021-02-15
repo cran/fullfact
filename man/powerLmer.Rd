@@ -23,7 +23,7 @@ significance values less than \emph{alpha} for each component (Bolker 2008).
 Significance values for the random effects are determined using likelihood ratio tests (Bolker et al. 2009).
 }
 \value{
-A data frame with the sample sizes, variance component inputs, variance component outputs, and power values.
+Prints a data frame with the sample sizes, variance component inputs, variance component outputs, and power values.
 }
 \references{
 Bolker BM. 2008. Ecological models and data in R. Princeton University Press, New Jersey.
@@ -48,9 +48,8 @@ parameters, but is the preferred method for analyzing large data sets with compl
 \seealso{ \code{\link{powerLmer2}}, \code{\link{powerLmer3}} }
 \examples{
 #100 simulations
-#pwr_L1<- powerLmer(varcomp=c(0.19,0.03,0.02,0.76),nval=c(10,10,20))
-#pwr_L1
-#5simulations
-pwr_L1<- powerLmer(varcomp=c(0.19,0.03,0.02,0.76),nval=c(10,10,20),nsim=5)
-pwr_L1
+#powerLmer(varcomp=c(0.19,0.03,0.02,0.76),nval=c(10,10,20))
+#
+#5 simulations
+powerLmer(varcomp=c(0.19,0.03,0.02,0.76),nval=c(10,10,20),nsim=5)
 }

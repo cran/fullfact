@@ -63,12 +63,14 @@ function(observ,dam,sire,response,fam_link,position=NULL,block=NULL,quasi=F) {
    r_term<- r_term1[seq(3,length(r_term1),3)]  #every third matches comp
  for (i in  1:length(r_term0)) {
    comp[,c(4:7)][which(comp$effect==r_term[i]),]<- p_rand[,c(2:5)][which(p_rand$term==r_term0[i]),]  }
-  levels(comp$effect)[which(levels(comp$effect)==dam)]<- "dam"
-  levels(comp$effect)[which(levels(comp$effect)==sire)]<- "sire"
-  levels(comp$effect)[which(levels(comp$effect)==noquote(paste(dam,":",sire,sep="")))]<- "dam:sire"
+  temp<- comp #to not override column names
+  temp$effect<- factor(temp$effect)
+  levels(temp$effect)[which(levels(temp$effect)==dam)]<- "dam"
+  levels(temp$effect)[which(levels(temp$effect)==sire)]<- "sire"
+  levels(temp$effect)[which(levels(temp$effect)==noquote(paste(dam,":",sire,sep="")))]<- "dam:sire"
   comp2<- data.frame(component=c("additive","nonadd","maternal"),variance=0,percent=0)
-  comp2$variance<- c(4*comp$variance[which(comp$effect=="sire")],4*comp$variance[which(comp$effect=="dam:sire")],
-    comp$variance[which(comp$effect=="dam")]- comp$variance[which(comp$effect=="sire")])
+  comp2$variance<- c(4*temp$variance[which(temp$effect=="sire")],4*temp$variance[which(temp$effect=="dam:sire")],
+    temp$variance[which(temp$effect=="dam")]- temp$variance[which(temp$effect=="sire")])
   comp2$percent<- 100*comp2$variance/tot
   var_obj<- list(random=comp,other=other,calculation=comp2)
    print(Sys.time()- time1) #end time

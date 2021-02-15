@@ -12,7 +12,8 @@ if (is.null(dat$trait)) { num <- 1; name_lab<- ""
   ord[,1][1]<- which(dat$component=="additive")
   ord[,1][2]<- which(dat$component=="nonadd")
   ord[,1][3]<- which(dat$component=="maternal") }
-if (!is.null(dat$trait)) { num <- length(levels(dat$trait)); name_lab<- levels(dat$trait)
+if (!is.null(dat$trait)) { dat$trait<- factor(dat$trait)
+  num <- length(levels(dat$trait)); name_lab<- levels(dat$trait)
   ord<- matrix(0,ncol=1,nrow=3*num)
   ord[,1][seq(1,3*num,3)]<- which(dat$component=="additive")
   ord[,1][seq(2,3*num,3)]<- which(dat$component=="nonadd")

@@ -9,7 +9,7 @@ function(dat,copy,family,iter) {
  families<- length(levels(as.factor(dat[,fam2])))  #count the number of families
  for (fam in 1:families) {
   family2<- levels(as.factor(dat[,fam2]))[fam]
-  print(paste("Starting family: ", fam, " - id", family2, sep=""))
+  print(paste("Starting family: ", fam, " - id: ", family2, sep=""))
   target<- dat[dat[,fam2]==family2,]
     num<- length(target[,1]) #number of individuals in family
     samp<- num
@@ -18,7 +18,7 @@ function(dat,copy,family,iter) {
     for (i in 1:samp) { for (j in 1:length(copy)) { for (k in 1:iter) {
       resamp[,1,k]<- sample(1:num,samp,replace=T) }}}  #temporary: column 1 contains the sampled row number
     for (i in 1:samp) { for (k in 1:iter) { for (z in 1:num) {   #row number gone, copied over
-      if (resamp[i,1,k] == z) { resamp[i,,k][1:length(copy)]<- as.numeric(target[z,][copy]) } }}}
+      if (resamp[i,1,k] == z) { resamp[i,,k][1:length(copy)]<- as.character(target[z,][copy]) } }}}
     file_name<- paste(family2, "_resampF.csv", sep="")
     write.table(resamp,file_name,sep=",",row.names=F)
  } #end family loop

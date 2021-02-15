@@ -11,27 +11,27 @@ function(resamp,dam,sire,response,start,end,ml=F) {
   dam2<- colnames(resamp)[grep(paste(dam), colnames(resamp))]
   sire2<- colnames(resamp)[grep(paste(sire), colnames(resamp))]
   mod<- matrix(0,ncol=4,nrow=length(response2))   #variance
- for (j in start:end) {
+ for (j in start:end) { 
   print(paste("Working on model: ", j, sep=""))
  if (ml == F) {
   m<- lmer(formula= noquote(paste(response2[j],"~ (1|",dam2[j],") + (1|",sire2[j],") + (1|",dam2[j],":",sire2[j],")",sep="")),
     data=resamp) }
  if (ml == T) {
   m<- lmer(formula= noquote(paste(response2[j],"~ (1|",dam2[j],") + (1|",sire2[j],") + (1|",dam2[j],":",sire2[j],")",sep="")),
-    data=resamp, REML=F) }
+    data=resamp, REML=F) } 
   mod[j,]<- c(colSums(diag(VarCorr(m))),attr(VarCorr(m),"sc")^2)
   col_names<- as.data.frame(VarCorr(m))$grp; rm(m)   }
    comp<- as.data.frame(mod)
    colnames(comp)<- col_names
    comp$Total<- rowSums(comp)
 colnames(comp)<- gsub(end,'', colnames(comp))
-  colnames(comp)[which(colnames(comp)==dam)]<- "dam"
-  colnames(comp)[which(colnames(comp)==sire)]<- "sire"
-  colnames(comp)[which(colnames(comp)==noquote(paste(dam,":",sire,sep="")))]<- "dam:sire"
-  colnames(comp)[which(colnames(comp)==noquote(paste(dam,".",sire,sep="")))]<- "dam:sire" #weird period sometimes
-  comp$additive<- 4*comp$sire
-  comp$nonadd<- 4*comp$'dam:sire'
-  comp$maternal<- comp$dam- comp$sire
+  temp<- comp #to not override column names
+  colnames(temp)[which(colnames(temp)==dam)]<- "dam"
+  colnames(temp)[which(colnames(temp)==sire)]<- "sire"
+  colnames(temp)[which(colnames(temp)==noquote(paste(dam,":",sire,sep="")))]<- "dam:sire"
+  comp$additive<- 4*temp$sire
+  comp$nonadd<- 4*temp$'dam:sire'
+  comp$maternal<- temp$dam- temp$sire
    print(Sys.time()- time1) #end time
    invisible(comp)  #after time
 }
