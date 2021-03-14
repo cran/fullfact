@@ -53,14 +53,14 @@ data(chinook_bootL) #Chinook salmon offspring length
 ciMANA2(comp=chinook_bootL,position="tray")
 
 #Extract bias corrected confidence interval
-ciMANA2(comp=chinook_bootL,bias=c(0.0000000,0.7192253,0.2029684,0.1077423),position="tray")
+ciMANA2(comp=chinook_bootL,position="tray",bias=c(0,0.7192,0.2030,0.1077))
 #see details for 'bias' fail
 
 #Extract bias and accelerated corrected confidence interval
 #Import jackknife resampled data model results
 data(chinook_jackL)
 #
-ciMANA2(comp=chinook_bootL,bias=c(0.0000000,0.7192253,0.2029684,0.1077423),
-accel=chinook_jackL,position="tray")
+ciMANA2(comp=chinook_bootL,position="tray",
+bias=c(0,0.7192,0.2030,0.1077),accel=chinook_jackL)
 #see details for 'bias' fail
 }

@@ -1,0 +1,288 @@
+---
+title: "Simple Normal Data Example"
+author: "Aimee Lee Houde"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Simple Normal Data Example}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, warning = FALSE, message= FALSE, comment = "#>")
+```
+
+In this vignette, the `fullfact` package is explored using simple (functions designated by no number) for the standard model, i.e. containing random effects for dam, sire, and dam by sire, for normal data type or error structure. 
+
+Advanced (functions designated by the number 2) for the standard model with the options of including additional random effects for one position (e.g. tank) and/or one block effect (e.g. several blocks of 2 $\times$ 2 factorial matings) is explored in the vignette **Advanced Normal Data Example**.
+
+Expert (functions designated by the number 3) for the standard model with the ability of the user to include additional fixed and/or random effects, such as a model including environment treatments and their interactions is explored in the vignette **Expert Normal Data Example**.
+
+Non-normal error structures (e.g. binary, proportion, and/or count data types) are explored in another three vignettes: (1) Simple Non-normal Data Example, (2) Advanced Non-normal Data Example, and (3) Expert Non-normal Data Example. 
+
+## Load the package and example data
+
+The example data set is an 11 $\times$ 11 full factorial mating: 11 dams and 11 sires with all combinations resulting in 121 families. There are 10 observations per family or 5 observations for each of two replicates per family.
+
+```{r package-data}
+library("fullfact")     
+data(chinook_length)
+head(chinook_length)
+```
+
+Displayed are columns for family identities (ID), replicate ID, dam ID, sire ID, incubation tray ID, incubation cell ID (within tray), Chinook salmon length (mm) at hatch, and dam egg size (mm).
+
+## Observed variance components
+
+Model random effects are dam, sire, and dam by sire. Extracts the dam, sire, dam, dam by sire, and residual variance components. Calculates the total variance component. Calculates the additive genetic, non-additive genetic, and maternal variance components.
+
+Assuming the effects of epistasis are of negligible importance, the additive genetic variance (V~A~) component is calculated as four times the sire (V~S~), the non-additive genetic variance (V~N~) component as four times the dam by sire interaction (V~D$\times$S~), and the maternal variance component (V~M~) as the dam (V~D~) – sire (V~S~) (Lynch and Walsh 1998, p. 603). When there is epistasis, those variance components will be overestimated and this may explain why the percentage of phenotypic variance explained by the components can add up to more than 100% in certain cases. 
+
+Significance values for the random effects are determined using likelihood ratio tests (Bolker et al. 2009).
+
+Lynch M, Walsh B. 1998. Genetics and Analysis of Quantitative Traits. Sinauer Associates, Massachusetts.
+
+Bolker BM, Brooks ME, Clark CJ, Geange SW, Poulsen JR, Stevens MHH, White J-SS. 2009. Generalized linear mixed models: a practical guide for ecology and evolution. Trends in Ecology and Evolution 24(3): 127-135. DOI: 10.1016/j.tree.2008.10.008
+
+```{r observed-vc}
+length_mod1<- observLmer(observ=chinook_length,dam="dam",sire="sire",response="length")
+length_mod1
+```
+
+Produces a list object containing three data frames. Each data frame contains the raw variance components and the variance components as a percentage of the total variance component. The first data frame also contains the difference in AIC and BIC, and likelihood ratio test Chi-square and p-value for all random effects.
+
+_Note_
+
+Default is Restricted maximum likelihood (REML) as `ml = F`. Option for maximum likelihood (ML) is `ml = T`.
+
+Maximum likelihood (ML) estimates the parameters that maximize the likelihood of the observed data
+and has the advantage of using all the data and accounting for non-independence (Lynch and Walsh 1998,
+p. 779; Bolker et al. 2009). On the other hand, ML has the disadvantage of assuming that all fixed
+effects are known without error, producing a downward bias in the estimation of the residual variance
+component. This bias can be large if there are lots of fixed effects, especially if sample sizes are
+small. Restricted maximum likelihood (REML) has the advantage of not assuming the fixed effects are
+known and averages over the uncertainty, so there can be less bias in the estimation of the residual
+variance component. However, REML only maximizes a portion of the likelihood to estimate the effect
+parameters, but is the preferred method for analyzing large data sets with complex structure.
+
+## Statistical Power analysis
+
+Power values are calculated by stochastically simulating data for a number of iterations and then calculating the proportion of P-values less than $\alpha$ (e.g. 0.05) for each component (Bolker 2008). Simulated data are specified by inputs for variance component values and the sample sizes.
+
+Bolker BM. 2008. Ecological Models and Data in R. Princeton University Press, Princeton.
+
+Defaults are `alpha = 0.05` for 5%, `nsim = 100` for 100 simulations, and `ml = F` for REML.
+
+`varcomp` is a vector of dam, sire, dam by sire, and residual variance components, i.e. c(dam,sire,dam $\times$ sire,residual).
+
+`nval` is a vector of dam, sire, and offspring per family sample sizes, i.e. c(dam,sire,offspring). 
+
+For this example, the variance components of `observLmer` above are used (i.e. dam= 0.1900, sire= 0, dam $\times$ sire= 0.1719, residual= 0.6315) and the sample size of the Chinook salmon data set (i.e. dam= 11, sire= 11, offspring= 10).
+
+Full analysis is 100 simulations. Example has 25 simulations.
+
+```{r power-analysis}
+#>powerLmer(varcomp=c(0.1900,0,0.1719,0.6315),nval=c(11,11,10)) #full
+powerLmer(varcomp=c(0.1900,0,0.1719,0.6315),nval=c(11,11,10),nsim=25) #25 simulations
+```
+
+There is sufficient power ($\ge$ 0.8) for dam and dam by sire variance components, whereas there is insufficient power (< 0.8) for the sire variance component. Albeit, the sire component is near zero, so the low power may be an artifact. In the cases of insufficient power, the sample size of dam, sire, and/or offspring can be increased until there is sufficient power. 
+
+Taking the reverse approach (can the sample size of dam, sire, or offspring be reduced while maintaining sufficient power?) using the same variance components and offspring sample size, dam and sire sample sizes could be reduced from 11 to 7.   
+
+```{r power-analysis2}
+#>powerLmer(varcomp=c(0.1900,0,0.1719,0.6315),nval=c(7,7,10)) #full
+powerLmer(varcomp=c(0.1900,0,0.1719,0.6315),nval=c(7,7,10),nsim=25) #25 simulations
+```
+
+## Bootstrap confidence intervals
+
+Confidence intervals for the additive genetic, non-additive genetic, and maternal variance components can be produced using the bootstrap-t resampling method described by Efron and Tibshirani (1993, p. 160‒162). Observations are resampled with replacement until the original sample size is reproduced. The resampled data are then used in the model and the additive genetic, non-additive genetic, and maternal variance components are extracted. The process is repeated for a number of iterations, typically 1,000 times, to produce a distribution for each component. The confidence interval lower and upper limits and median are extracted from the distribution.
+
+Efron B, Tibshirani R. 1993. An Introduction to the Bootstrap. Chapman and Hall, New York.
+
+### Resample observations 
+
+The `resampRepli` function is used to bootstrap resample observations grouped by replicate ID within family ID for a specified number of iterations to create the resampled data set. A similar `resampFamily` function is able to resample observations grouped by family ID only. 
+
+`copy` is a vector of column numbers (to copy the contents). Does not need to contain the family and/or replicate columns. 
+
+Full analysis is 1000 iterations. Example has 5 iterations.
+
+```{r resample, eval=FALSE}
+#>resampRepli(dat=chinook_length,copy=c(3:8),family="family",replicate="repli",iter=1000) #full
+#>resampFamily(dat=chinook_length,copy=c(3:8),family="family",iter=1000) #family only
+resampRepli(dat=chinook_length,copy=c(3:8),family="family",replicate="repli",iter=5) #5 iterations
+```
+
+Because of the large file sizes that can be produced, the resampling of each replicate Y per family X is
+saved separately as a common separated (X_Y_resampR.csv) file in the working directory. These files
+are merged to create the final resampled data set (resamp_datR.csv).
+
+If using `resampFamily`, the file names are X_resampF.csv per family and resamp_datF.csv for the final resampled data set.
+
+### Iteration variance components 
+
+The equivalent to `observLmer` is available for the final bootstrap resampled data set, i.e. `resampLmer`. 
+
+Default is `ml = F` for REML. The starting model number `start =` and ending model number `end =` need to be specified.
+
+Full analysis is 1000 iterations. Example has 5 iterations.
+
+```{r boot-vc}
+#>length_datR<- read.csv("resamp_datR.csv") #1000 iterations
+#>length_rcomp1<- resampLmer(resamp=length_datR,dam="dam",sire="sire",response="length",
+#>start=1,end=1000) #full
+data(chinook_resampL) #5 iterations
+head(chinook_resampL)
+length_rcomp1<- resampLmer(resamp=chinook_resampL,dam="dam",sire="sire",response="length",
+start=1,end=5)
+length_rcomp1[1:5,]
+```
+
+The function provides a data frame with columns containing the raw variance components for dam, sire, dam by sire, residual, total, additive genetic, non-additive genetic, and maternal. The number of rows in the data frame matches the number of iterations in the resampled data set and each row represents a model number.
+
+### Extract confidence intervals
+
+Extract the bootstrap-t confidence intervals (CI) and median for the additive genetic, non-additive genetic, and maternal values from the data frame of models produced using `resampLmer`. 
+
+Default confidence interval is 95% as `level = 95`. 
+
+```{r boot-ci}
+#>ciMANA(comp=length_rcomp1) #full
+data(chinook_bootL) #same as length_rcomp1 1000 models
+ciMANA(comp=chinook_bootL)
+```
+
+The raw values are presented and are converted to a percentage of the total variance for each model. Defaults are the number of decimal places to round CI raw values as `rnd_r = 3` and to round the CI percent values as `rnd_p = 1`. 
+
+The bootstrap-t method may produce medians that are largely different from the observed values. However, the chinook_bootL example data for the bootstrap-t CI were produced using another model including a position effect (see the vignette for **Advanced Normal Data Example**), which may explain differences between the 95% CI and observed values. Nonetheless, options are provided below for 95% CI that are a poor fit.
+
+#### Bias and accelerated corrected confidence intervals
+
+The BCa method (bias and acceleration) described by Efron and Tibshirani (1993, p.184‒188) can be used for the correction of bootstrap-t confidence intervals. 
+
+`bias` is a vector of additive, non-additive, and maternal variance components, i.e. c(additive,non-additive,maternal), from the raw observed variance components of `observLmer`.
+
+The raw variance components of the chinook_bootL model were additive= 0, non-additive= 0.7192, and maternal= 0.2030. Typically the variance components would be from `observLmer` above for the analysis pipeline.
+
+The 'bias fail' warning is if the bias calculation is infinity (negative or positive), e.g. bias contains a zero value, so the uncorrected confidence interval is displayed for the component.
+
+```{r boot-ci-bias}
+ciMANA(comp=chinook_bootL,bias=c(0,0.7192,0.2030)) #bias only
+#>ciMANA(comp=length_rcomp1,bias=c(0,0.6878,0.1900)) #full, observLmer components
+```
+
+`accel` for acceleration correction uses the delete-one observation jackknife data set. See length_jack1 all observations in the next section.
+
+```{r boot-ci-bias-accel}
+data(chinook_jackL)
+ciMANA(comp=chinook_bootL,bias=c(0,0.7192,0.2030),accel=chinook_jackL) #bias and acceleration
+#>ciMANA(comp=length_rcomp1,bias=c(0,0.6878,0.1900),accel=length_jack1) #full, observLmer
+```
+
+#### Jackknife confidence intervals
+
+Jackknife resampling is another method for producing confidence intervals.
+
+The equivalent to `observLmer` is available for jackknife resampling, i.e. `JackLmer`, using the observed data frame. 
+
+Default is delete-one jackknife resampling as `size = 1` and REML as `ml = F`.
+
+Full analysis uses all observations. Example has the first 10 observations.
+
+```{r jack-vc}
+#full, all observations
+#>length_jack1<- JackLmer(observ=chinook_length,dam="dam",sire="sire",response="length")
+#first 10 observations
+length_jack1<- JackLmer(observ=chinook_length,dam="dam",sire="sire",response="length",first=10) 
+head(length_jack1)
+```
+
+Because the delete-one observation jackknife resampling may be computationally intensive for large data sets, the `JackLmer` function has the option of delete-d observation jackknife resampling, for which d > 1. The rows of the observed data frame are shuffled and a block of observations of size d is deleted sequentially. For example, delete-5 observation jackknife resampling is specified as `size = 5`, which deletes a block of 5 observations.  
+
+Full analysis uses all observations. Example has the first 10 observations.
+
+```{r jack-vc-d}
+#full
+#>length_jack1D<- JackLmer(observ=chinook_length,dam="dam",sire="sire",response="length",size=5)
+#first 10
+length_jack1D<- JackLmer(observ=chinook_length,dam="dam",sire="sire",response="length",
+size=5,first=10)
+head(length_jack1D)
+```
+
+Extract the jackknife confidence intervals (CI) and median for the additive genetic, non-additive genetic, and maternal values from the data frame of models produced using `JackLmer`.
+
+The mean and the standard error of pseudo-values for each variance component are calculated (Efron and Tibshirani 1993, p.184‒188). The standard error is then used with the Student’s t distribution to provide the lower and upper limits for the confidence interval. For delete-d jackknife resampling, M degrees of freedom were used for producing the confidence interval (Martin et al. 2004): M = N / d, where N is the total number of observations and d is the number of deleted observations. Large values of M, such as 1,000, can translate to the delete-d jackknife resampling method approaching bootstrap resampling expectations (Efron and Tibshirani 1993, p. 149).
+
+Martin, H., Westad, F. & Martens, H. (2004). Improved Jackknife Variance Estimates of Bilinear Model Parameters. COMPSTAT 2004 -- Proceedings in Computational Statistics 16th Symposium Held in Prague, Czech Republic, 2004 (ed J. Antoch), pp. 261-275. Physica-Verlag HD, Heidelberg.
+
+Default confidence interval is 95% as `level = 95`. 
+
+`full` is a vector of additive, non-additive, maternal, and total variance components, i.e. c(additive,non-additive,maternal,total), from the raw observed variance components of `observLmer`.
+
+The chinook_jackL example data for the jackknife CI were produced using another model including a position effect (see the vignette for **Advanced Normal Data Example**). The raw variance components of this model were additive= 0, non-additive= 0.7192, maternal= 0.2030, and total= 1.0404. Typically the variance components would be from `observLmer` above for the analysis pipeline.
+
+```{r jack-ci}
+data(chinook_jackL) #similar to length_jack1 all observations
+ciJack(comp=chinook_jackL,full=c(0,0.7192,0.2030,1.0404))
+#full, all observations, observLmer components
+#>ciJack(comp=length_jack1,full=c(0,0.6878,0.1900,0.9935)) 
+```
+
+The raw values are presented and are converted to a percentage of the total variance for each model. Defaults are the number of decimal places to round CI raw values as `rnd_r = 3` and to round the CI percent values as `rnd_p = 1`. 
+
+## Plotting confidence intervals
+
+The `barMANA` and `boxMANA` functions are simple plotting functions for the confidence intervals or all values, respectively, from the bootstrap and jackknife approaches. Default is to display the percentage values as `type = perc`. Raw values can be displayed as `type = raw`.
+
+Within the functions, there are simple plot modifications available. For the y-axis, min and max values can be species as `ymin` and `ymax`, as well as the increment as `yunit`. Also, magnification of the axis unit as `cex_yaxis` and label as `cex_ylab`. The position of the legend can be specified as `leg`. Default is "topright".
+
+### Bar plot
+
+The `barMANA` function produces bar graphs with the bootstrap-t median (`ciMANA`) or jackknife pseudo-value mean (`ciJack`) as the top of the shaded bar and error bars covering the range of the confidence interval for each of the additive genetic, non-additive genetic, and maternal values of a phenotypic trait.
+
+The length of the error bar can be specified in inches as `bar_len`.
+
+```{r barplot, fig.width=7, fig.height=10} 
+length_ci<- ciJack(comp=chinook_jackL,full=c(0,0.7192,0.2030,1.0404))
+oldpar<- par(mfrow=c(2,1))
+barMANA(ci_dat=length_ci) #basic, top
+barMANA(ci_dat=length_ci,bar_len=0.3,yunit=20,ymax=100,cex_ylab=1.3) #modified, bottom
+```
+
+Different traits can also be combined on the same bar plot using `trait` specified in `ciMANA` or `ciJack`. The information is combined into a list object. For the example, the jackknife CI is duplicated to simulate 'different traits'.
+
+```{r barplot-comb, fig.width=7, fig.height=5}
+length_ci1<- ciJack(comp=chinook_jackL,full=c(0,0.7192,0.2030,1.0404),trait="length_1")
+length_ci2<- ciJack(comp=chinook_jackL,full=c(0,0.7192,0.2030,1.0404),trait="length_2")
+comb_bar<- list(raw=rbind(length_ci1$raw,length_ci2$raw),
+percentage=rbind(length_ci1$percentage,length_ci2$percentage)) 
+barMANA(ci_dat=comb_bar,bar_len=0.3,yunit=20,ymax=100,cex_ylab=1.3)
+```
+
+The legend is slightly off in the presented html version but is fine with the R plotting device.
+
+### Box plot
+
+The `boxMANA` function produces box plots using all values for the bootstrap-t resampling data set (`resampLmer`) or jackknife resampling data set (`JackLmer`). 
+
+```{r boxplot, fig.width=7, fig.height=10}
+oldpar<- par(mfrow=c(2,1))
+boxMANA(comp=chinook_bootL) #from resampLmer, basic, top 
+boxMANA(comp=chinook_bootL,yunit=20,ymax=100,cex_ylab=1.3,leg="topleft") #modified, bottom
+```
+
+Different traits can also be combined on the same box plot by adding a "trait" column to the resampling data set. For the example, the bootstrap-t data frame is duplicated to simulate 'different traits'.
+
+```{r boxplot-comb, fig.width=7, fig.height=5}
+chinook_bootL1<- chinook_bootL; chinook_bootL2<- chinook_bootL #from resampLmer
+chinook_bootL1$trait<- "length_1"; chinook_bootL2$trait<- "length_2"
+comb_boot<- rbind(chinook_bootL1,chinook_bootL2)
+comb_boot$trait<- as.factor(comb_boot$trait)
+boxMANA(comb_boot,yunit=20,ymax=100,cex_ylab=1.3,leg="topleft")
+```
+
+The recommended follow-up vignette is the **Advanced Normal Data Example**, covering the standard model with the options of including additional random effects for one position (e.g. tank) and/or one block effect (e.g. several blocks of 2 $\times$ 2 factorial matings).

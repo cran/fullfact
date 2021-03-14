@@ -3,7 +3,7 @@
 \title{Bootstrap confidence intervals 3}
 \description{
 Extracts bootstrap-\emph{t} confidence intervals for additive genetic, non-additive genetic, and maternal
-variance components. Also extracts intervals for additional fixed and random effects.
+variance components. Also extracts intervals for additional fixed and/or random effects.
 }
 \usage{
 ciMANA3(comp, level = 95, rnd_r = 3, rnd_p = 1, bias = NULL, accel = NULL,
@@ -17,7 +17,7 @@ remain = NULL, trait = NULL)
   \item{bias}{
 Optional vector of raw observed additive, non-additive, and maternal variance components
 for bias correction. Followed by any other components in the order of the vector \emph{remain},
-i.e. c(additive, non-additive, maternal, component1, component2, ...).
+i.e. c(additive, non-additive, maternal, component1, component2, etc.).
 }
   \item{accel}{Optional data frame of jackknifed data model results for acceleration correction.}
   \item{remain}{Vector of column names for additional effects.}
@@ -36,7 +36,7 @@ a zero value, so the uncorrected confidence interval is displayed.
 \value{
 Prints a data frame containing the lower, median, and upper values of the bootstrap-\emph{t} confidence
 interval for additive genetic, non-additive genetic, maternal, and any additional fixed effect
-and random effect variance components. Values are presented as raw and percentages of the total variance
+and/or random effect variance components. Values are presented as raw and percentages of the total variance
 value within each row.
 }
 \references{
@@ -52,14 +52,14 @@ data(chinook_bootL) #Chinook salmon offspring length
 ciMANA3(comp=chinook_bootL,remain=c("tray","Residual"))
 
 #Extract bias corrected confidence interval
-ciMANA3(comp=chinook_bootL,bias=c(0.0000000,0.7192253,0.2029684,0.1077423,0.5499255),
-remain=c("tray","Residual"))
+ciMANA3(comp=chinook_bootL,remain=c("tray","Residual"),
+bias=c(0,0.7192,0.2030,0.1077,0.5499))
 #see details for 'bias' fail
 
 #Extract bias and accelerated corrected confidence interval
 #Import jackknife resampled data model results
 data(chinook_jackL)
 #
-ciMANA3(comp=chinook_bootL,bias=c(0.0000000,0.7192253,0.2029684,0.1077423,0.5499255),
-accel=chinook_jackL,remain=c("tray","Residual"))
+ciMANA3(comp=chinook_bootL,remain=c("tray","Residual"),
+bias=c(0,0.7192,0.2030,0.1077,0.5499),accel=chinook_jackL)
 }

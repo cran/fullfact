@@ -13,7 +13,7 @@ if (type == "raw") {
   colnames(dat)<- c("variance","component")
   label<- "phenotypic variance" }
 dat$component<- factor(dat$component, levels(dat$component)[c(1,3,2)])
- if (is.null(ymax)) { ymax<- max(dat$variance) }
+ if (is.null(ymax)) { ymax<- as.numeric(max(dat$variance)) }
  if (!is.null(ymax)) { ymax<- ymax }
  if (is.null(ymin)) { ymin<- 0 }
  if (!is.null(ymin)) { ymin<- ymin }

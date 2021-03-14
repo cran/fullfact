@@ -12,18 +12,17 @@ block = NULL, poisLog = NULL)
 }
 \arguments{
   \item{varcomp}{Vector of known dam, sire, dam by sire, and position and/or
-  block variance components, i.e. c(dam,sire,ds,position/block). If there is a
-  position and a block c(..., ds, position, block).}
+  block variance components, i.e. c(dam, sire, dam x sire, position/block). If there is a
+  position and a block c(..., dam x sire, position, block).}
   \item{nval}{Vector of known dam, sire, offspring per family, and offspring per position or number of blocks
-  sample sizes, i.e. c(dam,sire,offspring,position/block). If there is a position and a
+  sample sizes, i.e. c(dam, sire, offspring, position/block). If there is a position and a
   block c(..., offspring, position, block).}
-  \item{fam_link}{ The family and link in family(link) format. Supported options are binomial(logit),
-  binomial(probit), poisson(log), and poisson (sqrt).}
+  \item{fam_link}{The family and link in family(link) format. Supported options are binomial(link="logit"), binomial(link="probit"), poisson(link="log"), and poisson(link="sqrt").}
   \item{alpha}{Statistical significance value. Default is 0.05.}
   \item{nsim}{Number of simulations. Default is 100.}
   \item{position}{Optional number of positions.}
   \item{block}{Optional vector of dams and sires per block, e.g. c(2,2).}
-  \item{poisLog}{Known poisson(log) variance component value.}
+  \item{poisLog}{The residual variance component value if using poisson(link="log").}
 }
 \details{
 Extracts the dam, sire, dam, dam by sire, and position and/or block power values.
@@ -61,6 +60,6 @@ increasing number of random effects.
 \seealso{ \code{\link{powerGlmer}}, \code{\link{powerGlmer3}} }
 \examples{
 #100 simulations
-\dontrun{powerGlmer2(varcomp=c(1,0.15,0.11,0.5),nval=c(10,10,20,10),fam_link=binomial(logit),
-position=2) }
+\dontrun{powerGlmer2(varcomp=c(0.7880,0.1667,0.1671,0.0037),nval=c(11,11,300,3300),
+position=11,fam_link=binomial(link="logit")) }
 }

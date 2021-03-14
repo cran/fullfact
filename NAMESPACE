@@ -1,6 +1,5 @@
 importFrom("lme4", "lmer", "glmer", "fixef","VarCorr","findbars","nobars")
 importFrom("afex", "mixed")
-
 importFrom("graphics", "arrows", "axis", "barplot", "boxplot","legend")
 importFrom("stats", "anova", "formula", "plogis", "pnorm", "qnorm",
              "qt", "quantile", "rbinom", "reformulate", "rnorm", "rpois",

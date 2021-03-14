@@ -60,7 +60,7 @@ if (!is.null(var_fix)) {
   sim_varF[i]<- var(unique(as.vector(fixef(m) %*% t(m@pp$X))))
 if (ftest=="LR") { f_rand<- fixedLmer(model=m,observ=observ) 
   for (p in 1:length(fixN)) { sim_pvalF[,p][i]<- f_rand$p.value[which(f_rand$term==paste0(fNames[p]))] } }
-if (ftest=="PB") { f_rand<- mixed(m,data=observ,method = "PB",args.test = list(nsim = iter))$anova_table 
+if (ftest=="PB") { f_rand<- mixed(m,data=observ,method = "PB",args_test = list(nsim = iter))$anova_table 
   for (p in 1:length(fixN)) { sim_pvalF[,p][i]<- as.numeric(f_rand[which(rownames(f_rand)==paste0(fNames[p])),][4]) } }  } #end fixed
 } #end loop
 pwr_rand<- matrix(0,ncol=5,nrow=length(var_rand))

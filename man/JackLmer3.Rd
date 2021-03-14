@@ -11,16 +11,16 @@ JackLmer3(observ, dam, sire, response, remain, ml = F, size = 1, first = NULL)
 }
 \arguments{
   \item{observ}{Data frame of observed data}
-  \item{dam}{Column name containing dam(female) parent identity information.}
-  \item{sire}{Column name containing sire(male) parent identity information.}
+  \item{dam}{Column name containing dam (female) parent identity information.}
+  \item{sire}{Column name containing sire (male) parent identity information.}
   \item{response}{Column name containing the offspring (response) phenotype values.}
-  \item{remain}{Remaining formula with # using \emph{lme4} package format.}
+  \item{remain}{Remaining formula using \emph{lme4} package format.}
   \item{ml}{Default is FALSE for restricted maximum likelihood. Change to TRUE for maximum likelihood.}
   \item{size}{Default is 1 for delete-one jackknife resampling. If \emph{size} > 1,
 delete-\emph{d} jackknife resampling occurs removing a block d equal to \emph{size}.}
   \item{first}{
 Number of initial sub-samples to run. Useful for examing if there is variation among
-sub-samples before jackknife resampling the entire data set. There can be little varitation for
+sub-samples before jackknife resampling the entire data set. There can be little variation for
 delete-one jackknife resampling with large data sets, and delete-\emph{d} jackknife resampling
 should be considered.
 }

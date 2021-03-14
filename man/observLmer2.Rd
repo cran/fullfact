@@ -12,8 +12,8 @@ observLmer2(observ, dam, sire, response, position = NULL, block = NULL, ml = F)
 }
 \arguments{
   \item{observ}{Data frame of observed data.}
-  \item{dam}{Column name containing dam(female) parent identity information.}
-  \item{sire}{Column name containing sire(male) parent identity information.}
+  \item{dam}{Column name containing dam (female) parent identity information.}
+  \item{sire}{Column name containing sire (male) parent identity information.}
   \item{response}{Column name containing the offspring (response) phenotype values.}
   \item{position}{Optional column name containing position factor information.}
   \item{block}{Optional column name containing block factor information.}

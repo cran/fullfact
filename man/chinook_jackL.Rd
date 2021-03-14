@@ -36,6 +36,6 @@ DOI: 10.1007/s10592-006-9204-z
 \examples{
 data(chinook_jackL)
 ## Extract jackknifed confidence interval
-ciJack(comp=chinook_jackL,full=c(0.0000000,0.7192253,0.2029684,1.0404425))
+ciJack(comp=chinook_jackL,full=c(0,0.7192,0.2030,1.0404))
 }
 \keyword{datasets}

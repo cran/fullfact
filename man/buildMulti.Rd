@@ -11,8 +11,8 @@ buildMulti(dat, copy, multi)
 \arguments{
   \item{dat}{Data frame to convert.}
   \item{copy}{Column numbers to copy.}
-  \item{multi}{A list containing the numbers to assign and matching column names.
-  E.g. list(c(2,0,1),c("two","zero","one").)
+  \item{multi}{A list containing the numbers to assign and matching column names,
+  e.g. list(c(2,0,1),c("two","zero","one")).
 }
 }
 \details{

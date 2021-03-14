@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Load the package and example data</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<p>In this vignette, the <code>fullfact</code> package is explored using expert (functions designated by the number 3) for the standard model with the ability of the user to include additional fixed and/or random effects, such as a model including environment treatments and their interaction, for normal data type or error structures.</p>
+
+<p>Simple (functions designated by no number) for the standard model only is explored in the vignette <strong>Simple Normal Data Example</strong>.</p>
+
+<p>Advanced (functions designated by the number 2) for the standard model with the options of including additional random effects for one position (e.g. tank) and/or one block effect (e.g. several blocks of 2 \(\times\) 2 factorial matings) is explored in the vignette <strong>Advanced Normal Data Example</strong>.</p>
+
+<p>Non-normal error structures (e.g. binary, proportion, and/or count data types) are explored in another three vignettes: (1) Simple Non-normal Data Example, (2) Advanced Non-normal Data Example, and (3) Expert Non-normal Data Example. </p>
+
+<h2>Load the package and example data</h2>
+
+<p>The example data set is an 11 \(\times\) 11 full factorial mating: 11 dams and 11 sires with all combinations resulting in 121 families. There are 10 observations per family or 5 observations for each of two replicates per family.</p>
+
+<pre><code class="r">library(&quot;fullfact&quot;)     
+data(chinook_length)
+head(chinook_length)
+#&gt;   family repli dam sire tray cell length egg_size
+#&gt; 1     f1    r1  d1   s1   t7   1A   22.7     7.27
+#&gt; 2     f1    r2  d1   s1   t8   1A   22.0     7.27
+#&gt; 3     f1    r1  d1   s1   t7   1A   23.8     7.27
+#&gt; 4     f1    r2  d1   s1   t8   1A   21.8     7.27
+#&gt; 5     f1    r1  d1   s1   t7   1A   22.6     7.27
+#&gt; 6     f1    r2  d1   s1   t8   1A   22.4     7.27
+</code></pre>
+
+<p>Displayed are columns for family identities (ID), replicate ID, dam ID, sire ID, incubation tray ID, incubation cell ID (within tray), Chinook salmon length (mm) at hatch, and dam egg size (mm).</p>
+
+<h2>Observed variance components</h2>
+
+<p>Model random effects are dam, sire, dam by sire, and any additional fixed and/or random effects. Extracts the dam, sire, dam, dam by sire, and residual variance components. Extracts any additional fixed effect and/or random effect variance components. The fixed effect variance component is as a single group using the method described by Nakagawa and Schielzeth (2013). Calculates the total variance component. Calculates the additive genetic, non-additive genetic, and maternal variance components.</p>
+
+<p>Assuming the effects of epistasis are of negligible importance, the additive genetic variance (V~A~) component is calculated as four times the sire (V~S~), the non-additive genetic variance (V~N~) component as four times the dam by sire interaction (V~D$\times$S~), and the maternal variance component (V~M~) as the dam (V~D~) – sire (V~S~) (Lynch and Walsh 1998, p. 603). When there is epistasis, those variance components will be overestimated and this may explain why the percentage of phenotypic variance explained by the components can add up to more than 100% in certain cases.</p>
+
+<p>Significance values for the random effects are determined using likelihood ratio tests (Bolker et al. 2009).</p>
+
+<p>Significance values for any fixed effects are determined using likelihood ratio tests (LRT) and a parametric bootstrap method (Bolker et al. 2009) from the <code>mixed</code> function of the <code>afex</code> package. LRT is not generally recommended for fixed effects as there are issues calculating the denominator degrees of freedom.</p>
+
+<p><code>remain</code> is the remaining formula using <code>lme4</code> package format.</p>
+
+<p><code>iter</code> is the number of iterations for computing the parametric bootstrap significance value for any fixed effects, typically 1,000. For the example, 100 iterations was used.</p>
+
+<p>Nakagawa S, Schielzeth H. 2013. A general and simple method for obtaining R2 from generalized linear mixed-effects models. Methods in Ecology and Evolution 4(2): 133-142. DOI: 10.1111/j.2041-210x.2012.00261.x</p>
+
+<p>Lynch M, Walsh B. 1998. Genetics and Analysis of Quantitative Traits. Sinauer Associates, Massachusetts.</p>
+
+<p>Bolker BM, Brooks ME, Clark CJ, Geange SW, Poulsen JR, Stevens MHH, White J-SS. 2009. Generalized linear mixed models: a practical guide for ecology and evolution. Trends in Ecology and Evolution 24(3): 127-135. DOI: 10.1016/j.tree.2008.10.008</p>
+
+<pre><code class="r">#&gt;length_mod3&lt;- observLmer3(observ=chinook_length,dam=&quot;dam&quot;,sire=&quot;sire&quot;,response=&quot;length&quot;,
+#&gt;remain=&quot;egg_size + (1|tray)&quot;,iter=1000) #full
+length_mod3&lt;- observLmer3(observ=chinook_length,dam=&quot;dam&quot;,sire=&quot;sire&quot;,response=&quot;length&quot;,
+remain=&quot;egg_size + (1|tray)&quot;,iter=100)
+#&gt; [1] &quot;2021-03-13 14:07:14 PST&quot;
+#&gt; Fitting 2 (g)lmer() models:
+#&gt; [..]
+#&gt; Obtaining 1 p-values:
+#&gt; [.]
+#&gt; Time difference of 10.97393 secs
+length_mod3
+#&gt; $fixed
+#&gt;     effect   variance  percent   Chi.sq   p.value
+#&gt; 1 egg_size         NA       NA 3.273533 0.1386139
+#&gt; 2  Fix_Tot 0.05967801 5.660667       NA        NA
+#&gt; 
+#&gt; $LRT.fixed
+#&gt;       term    d.AIC     d.BIC   Chi.sq    p.value
+#&gt; 1 egg_size 1.273533 -3.824843 3.273533 0.07040586
+#&gt; 
+#&gt; $random
+#&gt;     effect     effect2  variance  percent
+#&gt; 1 dam:sire (Intercept) 0.1788030 16.96008
+#&gt; 2     tray (Intercept) 0.1197717 11.36077
+#&gt; 3     sire (Intercept) 0.0000000  0.00000
+#&gt; 4      dam (Intercept) 0.1461126 13.85929
+#&gt; 
+#&gt; $LRT.random
+#&gt;             term     d.AIC      d.BIC       Chi.sq      p.value
+#&gt; 1      (1 | dam)  14.15463   9.056258 1.615463e+01 5.837558e-05
+#&gt; 2     (1 | sire)  -2.00000  -7.098376 5.329639e-09 9.999418e-01
+#&gt; 3 (1 | dam:sire) 141.43393 136.335557 1.434339e+02 4.724486e-33
+#&gt; 4     (1 | tray) 122.90989 117.811512 1.249099e+02 5.325917e-29
+#&gt; 
+#&gt; $other
+#&gt;   component  variance   percent
+#&gt; 1  Residual 0.5498922  52.15919
+#&gt; 2     Total 1.0542576 100.00000
+#&gt; 
+#&gt; $calculation
+#&gt;   component  variance  percent
+#&gt; 1  additive 0.0000000  0.00000
+#&gt; 2    nonadd 0.7152119 67.84034
+#&gt; 3  maternal 0.1461126 13.85929
+</code></pre>
+
+<p>Produces a list object containing up to six data frames. Fixed, random, other, and calculation data frames contain the raw variance components and the variance components as a percentage of the total variance component. The fixed data frame also contains the parametric bootstrap Chi-square and p-value for any fixed effects. LRT.random and LRT.fixed data frames contain the difference in AIC and BIC, and likelihood ratio test Chi-square and p-value for random and any fixed effects, respectively.</p>
+
+<p><em>Note</em></p>
+
+<p>Default is Restricted maximum likelihood (REML) as <code>ml = F</code>. Option for maximum likelihood (ML) is <code>ml = T</code>.</p>
+
+<p>Maximum likelihood (ML) estimates the parameters that maximize the likelihood of the observed data
+and has the advantage of using all the data and accounting for non-independence (Lynch and Walsh 1998,
+p. 779; Bolker et al. 2009). On the other hand, ML has the disadvantage of assuming that all fixed
+effects are known without error, producing a downward bias in the estimation of the residual variance
+component. This bias can be large if there are lots of fixed effects, especially if sample sizes are
+small. Restricted maximum likelihood (REML) has the advantage of not assuming the fixed effects are
+known and averages over the uncertainty, so there can be less bias in the estimation of the residual
+variance component. However, REML only maximizes a portion of the likelihood to estimate the effect
+parameters, but is the preferred method for analyzing large data sets with complex structure.</p>
+
+<h2>Statistical Power analysis</h2>
+
+<p>Power values are calculated by stochastically simulating data for a number of iterations and then calculating the proportion of P-values less than \(\alpha\) (e.g. 0.05) for each component (Bolker 2008). Simulated data are specified by inputs for variance component values and the sample sizes.</p>
+
+<p>Bolker BM. 2008. Ecological Models and Data in R. Princeton University Press, Princeton.</p>
+
+<p>Defaults are <code>alpha = 0.05</code> for 5%, <code>nsim = 100</code> for 100 simulations, and <code>ml = F</code> for REML. Other default is <code>ftest = &quot;LR&quot;</code> for likelihood ratio test for fixed effects; option of &ldquo;PB&rdquo; for parametric bootstrap for which the number of iterations need to be specified, e.g. <code>iter=1000</code>. </p>
+
+<p><code>var_rand</code> is a vector of dam, sire, dam by sire, residual, and remaining random variance components, i.e. c(dam,sire,dam \(\times\) sire,residual,rand1,rand2,etc.).</p>
+
+<p><code>n_rand</code> is a vector of dam, sire, family (i.e. dam \(\times\) sire), and remaining random sample sizes, i.e. c(dam,sire,family,rand1,rand2,etc.). </p>
+
+<p><code>design</code> is a data frame of the experimental design, using only integers. First three columns must contain and be named &ldquo;dam&rdquo;, &ldquo;sire&rdquo;, &ldquo;family&rdquo;. Remaining columns are the random effects followed by the fixed effects. Continuous fixed effects are a column containing the values 1:nrow(design).</p>
+
+<p><code>remain</code> is the remaining formula using <code>lme4</code> package format. Must be random effects followed by fixed effects. No interactions or random slopes; formulate as intercepts in design.</p>
+
+<p><code>var_fix</code> is a vector of known fixed variance components, i.e. c(fix1,fix2,etc.). Continuous fixed random values are sorted to match column values.</p>
+
+<p><code>n_fix</code> is a vector of known fixed sample sizes, i.e. c(fix1,fix2,etc.). Continuous fixed effects must have a sample size of 1.</p>
+
+<p>For this example, the random effect variance components of <code>observLmer3</code> above are used (i.e. dam= 0.1461, sire= 0, dam \(\times\) sire= 0.1788, residual= 0.5499, tray= 0.1198) and the sample size of the Chinook salmon data set (i.e. dam= 11, sire= 11, family= 121 (11 \(\times\) 11), tray= 11). The actual design was composed of 16 trays with 55–80 offspring each. However, <code>powerLmer3</code> uses an equal number of offspring per position, so the number of trays was decreased from 16 to 11. The fixed effect variance component (egg_size) is 0.0597 and sample size is 11 as the mean egg size per dam was used for each offspring. If egg size was more of a continuous effect, i.e. differed among the offspring within dam, then the sample size would be 1 for the simulation. </p>
+
+<p>The Chinook salmon data set is reworked to contain only integers for <code>design</code>. </p>
+
+<p>Full analysis is 100 simulations. Example has 25 simulations.</p>
+
+<pre><code class="r">#Reworking the Chinook salmon data set to contain only integers for `design`
+#dam ID, sire ID, family ID
+desn0&lt;- data.frame(dam=rep(1:11,each=11),sire=rep(1:11,11),family=1:(11*11))
+#replicate for offspring sample size (10)
+desn&lt;- do.call(&quot;rbind&quot;, replicate(10,desn0,simplify=F)); rm(desn0) 
+desn$tray&lt;- rep(1:11,each=nrow(desn)/11) #equal number of offspring per tray 
+desn$tray&lt;- sample(desn$tray,nrow(desn)) #shuffle tray numbers
+desn$egg_size&lt;- desn$dam #egg size is related to dam
+head(desn)
+#&gt;   dam sire family tray egg_size
+#&gt; 1   1    1      1    2        1
+#&gt; 2   1    2      2   11        1
+#&gt; 3   1    3      3   11        1
+#&gt; 4   1    4      4    1        1
+#&gt; 5   1    5      5    3        1
+#&gt; 6   1    6      6    1        1
+#&gt;powerLmer3(var_rand=c(0.1461,0,0.1788,0.5499,0.1198),n_rand=c(11,11,121,11),var_fix=0.0597,
+#&gt;n_fix=11,design=desn,remain=&quot;(1|tray) + egg_size&quot;) #full with LR
+#full with PB and 1000 iterations
+#&gt;powerLmer3(var_rand=c(0.1461,0,0.1788,0.5499,0.1198),n_rand=c(11,11,121,11),var_fix=0.0597,
+#&gt;n_fix=11,design=desn,remain=&quot;(1|tray) + egg_size&quot;,ftest=&quot;PB&quot;,iter=1000) 
+powerLmer3(var_rand=c(0.1461,0,0.1788,0.5499,0.1198),n_rand=c(11,11,121,11),var_fix=0.0597,
+n_fix=11,design=desn,remain=&quot;(1|tray) + egg_size&quot;,nsim=25) #25 simulations with LR
+#&gt; [1] &quot;2021-03-13 14:07:25 PST&quot;
+#&gt; [1] &quot;Starting simulation: 1&quot;
+#&gt; [1] &quot;Starting simulation: 2&quot;
+#&gt; [1] &quot;Starting simulation: 3&quot;
+#&gt; [1] &quot;Starting simulation: 4&quot;
+#&gt; [1] &quot;Starting simulation: 5&quot;
+#&gt; [1] &quot;Starting simulation: 6&quot;
+#&gt; [1] &quot;Starting simulation: 7&quot;
+#&gt; [1] &quot;Starting simulation: 8&quot;
+#&gt; [1] &quot;Starting simulation: 9&quot;
+#&gt; [1] &quot;Starting simulation: 10&quot;
+#&gt; [1] &quot;Starting simulation: 11&quot;
+#&gt; [1] &quot;Starting simulation: 12&quot;
+#&gt; [1] &quot;Starting simulation: 13&quot;
+#&gt; [1] &quot;Starting simulation: 14&quot;
+#&gt; [1] &quot;Starting simulation: 15&quot;
+#&gt; [1] &quot;Starting simulation: 16&quot;
+#&gt; [1] &quot;Starting simulation: 17&quot;
+#&gt; [1] &quot;Starting simulation: 18&quot;
+#&gt; [1] &quot;Starting simulation: 19&quot;
+#&gt; [1] &quot;Starting simulation: 20&quot;
+#&gt; [1] &quot;Starting simulation: 21&quot;
+#&gt; [1] &quot;Starting simulation: 22&quot;
+#&gt; [1] &quot;Starting simulation: 23&quot;
+#&gt; [1] &quot;Starting simulation: 24&quot;
+#&gt; [1] &quot;Starting simulation: 25&quot;
+#&gt; Time difference of 14.69473 secs
+#&gt; $group
+#&gt;     group var_in            var_out
+#&gt; 1 fix_eff 0.0597 0.0269344498432969
+#&gt; 
+#&gt; $fixed
+#&gt;       term  n power
+#&gt; 1 egg_size 11  0.04
+#&gt; 
+#&gt; $random
+#&gt;       term    n var_in             var_out power
+#&gt; 1      dam   11 0.1461   0.172362610511004     1
+#&gt; 2     sire   11      0 0.00480873987944462  0.04
+#&gt; 3 dam.sire  121 0.1788    0.17667901413797     1
+#&gt; 4     tray   11 0.1198    0.10981070567405     1
+#&gt; 5 residual &lt;NA&gt; 0.5499    0.55501601427185  &lt;NA&gt;
+</code></pre>
+
+<p>There is sufficient power (\(\ge\) 0.8) for dam and dam by sire variance components, whereas there is insufficient power (&lt; 0.8) for the sire variance component. Albeit, the sire component is near zero, so the low power may be an artifact. There was also sufficient power for tray and egg size variance components.In the cases of insufficient power, the sample size of dam, sire, and/or offspring per family can be increased until there is sufficient power.</p>
+
+<p>Taking the reverse approach (can the sample size of dam, sire or offspring per family be reduced while maintaining sufficient power?) using the same variance components and offspring per family sample size, dam and sire sample sizes could be reduced from 11 to 7. The tray sample size was reduced accordingly to have an equal number of offspring per tray, i.e. 7 dams \(\times\) 7 sires \(\times\) 10 offspring = 490, which can divided equally by 10 trays. The egg size sample  size was only reduced accordingly to match the change in dam sample size. </p>
+
+<pre><code class="r">#dam ID, sire ID, family ID
+desn0_2&lt;- data.frame(dam=rep(1:7,each=7),sire=rep(1:7,7),family=1:(7*7))
+#replicate for offspring sample size (10)
+desn_2&lt;- do.call(&quot;rbind&quot;, replicate(10,desn0_2,simplify=F)); rm(desn0) 
+desn_2$tray&lt;- rep(1:10,each=nrow(desn_2)/10) #equal number of offspring per tray 
+desn_2$tray&lt;- sample(desn_2$tray,nrow(desn_2)) #shuffle tray numbers
+desn_2$egg_size&lt;- desn_2$dam #egg size is related to dam
+#&gt;powerLmer3(var_rand=c(0.1461,0,0.1788,0.5499,0.1198),n_rand=c(7,7,49,10),var_fix=0.0597,
+#&gt;n_fix=7,design=desn_2,remain=&quot;(1|tray) + egg_size&quot;) #full with LR
+#full with PB and 1000 iterations
+#&gt;powerLmer3(var_rand=c(0.1461,0,0.1788,0.5499,0.1198),n_rand=c(7,7,49,10),var_fix=0.0597,
+#&gt;n_fix=7,design=desn_2,remain=&quot;(1|tray) + egg_size&quot;,ftest=&quot;PB&quot;,iter=1000) 
+powerLmer3(var_rand=c(0.1461,0,0.1788,0.5499,0.1198),n_rand=c(7,7,49,10),var_fix=0.0597,
+n_fix=7,design=desn_2,remain=&quot;(1|tray) + egg_size&quot;,nsim=25) #25 simulations with LR
+#&gt; [1] &quot;2021-03-13 14:07:40 PST&quot;
+#&gt; [1] &quot;Starting simulation: 1&quot;
+#&gt; [1] &quot;Starting simulation: 2&quot;
+#&gt; [1] &quot;Starting simulation: 3&quot;
+#&gt; [1] &quot;Starting simulation: 4&quot;
+#&gt; [1] &quot;Starting simulation: 5&quot;
+#&gt; [1] &quot;Starting simulation: 6&quot;
+#&gt; [1] &quot;Starting simulation: 7&quot;
+#&gt; [1] &quot;Starting simulation: 8&quot;
+#&gt; [1] &quot;Starting simulation: 9&quot;
+#&gt; [1] &quot;Starting simulation: 10&quot;
+#&gt; [1] &quot;Starting simulation: 11&quot;
+#&gt; [1] &quot;Starting simulation: 12&quot;
+#&gt; [1] &quot;Starting simulation: 13&quot;
+#&gt; [1] &quot;Starting simulation: 14&quot;
+#&gt; [1] &quot;Starting simulation: 15&quot;
+#&gt; [1] &quot;Starting simulation: 16&quot;
+#&gt; [1] &quot;Starting simulation: 17&quot;
+#&gt; [1] &quot;Starting simulation: 18&quot;
+#&gt; [1] &quot;Starting simulation: 19&quot;
+#&gt; [1] &quot;Starting simulation: 20&quot;
+#&gt; [1] &quot;Starting simulation: 21&quot;
+#&gt; [1] &quot;Starting simulation: 22&quot;
+#&gt; [1] &quot;Starting simulation: 23&quot;
+#&gt; [1] &quot;Starting simulation: 24&quot;
+#&gt; [1] &quot;Starting simulation: 25&quot;
+#&gt; Time difference of 9.354495 secs
+#&gt; $group
+#&gt;     group var_in            var_out
+#&gt; 1 fix_eff 0.0597 0.0344343837351071
+#&gt; 
+#&gt; $fixed
+#&gt;       term n power
+#&gt; 1 egg_size 7  0.04
+#&gt; 
+#&gt; $random
+#&gt;       term    n var_in            var_out power
+#&gt; 1      dam    7 0.1461  0.202075824806516   0.8
+#&gt; 2     sire    7      0 0.0058981062896345     0
+#&gt; 3 dam.sire   49 0.1788  0.187379225832473     1
+#&gt; 4     tray   10 0.1198  0.120187782545446     1
+#&gt; 5 residual &lt;NA&gt; 0.5499  0.552136866407061  &lt;NA&gt;
+</code></pre>
+
+<h2>Bootstrap confidence intervals</h2>
+
+<p>Confidence intervals for the additive genetic, non-additive genetic, and maternal variance components can be produced using the bootstrap-t resampling method described by Efron and Tibshirani (1993, p. 160‒162). Observations are resampled with replacement until the original sample size is reproduced. The resampled data are then used in the model and the additive genetic, non-additive genetic, and maternal variance components are extracted. The process is repeated for a number of iterations, typically 1,000 times, to produce a distribution for each component. The confidence interval lower and upper limits and median are extracted from the distribution.</p>
+
+<p>Efron B, Tibshirani R. 1993. An Introduction to the Bootstrap. Chapman and Hall, New York.</p>
+
+<h3>Resample observations</h3>
+
+<p>The <code>resampRepli</code> function is used to bootstrap resample observations grouped by replicate ID within family ID for a specified number of iterations to create the resampled data set. A similar <code>resampFamily</code> function is able to resample observations grouped by family ID only. </p>
+
+<p><code>copy</code> is a vector of column numbers (to copy the contents). Does not need to contain the family and/or replicate columns. </p>
+
+<p>Full analysis is 1000 iterations. Example has 5 iterations.</p>
+
+<pre><code class="r">#&gt;resampRepli(dat=chinook_length,copy=c(3:8),family=&quot;family&quot;,replicate=&quot;repli&quot;,iter=1000) #full
+#&gt;resampFamily(dat=chinook_length,copy=c(3:8),family=&quot;family&quot;,iter=1000) #family only
+resampRepli(dat=chinook_length,copy=c(3:8),family=&quot;family&quot;,replicate=&quot;repli&quot;,iter=5) #5 iterations
+</code></pre>
+
+<p>Because of the large file sizes that can be produced, the resampling of each replicate Y per family X is
+saved separately as a common separated (X_Y_resampR.csv) file in the working directory. These files
+are merged to create the final resampled data set (resamp_datR.csv).</p>
+
+<p>If using <code>resampFamily</code>, the file names are X_resampF.csv per family and resamp_datF.csv for the final resampled data set.</p>
+
+<h3>Iteration variance components</h3>
+
+<p>The equivalent to <code>observLmer3</code> is available for the final bootstrap resampled data set, i.e. <code>resampLmer3</code>. </p>
+
+<p>Default is <code>ml = F</code> for REML. The starting model number <code>start =</code> and ending model number <code>end =</code> need to be specified.</p>
+
+<p><code>remain</code> is the remaining formula using <code>lme4</code> package format with # sign, e.g. fixed# + (1|random#).</p>
+
+<p>Full analysis is 1000 iterations. Example has 5 iterations.</p>
+
+<pre><code class="r">#&gt;length_datR&lt;- read.csv(&quot;resamp_datR.csv&quot;) #1000 iterations
+#&gt;length_rcomp3&lt;- resampLmer3(resamp=length_datR,dam=&quot;dam&quot;,sire=&quot;sire&quot;,response=&quot;length&quot;,
+#&gt;remain=&quot;egg_size# + (1|tray#)&quot;,start=1,end=1000) #full
+data(chinook_resampL) #5 iterations
+head(chinook_resampL)
+#&gt;   dam1 sire1 tray1 cell1 length1 egg_size1 dam2 sire2 tray2 cell2 length2
+#&gt; 1   d1    s1    t7    1A    23.1      7.27   d1    s1    t7    1A    23.1
+#&gt; 2   d1    s1    t7    1A    22.7      7.27   d1    s1    t7    1A    22.7
+#&gt; 3   d1    s1    t7    1A    22.9      7.27   d1    s1    t7    1A    22.9
+#&gt; 4   d1    s1    t7    1A    23.1      7.27   d1    s1    t7    1A    22.7
+#&gt; 5   d1    s1    t7    1A    23.1      7.27   d1    s1    t7    1A    22.9
+#&gt; 6   d1    s1    t8    1A    22.4      7.27   d1    s1    t8    1A    22.3
+#&gt;   egg_size2 dam3 sire3 tray3 cell3 length3 egg_size3 dam4 sire4 tray4 cell4
+#&gt; 1      7.27   d1    s1    t7    1A    23.8      7.27   d1    s1    t7    1A
+#&gt; 2      7.27   d1    s1    t7    1A    23.8      7.27   d1    s1    t7    1A
+#&gt; 3      7.27   d1    s1    t7    1A    23.8      7.27   d1    s1    t7    1A
+#&gt; 4      7.27   d1    s1    t7    1A    23.8      7.27   d1    s1    t7    1A
+#&gt; 5      7.27   d1    s1    t7    1A    23.8      7.27   d1    s1    t7    1A
+#&gt; 6      7.27   d1    s1    t8    1A    22.4      7.27   d1    s1    t8    1A
+#&gt;   length4 egg_size4 dam5 sire5 tray5 cell5 length5 egg_size5
+#&gt; 1    22.6      7.27   d1    s1    t7    1A    22.9      7.27
+#&gt; 2    23.8      7.27   d1    s1    t7    1A    22.6      7.27
+#&gt; 3    23.1      7.27   d1    s1    t7    1A    22.6      7.27
+#&gt; 4    22.9      7.27   d1    s1    t7    1A    22.9      7.27
+#&gt; 5    23.8      7.27   d1    s1    t7    1A    22.7      7.27
+#&gt; 6    22.0      7.27   d1    s1    t8    1A    22.4      7.27
+length_rcomp3&lt;- resampLmer3(resamp=chinook_resampL,dam=&quot;dam&quot;,sire=&quot;sire&quot;,response=&quot;length&quot;,
+remain=&quot;egg_size# + (1|tray#)&quot;,start=1,end=5)
+#&gt; [1] &quot;2021-03-13 14:07:50 PST&quot;
+#&gt; [1] &quot;Working on model: 1&quot;
+#&gt; [1] &quot;Working on model: 2&quot;
+#&gt; [1] &quot;Working on model: 3&quot;
+#&gt; [1] &quot;Working on model: 4&quot;
+#&gt; [1] &quot;Working on model: 5&quot;
+#&gt; Time difference of 0.5271339 secs
+length_rcomp3[1:5,]
+#&gt;    dam:sire      tray         sire       dam  Residual      Fixed     Total
+#&gt; 1 0.2138559 0.1160011 0.000000e+00 0.1340714 0.4995956 0.06131461 1.0248386
+#&gt; 2 0.2402589 0.1242010 6.029765e-09 0.1376951 0.5203867 0.06188805 1.0844298
+#&gt; 3 0.2194606 0.1161735 4.287067e-08 0.1357622 0.4844443 0.04275863 0.9985993
+#&gt; 4 0.1960044 0.1330174 1.204095e-03 0.1341200 0.4919724 0.05875469 1.0150730
+#&gt; 5 0.2247567 0.1466172 0.000000e+00 0.1305175 0.4787519 0.08000904 1.0606523
+#&gt;       additive    nonadd  maternal
+#&gt; 1 0.000000e+00 0.8554237 0.1340714
+#&gt; 2 2.411906e-08 0.9610355 0.1376951
+#&gt; 3 1.714827e-07 0.8778425 0.1357622
+#&gt; 4 4.816382e-03 0.7840176 0.1329159
+#&gt; 5 0.000000e+00 0.8990270 0.1305175
+</code></pre>
+
+<p>The function provides a data frame with columns containing the raw variance components for dam, sire, dam by sire, residual, total, additive genetic, non-additive genetic, and maternal. Also columns containing the raw variance components for any additional fixed and/or random effects. The number of rows in the data frame matches the number of iterations in the resampled data set and each row represents a model number.</p>
+
+<h3>Extract confidence intervals</h3>
+
+<p>Extract the bootstrap-t confidence intervals (CI) and median for the additive genetic, non-additive genetic, and maternal values from the data frame of models produced using <code>resampLmer3</code>. Also extracts intervals for additional fixed and/or random effects.</p>
+
+<p>Default confidence interval is 95% as <code>level = 95</code>. </p>
+
+<p><code>remain</code> is a vector of column names for additional effects.</p>
+
+<pre><code class="r">#&gt;ciMANA3(comp=length_rcomp3,remain=c(&quot;tray&quot;,&quot;Fixed&quot;)) #full, with egg size as Fixed
+data(chinook_bootL) #similar to length_rcomp3 1000 models, but has no Fixed
+ciMANA3(comp=chinook_bootL,remain=c(&quot;tray&quot;,&quot;Residual&quot;))
+#&gt; $raw
+#&gt;   component lower median upper
+#&gt; 1  additive     0      0  0.03
+#&gt; 2    nonadd 0.713  0.844 0.996
+#&gt; 3  maternal 0.168  0.201 0.233
+#&gt; 4      tray 0.091  0.112 0.133
+#&gt; 5  Residual 0.466  0.514 0.562
+#&gt; 
+#&gt; $percentage
+#&gt;   component lower median upper
+#&gt; 1  additive     0      0   2.9
+#&gt; 2    nonadd  69.4   81.3  94.2
+#&gt; 3  maternal  16.7   19.3    22
+#&gt; 4      tray     9   10.8  12.6
+#&gt; 5  Residual  46.5   49.4  52.7
+</code></pre>
+
+<p>The raw values are presented and are converted to a percentage of the total variance for each model. Defaults are the number of decimal places to round CI raw values as <code>rnd_r = 3</code> and to round the CI percent values as <code>rnd_p = 1</code>. </p>
+
+<p>The bootstrap-t method may produce medians that are largely different from the observed values. However, the chinook_bootL example data for the bootstrap-t CI were produced using another model including tray but not egg size (see the vignette for <strong>Advanced Normal Data Example</strong>), which may explain differences between the 95% CI and observed values. Nonetheless, options are provided below for 95% CI that are a poor fit.</p>
+
+<h4>Bias and accelerated corrected confidence intervals</h4>
+
+<p>The BCa method (bias and acceleration) described by Efron and Tibshirani (1993, p.184‒188) can be used for the correction of bootstrap-t confidence intervals. </p>
+
+<p><code>bias</code> is a vector of additive, non-additive, and maternal variance components. Followed by any other components in the order of the vector <code>remain</code>, i.e. c(additive,non-additive,maternal,component1,component2,etc.), from the raw observed variance components of <code>observLmer3</code>.</p>
+
+<p>The raw variance components of the chinook_bootL model were additive= 0, non-additive= 0.7192, maternal= 0.2030, tray= 0.1077, and residual= 0.5499. Typically the variance components would be from <code>observLmer3</code> above for the analysis pipeline.</p>
+
+<p>The &#39;bias fail&#39; warning is if the bias calculation is infinity (negative or positive), e.g. bias contains a zero value, so the uncorrected confidence interval is displayed for the component.</p>
+
+<pre><code class="r">#bias only
+ciMANA3(comp=chinook_bootL,remain=c(&quot;tray&quot;,&quot;Residual&quot;),bias=c(0,0.7192,0.2030,0.1077,0.5499))
+#&gt; $raw
+#&gt;   component lower median upper    change
+#&gt; 1  additive     0      0  0.03 bias fail
+#&gt; 2    nonadd 0.619  0.624 0.735      &lt;NA&gt;
+#&gt; 3  maternal 0.174  0.206  0.24      &lt;NA&gt;
+#&gt; 4      tray 0.081  0.103 0.125      &lt;NA&gt;
+#&gt; 5  Residual 0.534  0.587   0.6      &lt;NA&gt;
+#&gt; 
+#&gt; $percentage
+#&gt;   component lower median upper    change
+#&gt; 1  additive     0      0   2.9 bias fail
+#&gt; 2    nonadd  62.5   62.6  71.5      &lt;NA&gt;
+#&gt; 3  maternal    17   19.7  22.5      &lt;NA&gt;
+#&gt; 4      tray     8     10  11.9      &lt;NA&gt;
+#&gt; 5  Residual  50.8     54  54.5      &lt;NA&gt;
+#full, with egg size as Fixed, observLmer3 components
+#&gt;ciMANA3(comp=length_rcomp3,remain=c(&quot;tray&quot;,&quot;Fixed&quot;),bias=c(0,0.7152,0.1461,0.1198,0.0567)) 
+</code></pre>
+
+<p><code>accel</code> for acceleration correction uses the delete-one observation jackknife data set. See length_jack3 all observations in the next section.</p>
+
+<pre><code class="r">data(chinook_jackL)
+#bias and acceleration
+ciMANA3(comp=chinook_bootL,remain=c(&quot;tray&quot;,&quot;Residual&quot;),bias=c(0,0.7192,0.2030,0.1077,0.5499),
+accel=chinook_jackL)
+#&gt; $raw
+#&gt;   component lower median upper    change
+#&gt; 1  additive     0      0  0.03 bias fail
+#&gt; 2    nonadd 0.619  0.624 0.735      &lt;NA&gt;
+#&gt; 3  maternal 0.174  0.206  0.24      &lt;NA&gt;
+#&gt; 4      tray 0.081  0.103 0.125      &lt;NA&gt;
+#&gt; 5  Residual 0.534  0.587   0.6      &lt;NA&gt;
+#&gt; 
+#&gt; $percentage
+#&gt;   component lower median upper    change
+#&gt; 1  additive     0      0   2.9 bias fail
+#&gt; 2    nonadd  62.5   62.6  71.5      &lt;NA&gt;
+#&gt; 3  maternal    17   19.7  22.5      &lt;NA&gt;
+#&gt; 4      tray     8     10  11.9      &lt;NA&gt;
+#&gt; 5  Residual  50.8     54  54.5      &lt;NA&gt;
+#full, with egg size as Fixed, observLmer3 components
+#&gt;ciMANA3(comp=length_rcomp3,remain=c(&quot;tray&quot;,&quot;Fixed&quot;),bias=c(0,0.7152,0.1461,0.1198,0.0567),
+#&gt;accel=length_jack3) 
+</code></pre>
+
+<h4>Jackknife confidence intervals</h4>
+
+<p>Jackknife resampling is another method for producing confidence intervals.</p>
+
+<p>The equivalent to <code>observLmer3</code> is available for jackknife resampling, i.e. <code>JackLmer3</code>, using the observed data frame. </p>
+
+<p>Default is delete-one jackknife resampling as <code>size = 1</code> and REML as <code>ml = F</code>.</p>
+
+<p><code>remain</code> is the remaining formula using <code>lme4</code> package format.</p>
+
+<p>Full analysis uses all observations. Example has the first 10 observations.</p>
+
+<pre><code class="r">#&gt;length_jack3&lt;- JackLmer3(observ=chinook_length,dam=&quot;dam&quot;,sire=&quot;sire&quot;,response=&quot;length&quot;,
+#&gt;remain=&quot;egg_size + (1|tray)&quot;) #full, all observations
+length_jack3&lt;- JackLmer3(observ=chinook_length,dam=&quot;dam&quot;,sire=&quot;sire&quot;,response=&quot;length&quot;,
+remain=&quot;egg_size + (1|tray)&quot;,first=10) #first 10 observations
+#&gt; [1] &quot;2021-03-13 14:07:50 PST&quot;
+#&gt; [1] &quot;Removing observation: 1 of 1210&quot;
+#&gt; [1] &quot;Removing observation: 2 of 1210&quot;
+#&gt; [1] &quot;Removing observation: 3 of 1210&quot;
+#&gt; [1] &quot;Removing observation: 4 of 1210&quot;
+#&gt; [1] &quot;Removing observation: 5 of 1210&quot;
+#&gt; [1] &quot;Removing observation: 6 of 1210&quot;
+#&gt; [1] &quot;Removing observation: 7 of 1210&quot;
+#&gt; [1] &quot;Removing observation: 8 of 1210&quot;
+#&gt; [1] &quot;Removing observation: 9 of 1210&quot;
+#&gt; [1] &quot;Removing observation: 10 of 1210&quot;
+#&gt; Time difference of 1.013919 secs
+head(length_jack3)
+#&gt;    dam:sire      tray         sire       dam  Residual      Fixed    Total
+#&gt; 1 0.1788309 0.1198896 5.116505e-09 0.1461743 0.5503600 0.05955364 1.054808
+#&gt; 2 0.1788610 0.1195792 0.000000e+00 0.1463643 0.5503169 0.05941014 1.054531
+#&gt; 3 0.1788239 0.1189139 0.000000e+00 0.1455017 0.5495047 0.06005521 1.052799
+#&gt; 4 0.1789181 0.1194542 6.677429e-10 0.1465280 0.5501670 0.05925840 1.054326
+#&gt; 5 0.1788550 0.1199743 1.619127e-10 0.1462468 0.5503138 0.05950599 1.054896
+#&gt; 6 0.1787815 0.1198816 0.000000e+00 0.1459641 0.5503708 0.05972851 1.054727
+#&gt;       additive    nonadd  maternal
+#&gt; 1 2.046602e-08 0.7153237 0.1461743
+#&gt; 2 0.000000e+00 0.7154439 0.1463643
+#&gt; 3 0.000000e+00 0.7152954 0.1455017
+#&gt; 4 2.670972e-09 0.7156722 0.1465280
+#&gt; 5 6.476507e-10 0.7154199 0.1462468
+#&gt; 6 0.000000e+00 0.7151261 0.1459641
+</code></pre>
+
+<p>Because the delete-one observation jackknife resampling may be computationally intensive for large data sets, the <code>JackLmer3</code> function has the option of delete-d observation jackknife resampling, for which d &gt; 1. The rows of the observed data frame are shuffled and a block of observations of size d is deleted sequentially. For example, delete-5 observation jackknife resampling is specified as <code>size = 5</code>, which deletes a block of 5 observations.  </p>
+
+<p>Full analysis uses all observations. Example has the first 10 observations.</p>
+
+<pre><code class="r">#&gt;length_jack3D&lt;- JackLmer3(observ=chinook_length,dam=&quot;dam&quot;,sire=&quot;sire&quot;,response=&quot;length&quot;,
+#&gt;remain=&quot;egg_size + (1|tray)&quot;,size=5) #full
+length_jack3D&lt;- JackLmer3(observ=chinook_length,dam=&quot;dam&quot;,sire=&quot;sire&quot;,response=&quot;length&quot;,
+remain=&quot;egg_size + (1|tray)&quot;,size=5,first=10) #first 10 
+#&gt; [1] &quot;2021-03-13 14:07:51 PST&quot;
+#&gt; [1] &quot;Removing block: 1 of 242&quot;
+#&gt; [1] &quot;Removing block: 2 of 242&quot;
+#&gt; [1] &quot;Removing block: 3 of 242&quot;
+#&gt; [1] &quot;Removing block: 4 of 242&quot;
+#&gt; [1] &quot;Removing block: 5 of 242&quot;
+#&gt; [1] &quot;Removing block: 6 of 242&quot;
+#&gt; [1] &quot;Removing block: 7 of 242&quot;
+#&gt; [1] &quot;Removing block: 8 of 242&quot;
+#&gt; [1] &quot;Removing block: 9 of 242&quot;
+#&gt; [1] &quot;Removing block: 10 of 242&quot;
+#&gt; Time difference of 1.027099 secs
+head(length_jack3D)
+#&gt;    dam:sire      tray         sire       dam  Residual      Fixed    Total
+#&gt; 1 0.1784870 0.1200035 0.000000e+00 0.1450782 0.5516299 0.05968233 1.054881
+#&gt; 2 0.1786463 0.1199940 0.000000e+00 0.1459915 0.5520025 0.05970793 1.056342
+#&gt; 3 0.1803205 0.1198661 1.302634e-10 0.1456901 0.5510731 0.05949960 1.056449
+#&gt; 4 0.1787090 0.1190558 0.000000e+00 0.1475006 0.5509086 0.05971711 1.055891
+#&gt; 5 0.1798430 0.1192362 5.735676e-11 0.1445204 0.5500834 0.05976754 1.053451
+#&gt; 6 0.1706897 0.1194551 0.000000e+00 0.1456958 0.5427987 0.06062890 1.039268
+#&gt;       additive    nonadd  maternal
+#&gt; 1 0.000000e+00 0.7139480 0.1450782
+#&gt; 2 0.000000e+00 0.7145852 0.1459915
+#&gt; 3 5.210537e-10 0.7212820 0.1456901
+#&gt; 4 0.000000e+00 0.7148359 0.1475006
+#&gt; 5 2.294270e-10 0.7193719 0.1445204
+#&gt; 6 0.000000e+00 0.6827588 0.1456958
+</code></pre>
+
+<p>Extract the jackknife confidence intervals (CI) and median for the additive genetic, non-additive genetic, and maternal values from the data frame of models produced using <code>JackLmer3</code>. Also extracts any additional fixed effect and/or random effect variance components.</p>
+
+<p>The mean and the standard error of pseudo-values for each variance component are calculated (Efron and Tibshirani 1993, p.184‒188). The standard error is then used with the Student’s t distribution to provide the lower and upper limits for the confidence interval. For delete-d jackknife resampling, M degrees of freedom were used for producing the confidence interval (Martin et al. 2004): M = N / d, where N is the total number of observations and d is the number of deleted observations. Large values of M, such as 1,000, can translate to the delete-d jackknife resampling method approaching bootstrap resampling expectations (Efron and Tibshirani 1993, p. 149).</p>
+
+<p>Martin, H., Westad, F. &amp; Martens, H. (2004). Improved Jackknife Variance Estimates of Bilinear Model Parameters. COMPSTAT 2004 &ndash; Proceedings in Computational Statistics 16th Symposium Held in Prague, Czech Republic, 2004 (ed J. Antoch), pp. 261-275. Physica-Verlag HD, Heidelberg.</p>
+
+<p>Default confidence interval is 95% as <code>level = 95</code>.</p>
+
+<p><code>remain</code> is a vector of column names for additional effects.</p>
+
+<p><code>full</code> is a vector of additive, non-additive, maternal, and total variance components. Followed by any other components in the order of the vector <code>remain</code>, i.e. c(additive,non-additive,maternal,total,component1,component2,etc.), from the raw observed variance components of <code>observLmer3</code>.</p>
+
+<p>The chinook_jackL example data for the jackknife CI were produced using another model including tray but not egg size (see the vignette for <strong>Advanced Normal Data Example</strong>). The raw variance components of this model were additive= 0, non-additive= 0.7192, maternal= 0.2030, total= 1.0404, tray= 0.1077, and residual= 0.5499. Typically the variance components would be from <code>observLmer3</code> above for the analysis pipeline.</p>
+
+<pre><code class="r">data(chinook_jackL) #similar to length_jack3 all observations
+ciJack3(comp=chinook_jackL,remain=c(&quot;tray&quot;,&quot;Residual&quot;),full=c(0,0.7192,0.2030,1.0404,0.1077,
+0.5499))
+#&gt; $raw
+#&gt;   component lower  mean upper
+#&gt; 1  additive     0     0     0
+#&gt; 2    nonadd 0.481 0.691   0.9
+#&gt; 3  maternal 0.197 0.244 0.291
+#&gt; 4      tray 0.024 0.056 0.088
+#&gt; 5  Residual 0.519 0.519 0.519
+#&gt; 
+#&gt; $percentage
+#&gt;   component lower mean upper
+#&gt; 1  additive     0    0     0
+#&gt; 2    nonadd  52.2 69.7  87.2
+#&gt; 3  maternal  20.6 24.4  28.2
+#&gt; 4      tray   3.2  5.9   8.6
+#&gt; 5  Residual  48.4 52.3  56.2
+#full, all observations, with egg size as Fixed, observLmer3 components
+#&gt;ciJack3(comp=length_jack3,remain=c(&quot;tray&quot;,&quot;Fixed&quot;),full=c(0,0.7152,0.1461,1.0543,0.1198,
+#&gt;0.0597)) 
+</code></pre>
+
+<p>The raw values are presented and are converted to a percentage of the total variance for each model. Defaults are the number of decimal places to round CI raw values as <code>rnd_r = 3</code> and to round the CI percent values as <code>rnd_p = 1</code>. </p>
+
+<h2>Plotting confidence intervals</h2>
+
+<p>The <code>barMANA</code> and <code>boxMANA</code> functions are simple plotting functions for the confidence intervals or all values, respectively, from the bootstrap and jackknife approaches. Default is to display the percentage values as <code>type = perc</code>. Raw values can be displayed as <code>type = raw</code>.</p>
+
+<p>Within the functions, there are simple plot modifications available. For the y-axis, min and max values can be species as <code>ymin</code> and <code>ymax</code>, as well as the increment as <code>yunit</code>. Also, magnification of the axis unit as <code>cex_yaxis</code> and label as <code>cex_ylab</code>. The position of the legend can be specified as <code>leg</code>. Default is &ldquo;topright&rdquo;.</p>
+
+<h3>Bar plot</h3>
+
+<p>The <code>barMANA</code> function produces bar graphs with the bootstrap-t median (<code>ciMANA3</code>) or jackknife pseudo-value mean (<code>ciJack3</code>) as the top of the shaded bar and error bars covering the range of the confidence interval for each of the additive genetic, non-additive genetic, and maternal values of a phenotypic trait.</p>
+
+<p>The length of the error bar can be specified in inches as <code>bar_len</code>.</p>
+
+<pre><code class="r">length_ci&lt;- ciJack3(comp=chinook_jackL,remain=c(&quot;tray&quot;,&quot;Residual&quot;),full=c(0,0.7192,0.2030,1.0404,
+0.1077,0.5499))
+oldpar&lt;- par(mfrow=c(2,1))
+barMANA(ci_dat=length_ci) #basic, top
+barMANA(ci_dat=length_ci,bar_len=0.3,yunit=20,ymax=100,cex_ylab=1.3) #modified, bottom
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk barplot"/></p>
+
+<p>Different traits can also be combined on the same bar plot using <code>trait</code> specified in <code>ciMANA3</code> or <code>ciJack3</code>. The information is combined into a list object. For the example, the jackknife CI is duplicated to simulate &#39;different traits&#39;.</p>
+
+<pre><code class="r">length_ci1&lt;- ciJack3(comp=chinook_jackL,remain=c(&quot;tray&quot;,&quot;Residual&quot;),full=c(0,0.7192,0.2030,1.0404,
+0.1077,0.5499),trait=&quot;length_1&quot;)
+length_ci2&lt;- ciJack3(comp=chinook_jackL,remain=c(&quot;tray&quot;,&quot;Residual&quot;),full=c(0,0.7192,0.2030,1.0404,
+0.1077,0.5499),trait=&quot;length_2&quot;)
+comb_bar&lt;- list(raw=rbind(length_ci1$raw,length_ci2$raw),
+percentage=rbind(length_ci1$percentage,length_ci2$percentage)) 
+barMANA(ci_dat=comb_bar,bar_len=0.3,yunit=20,ymax=100,cex_ylab=1.3)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk barplot-comb"/></p>
+
+<p>The legend is slightly off in the presented html version but is fine with the R plotting device.</p>
+
+<h3>Box plot</h3>
+
+<p>The <code>boxMANA</code> function produces box plots using all values for the bootstrap-t resampling data set (<code>resampLmer3</code>) or jackknife resampling data set (<code>JackLmer3</code>). </p>
+
+<pre><code class="r">oldpar&lt;- par(mfrow=c(2,1))
+boxMANA(comp=chinook_bootL) #from resampLmer3, basic, top 
+boxMANA(comp=chinook_bootL,yunit=20,ymax=100,cex_ylab=1.3,leg=&quot;topleft&quot;) #modified, bottom
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk boxplot"/></p>
+
+<p>Different traits can also be combined on the same box plot by adding a &ldquo;trait&rdquo; column to the resampling data set. For the example, the bootstrap-t data frame is duplicated to simulate &#39;different traits&#39;.</p>
+
+<pre><code class="r">chinook_bootL1&lt;- chinook_bootL; chinook_bootL2&lt;- chinook_bootL #from resampLmer3
+chinook_bootL1$trait&lt;- &quot;length_1&quot;; chinook_bootL2$trait&lt;- &quot;length_2&quot;
+comb_boot&lt;- rbind(chinook_bootL1,chinook_bootL2)
+comb_boot$trait&lt;- as.factor(comb_boot$trait)
+boxMANA(comb_boot,yunit=20,ymax=100,cex_ylab=1.3,leg=&quot;topleft&quot;)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk boxplot-comb"/></p>
+
+<p>The recommended follow-up vignette is the <strong>Simple Non-Normal Data Example</strong>, covering the standard model only for non-normal error structures (e.g. binary, proportion, and/or count data types).</p>
+
+</body>
+
+</html>

@@ -13,12 +13,11 @@ quasi = F)
 }
 \arguments{
   \item{observ}{Data frame of observed data.}
-  \item{dam}{Column name containing dam(female) parent identity information.}
-  \item{sire}{Column name containing sire(male) parent identity information.}
+  \item{dam}{Column name containing dam (female) parent identity information.}
+  \item{sire}{Column name containing sire (male) parent identity information.}
   \item{response}{Column name containing the offspring (response) phenotype values.}
   \item{fam_link}{
-The family and link in family(link) format.
-Supported options are binomial(logit), binomial(probit), poisson(log), and poisson (sqrt).
+The family and link in family(link) format. Supported options are binomial(link="logit"), binomial(link="probit"), poisson(link="log"), and poisson(link="sqrt").
 }
   \item{position}{Optional column name containing position factor information.}
   \item{block}{Optional column name containing block factor information.}
@@ -71,6 +70,6 @@ data(chinook_survival) #Chinook salmon offspring survival
 chinook_survival2<- buildBinary(dat=chinook_survival,copy=c(2:6,9),one="alive",zero="dead")
 #
 \dontrun{survival_mod2<- observGlmer2(observ=chinook_survival2,dam="dam",sire="sire",
-response="status",fam_link=binomial(logit),position="tray")  #a few minutes
+response="status",fam_link=binomial(link="logit"),position="tray")  #a few minutes
 survival_mod2}
 }

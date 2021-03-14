@@ -46,5 +46,5 @@ in Prague, Czech Republic, 2004 (ed J. Antoch), pp. 261-275. Physica-Verlag HD, 
 \seealso{ \code{\link{ciJack2}}, \code{\link{ciJack3}} }
 \examples{
 data(chinook_jackL) #Chinook salmon offspring length, delete-one jackknife
-ciJack(chinook_jackL,c(0.0000000,0.7192253,0.2029684,1.0404425))
+ciJack(chinook_jackL,c(0,0.7192,0.2030,1.0404))
 }

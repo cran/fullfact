@@ -40,7 +40,7 @@ chinook_survival2<- buildBinary(dat=chinook_survival,copy=c(2:6,9),one="alive",z
 
 ## Standard additive genetic, non-additive genetic, and maternal variance analysis
 \dontrun{survival_mod1<- observGlmer(observ=chinook_survival2,dam="dam",sire="sire",
-response="status",fam_link=binomial(logit))
+response="status",fam_link=binomial(link="logit"))
 survival_mod1}
 }
 \keyword{datasets}

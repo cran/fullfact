@@ -12,10 +12,10 @@ ml = F)
 }
 \arguments{
   \item{varcomp}{Vector of known dam, sire, dam by sire, residual, and position and/or
-  block variance components, i.e. c(dam,sire,ds,residual,position/block). If there is a
+  block variance components, i.e. c(dam, sire, dam x sire, residual, position/block). If there is a
   position and a block c(..., residual, position, block).}
   \item{nval}{Vector of known dam, sire, offspring per family, and offspring per position or number of blocks
-  sample sizes, i.e. c(dam,sire,offspring,position/block). If there is a position and a
+  sample sizes, i.e. c(dam, sire, offspring, position/block). If there is a position and a
   block c(..., offspring, position, block).}
   \item{alpha}{Statistical significance value. Default is 0.05.}
   \item{nsim}{Number of simulations. Default is 100.}
@@ -55,5 +55,11 @@ parameters, but is the preferred method for analyzing large data sets with compl
 \seealso{ \code{\link{powerLmer}}, \code{\link{powerLmer3}} }
 \examples{
 #100 simulations
-\dontrun{powerLmer2(varcomp=c(0.19,0.03,0.02,0.66,0.1),nval=c(10,10,20,10),position=2) }
+#position only, e.g. 8 tanks
+\dontrun{powerLmer2(varcomp=c(0.2030,0,0.1798,0.5499,0.1077),nval=c(8,8,20,40),position=8)}
+#block only, e.g. four 2 x 2
+\dontrun{powerLmer2(varcomp=c(0.2030,0,0.1798,0.5499,0.1077),nval=c(8,8,20,4),block=c(2,2))}
+#position and block
+\dontrun{powerLmer2(varcomp=c(0.2030,0,0.1798,0.5499,0.1077,0.1077),nval=c(8,8,20,40,4),
+position=8,block=c(2,2))}
 }

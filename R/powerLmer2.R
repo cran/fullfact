@@ -35,7 +35,6 @@ pwr_res<- data.frame(term=c("dam","sire","dam.sire","residual"), n= c(nval[c(1,2
    sum(sim_dat$dam.sire_pval < alpha)/nsim,NA))
 } #end nothing
 if (!is.null(position) && is.null(block)) { posK<- varcomp[5]; posN<- nval[4]
-if (offN/position != posN) stop("Sample size of position (in nval) does not match offspring / position (in position)")
 sim_dat<- data.frame(dam_var=numeric(nsim), dam_pval=numeric(nsim), sire_var=numeric(nsim), sire_pval=numeric(nsim),
   dam.sire_var=numeric(nsim),dam.sire_pval=numeric(nsim),pos_var=numeric(nsim),pos_pval=numeric(nsim),
   residual=numeric(nsim))
@@ -45,7 +44,8 @@ print(paste0("Starting simulation: ", i))
   posR<- rnorm(position,0,sd=sqrt(posK))
 observ <- expand.grid(off=1:offN, dam=1:damN, sire=1:sireN)
 observ$famil<- rep(1:(damN*sireN),each=offN)
-observ$position<- rep(1:position,each=posN)
+if (nrow(observ)/position != posN) stop("Sample size of position (in nval) does not match offspring / position (in position)")
+observ$position<- rep(1:position,each=posN); observ$position<- sample(observ$position,nrow(observ)) #shuffle
 N<- nrow(observ);resR<- rnorm(N,0,sd=sqrt(resK)) #noise
 observ<- within(observ, { resp<- damR[dam] + sireR[sire] + dxsR[famil] + posR[position] + resR } )
   if (ml == F) { m<- lmer(resp~ (1|dam) + (1|sire) + (1|dam:sire) + (1|position), observ) }
@@ -107,7 +107,6 @@ pwr_res<- data.frame(term=c("dam","sire","dam.sire","block","residual"),
   sum(sim_dat$dam.sire_pval < alpha)/nsim,sum(sim_dat$bloc_pval < alpha)/nsim,NA))
 } #end block only
 if (!is.null(position) && !is.null(block)) { posK<- varcomp[5]; blocK<- varcomp[6]; posN<- nval[4]; blocN<- nval[5]
-if (offN/position != posN) stop("Sample size of position (in nval) does not match offspring / position (in position)")
 if (damN != block[1]*blocN) stop("Sample size of dams does not match block design")
 if (sireN != block[2]*blocN) stop("Sample size of sires does not match block design")
 sim_dat<- data.frame(dam_var=numeric(nsim), dam_pval=numeric(nsim), sire_var=numeric(nsim), sire_pval=numeric(nsim),
@@ -124,7 +123,8 @@ observ0<- merge(dam0,sire0, by="ind")
 levels(observ0[,1])<- 1:blocN; colnames(observ0)<- c("block","dam","sire")
 observ0$famil<- 1:nrow(observ0)  #add family
 observ<- do.call("rbind", replicate(offN,observ0,simplify=F));rm(observ0) #expand
-observ$position<- rep(1:position,each=posN*length(dxsR)) 
+if (nrow(observ)/position != posN) stop("Sample size of position (in nval) does not match offspring / position (in position)")
+observ$position<- rep(1:position,each=posN); observ$position<- sample(observ$position,nrow(observ)) #shuffle 
 N<- nrow(observ);resR<- rnorm(N,0,sd=sqrt(resK)) #noise
 observ<- within(observ, { resp<- damR[dam] + sireR[sire] + dxsR[famil] + posR[position] + blocR[block] + resR } )
   if (ml == F) { m<- lmer(resp~ (1|dam) + (1|sire) + (1|dam:sire) + (1|position) + (1|block), observ) }

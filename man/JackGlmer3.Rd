@@ -12,20 +12,19 @@ first = NULL)
 }
 \arguments{
   \item{observ}{Data frame of observed data.}
-  \item{dam}{Column name containing dam(female) parent identity information.}
-  \item{sire}{Column name containing sire(male) parent identity information.}
+  \item{dam}{Column name containing dam (female) parent identity information.}
+  \item{sire}{Column name containing sire (male) parent identity information.}
   \item{response}{Column name containing the offspring (response) phenotype values.}
   \item{fam_link}{
-The family and link in family(link) format.
-Supported options are binomial(logit), binomial(probit), poisson(log), and poisson (sqrt).
+The family and link in family(link) format. Supported options are binomial(link="logit"), binomial(link="probit"), poisson(link="log"), and poisson(link="sqrt").
 }
-  \item{remain}{Remaining formula with # using \emph{lme4} package formula.}
+  \item{remain}{Remaining formula using \emph{lme4} package formula.}
   \item{quasi}{Incorporate overdispersion or quasi-error structure.}
   \item{size}{Default is 1 for delete-one jackknife resampling. If \emph{size} > 1,
 delete-\emph{d} jackknife resampling occurs removing a block d equal to \emph{size}.}
   \item{first}{
 Number of initial sub-samples to run. Useful for examing if there is variation among
-sub-samples before jackknife resampling the entire data set. There can be little varitation for
+sub-samples before jackknife resampling the entire data set. There can be little variation for
 delete-one jackknife resampling with large data sets, and delete-\emph{d} jackknife resampling
 should be considered.
 }
@@ -86,9 +85,9 @@ chinook_survival2<- buildBinary(dat=chinook_survival,copy=c(1:6,9),one="alive",z
 
 #Delete-one
 \dontrun{survival_jack3<- JackGlmer3(observ=chinook_survival2,dam="dam",sire="sire",
-response="status",fam_link=binomial(logit),remain="egg_size + (1|tray)")}
+response="status",fam_link=binomial(link="logit""),remain="egg_size + (1|tray)")}
 
-#Delete-d, d=36
+#Delete-d, d=30
 \dontrun{survival_jack3.2<- JackGlmer3(observ=chinook_survival2,dam="dam",sire="sire",
-response="status",fam_link=binomial(logit),remain="egg_size + (1|tray)",size=36)}
+response="status",fam_link=binomial(link="logit""),remain="egg_size + (1|tray)",size=30)}
 }

@@ -11,12 +11,11 @@ resampGlmer(resamp, dam, sire, response, fam_link, start, end, quasi = F)
 }
 \arguments{
   \item{resamp}{Data frame of bootstrap resampled data.}
-  \item{dam}{Column name containing dam(female) parent identity information.}
-  \item{sire}{Column name containing sire(male) parent identity information.}
+  \item{dam}{Column name containing dam (female) parent identity information.}
+  \item{sire}{Column name containing sire (male) parent identity information.}
   \item{response}{Column name containing the offspring (response) phenotype values.}
   \item{fam_link}{
-The family and link in family(link) format.
-Supported options are binomial(logit), binomial(probit), poisson(log), and poisson (sqrt).
+The family and link in family(link) format. Supported options are binomial(link="logit"), binomial(link="probit"), poisson(link="log"), and poisson(link="sqrt").
 }
   \item{start}{Starting model number.}
   \item{end}{Ending model number.}
@@ -66,6 +65,8 @@ increasing number of random effects.
 \examples{
 data(chinook_resampS) #5 iterations
 
-\dontrun{survival_rcomp<- resampGlmer(resamp=survival_datR,dam="dam",sire="sire",
-response="status",fam_link=binomial(logit),start=1,end=1000)}
+#survival_rcomp<- resampGlmer(resamp=survival_datR,dam="dam",sire="sire",
+#response="status",fam_link=binomial(link="logit"),start=1,end=1000)
+\dontrun{survival_rcomp<- resampGlmer(resamp=chinook_resampS,dam="dam",sire="sire",
+response="status",fam_link=binomial(link="logit"),start=1,end=5) }
 }

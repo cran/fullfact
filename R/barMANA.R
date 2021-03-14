@@ -21,10 +21,11 @@ if (!is.null(dat$trait)) { dat$trait<- factor(dat$trait)
  dat_ci<- matrix(as.numeric(dat[,3][ord]),ncol=num,nrow=3) #median/mean
  lwr_ci<- matrix(as.numeric(dat$lower[ord]),ncol=num,nrow=3)
  upp_ci<- matrix(as.numeric(dat$upper[ord]),ncol=num,nrow=3)
- if (is.null(ymax)) { ymax<- max(dat$upper[ord]) }
+ if (is.null(ymax)) { ymax<- as.numeric(max(dat$upper[ord])) }
  if (!is.null(ymax)) { ymax<- ymax }
  if (is.null(ymin)) { ymin<- 0 }
  if (!is.null(ymin)) { ymin<- ymin }
+ 
 ci_plot<- barplot(dat_ci,beside=T,ylab=label,col=c("gray55","gray","gray95"),
   names.arg=name_lab,cex.names=cex_names,
   yaxt='n',ylim=c(ymin,ymax),cex.lab=cex_ylab)

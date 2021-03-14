@@ -9,9 +9,8 @@ linear mixed-effect model using the \emph{lmer} function of the \emph{lme4} pack
 powerLmer(varcomp, nval, alpha = 0.05, nsim = 100, ml = F)
 }
 \arguments{
-  \item{varcomp}{Vector of known dam, sire, dam by sire, and residual variance components, i.e. c(dam,sire,ds,res).}
-  \item{nval}{Vector of known dam, sire, and offspring per family sample sizes, i.e. c(dam,sire,
-  offspring).}
+  \item{varcomp}{Vector of known dam, sire, dam by sire, and residual variance components, i.e. c(dam, sire, dam x sire, residual).}
+  \item{nval}{Vector of known dam, sire, and offspring per family sample sizes, i.e. c(dam, sire, offspring).}
   \item{alpha}{Statistical significance value. Default is 0.05.}
   \item{nsim}{Number of simulations. Default is 100.}
   \item{ml}{Default is FALSE for restricted maximum likelihood. Change to TRUE for maximum likelihood.}
@@ -48,8 +47,8 @@ parameters, but is the preferred method for analyzing large data sets with compl
 \seealso{ \code{\link{powerLmer2}}, \code{\link{powerLmer3}} }
 \examples{
 #100 simulations
-#powerLmer(varcomp=c(0.19,0.03,0.02,0.76),nval=c(10,10,20))
+#powerLmer(varcomp=c(0.1900,0,0.1719,0.6315),nval=c(11,11,10))
 #
 #5 simulations
-powerLmer(varcomp=c(0.19,0.03,0.02,0.76),nval=c(10,10,20),nsim=5)
+powerLmer(varcomp=c(0.1900,0,0.1719,0.6315),nval=c(11,11,10),nsim=5)
 }

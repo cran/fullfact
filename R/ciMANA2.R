@@ -15,8 +15,9 @@ if (!is.null(bias)) {
   z0_mat <- qnorm(mean(comp[,mater] < bias[3]))
   z0_add <- qnorm(mean(comp[,add] < bias[1]))
   z0_na <- qnorm(mean(comp[,nonadd] < bias[2]))
-  if (!is.null(position)) { z0_pos <- qnorm(mean(comp[,pos] < bias[4])) }
-  if (!is.null(block)) { z0_bloc <- qnorm(mean(comp[,bloc] < bias[5])) }  } #end
+  if (!is.null(position) && is.null(block)) { z0_pos <- qnorm(mean(comp[,pos] < bias[4])) }
+  if (is.null(position) && !is.null(block)) { z0_bloc <- qnorm(mean(comp[,bloc] < bias[4])) }
+  if (!is.null(position) && !is.null(block)) { z0_pos <- qnorm(mean(comp[,pos] < bias[4])); z0_bloc <- qnorm(mean(comp[,bloc] < bias[5])) }}
 if (is.null(accel)) { a_mat<- 0; a_add<- 0; a_na<- 0; a_pos<- 0; a_bloc<-0 }
 if (!is.null(accel)) {
   mater2<- grep("maternal", colnames(accel))
@@ -27,8 +28,10 @@ if (!is.null(accel)) {
   a_mat <- sum((bias[3]-accel[,mater2])^3)/(6*sum((bias[3]-accel[,mater2])^2)^(3/2))
   a_add <- sum((bias[1]-accel[,add2])^3)/(6*sum((bias[1]-accel[,add2])^2)^(3/2))
   a_na <- sum((bias[2]-accel[,nonadd2])^3)/(6*sum((bias[2]-accel[,nonadd2])^2)^(3/2))
-  if (!is.null(position)) { a_pos <- sum((bias[4]-accel[,pos2])^3)/(6*sum((bias[4]-accel[,pos2])^2)^(3/2)) }
-  if (!is.null(block)) { a_bloc <- sum((bias[5]-accel[,bloc2])^3)/(6*sum((bias[5]-accel[,bloc2])^2)^(3/2)) }
+  if (!is.null(position) && is.null(block)) { a_pos <- sum((bias[4]-accel[,pos2])^3)/(6*sum((bias[4]-accel[,pos2])^2)^(3/2)) }
+  if (is.null(position) && !is.null(block)) { a_bloc <- sum((bias[4]-accel[,bloc2])^3)/(6*sum((bias[4]-accel[,bloc2])^2)^(3/2)) }
+  if (!is.null(position) && !is.null(block)) { a_pos <- sum((bias[4]-accel[,pos2])^3)/(6*sum((bias[4]-accel[,pos2])^2)^(3/2))
+   a_bloc <- sum((bias[5]-accel[,bloc2])^3)/(6*sum((bias[5]-accel[,bloc2])^2)^(3/2)) }
 } #end acceleration
   ci<- data.frame(component=c("additive","nonadd","maternal"),
     lower=c(quantile(comp[,add],cia),quantile(comp[,nonadd],cia),quantile(comp[,mater],cia)),

@@ -13,8 +13,8 @@ first = NULL)
 }
 \arguments{
   \item{observ}{Data frame of observed data.}
-  \item{dam}{Column name containing dam(female) parent identity information.}
-  \item{sire}{Column name containing sire(male) parent identity information.}
+  \item{dam}{Column name containing dam (female) parent identity information.}
+  \item{sire}{Column name containing sire (male) parent identity information.}
   \item{response}{Column name containing the offspring (response) phenotype values.}
   \item{position}{Optional column name containing position factor information.}
   \item{block}{Optional column name containing block factor information.}
@@ -23,7 +23,7 @@ first = NULL)
 delete-\emph{d} jackknife resampling occurs removing a block d equal to \emph{size}.}
   \item{first}{
 Number of initial sub-samples to run. Useful for examing if there is variation among
-sub-samples before jackknife resampling the entire data set. There can be little varitation for
+sub-samples before jackknife resampling the entire data set. There can be little variation for
 delete-one jackknife resampling with large data sets, and delete-\emph{d} jackknife resampling
 should be considered.
 }

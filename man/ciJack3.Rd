@@ -3,7 +3,7 @@
 \title{Jackknife confidence intervals 3}
 \description{
 Extracts jackknife confidence intervals for additive genetic, non-additive genetic, and maternal
-variance components. Also extracts intervals for additional fixed and random effects.
+variance components. Also extracts intervals for additional fixed and/or random effects.
 }
 \usage{
 ciJack3(comp, full, remain = NULL, level = 95, rnd_r = 3, rnd_p = 1, trait = NULL)
@@ -14,7 +14,7 @@ ciJack3(comp, full, remain = NULL, level = 95, rnd_r = 3, rnd_p = 1, trait = NUL
 A vector of raw observed additive, non-additive, maternal, and total variance component values
 for from the full observed data set, i.e. c(additive, non-additive, maternal, total). Followed by
 any other components in the order of the vector \emph{remain},
-i.e. c(additive, non-additive, maternal, total, component1, component2, ...).
+i.e. c(additive, non-additive, maternal, total, component1, component2, etc.).
 }
   \item{remain}{Vector of column names for additional effects}
   \item{level}{Confidence level, as a percentage. Default is 95.}
@@ -37,7 +37,7 @@ method approaching bootstrap resampling expectations (Efron & Tibshirani 1993).
 \value{
 Prints a data frame containing the lower, median, and upper values of the jackknife confidence
 interval for additive genetic, non-additive genetic, maternal variance components, and any
-additional fixed effect and random effect variance components. Values are presented as raw and
+additional fixed effect and/or random effect variance components. Values are presented as raw and
 percentages of the total variance value within each row.
 }
 \references{
@@ -50,6 +50,5 @@ in Prague, Czech Republic, 2004 (ed J. Antoch), pp. 261-275. Physica-Verlag HD, 
 \seealso{ \code{\link{ciJack}}, \code{\link{ciJack2}} }
 \examples{
 data(chinook_jackL) #Chinook salmon offspring length, delete-one jackknife
-ciJack3(chinook_jackL,c(0.0000000,0.7192253,0.2029684,1.0404425,0.1077423,0.5499255),
-remain=c("tray","Residual"))
+ciJack3(chinook_jackL,remain=c("tray","Residual"),c(0,0.7192,0.2030,1.0404,0.1077,0.5499))
 }

@@ -14,8 +14,8 @@ ml = F)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{resamp}{Data frame of bootstrap resampled data.}
-  \item{dam}{Column name containing dam(female) parent identity information.}
-  \item{sire}{Column name containing sire(male) parent identity information.}
+  \item{dam}{Column name containing dam (female) parent identity information.}
+  \item{sire}{Column name containing sire (male) parent identity information.}
   \item{response}{Column name containing the offspring (response) phenotype values.}
   \item{start}{Starting model number.}
   \item{end}{Ending model number.}

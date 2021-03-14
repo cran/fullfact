@@ -14,7 +14,7 @@ trait = NULL)
   \item{full}{
 A vector of raw observed additive, non-additive, maternal, and total variance component values
 for from the full observed data set, i.e. c(additive, non-additive, maternal, total, position/block).
-If there is a position and a block c(..., maternal, position, block).
+If there is a position and a block c(..., total, position, block).
 }
   \item{level}{Confidence level, as a percentage. Default is 95.}
   \item{rnd_r}{Number of decimal places to round the confidence interval of raw values.}
@@ -51,5 +51,5 @@ in Prague, Czech Republic, 2004 (ed J. Antoch), pp. 261-275. Physica-Verlag HD, 
 \seealso{ \code{\link{ciJack}}, \code{\link{ciJack3}} }
 \examples{
 data(chinook_jackL) #Chinook salmon offspring length, delete-one jackknife
-ciJack2(chinook_jackL,c(0.0000000,0.7192253,0.2029684,1.0404425,0.1077423),position="tray")
+ciJack2(chinook_jackL,position="tray",c(0,0.7192,0.2030,1.0404,0.1077))
 }

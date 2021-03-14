@@ -11,8 +11,8 @@ observLmer3(observ, dam, sire, response, remain, ml = F, iter = 1000)
 }
 \arguments{
   \item{observ}{Data frame of observed data.}
-  \item{dam}{Column name containing dam(female) parent identity information.}
-  \item{sire}{Column name containing sire(male) parent identity information.}
+  \item{dam}{Column name containing dam (female) parent identity information.}
+  \item{sire}{Column name containing sire (male) parent identity information.}
   \item{response}{Column name containing the offspring (response) phenotype values.}
   \item{remain}{Remaining formula using \emph{lme4} package format.}
   \item{ml}{Default is FALSE for restricted maximum likelihood. Change to TRUE for maximum likelihood.}
@@ -32,8 +32,8 @@ bootstrap method (Bolker et al. 2009) from the \emph{mixed} function of the \emp
 \value{
 A list object containing the raw variance components, the variance components as a percentage
 of the total variance component. Contains the difference in AIC and BIC, likelihood ratio
-test Chi-square and p-value for both random and fixed effects. Also contains the parametric
-bootstrap p-value for fixed effects.
+test Chi-square and p-value for random and/or fixed effects. Also contains the parametric
+bootstrap Chi-square and p-value for any fixed effects.
 }
 \references{
 Bolker BM, Brooks ME, Clark CJ, Geange SW, Poulsen JR, Stevens MHH, White J-SS. 2009.

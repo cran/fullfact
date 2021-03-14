@@ -50,6 +50,6 @@ DOI: 10.1007/s10592-006-9204-z
 \examples{
 data(chinook_resampS)
 \dontrun{survival_rcomp<- resampGlmer(resamp=chinook_resampS,dam="dam",sire="sire",
-response="status",fam_link=binomial(logit),start=1,end=1000)}
+response="status",fam_link=binomial(link="logit"),start=1,end=1000)}
 }
 \keyword{datasets}

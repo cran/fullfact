@@ -15,7 +15,7 @@ ciMANA(comp, level = 95, rnd_r = 3, rnd_p = 1, bias = NULL, accel = NULL, trait 
   \item{rnd_p}{Number of decimal places to round the confidence interval of percentage values.}
   \item{bias}{
 Optional vector of raw observed additive, non-additive, and maternal, variance component values
-for bias correction, i.e. c(additive, non-additive, maternal, total).
+for bias correction, i.e. c(additive, non-additive, maternal).
 }
   \item{accel}{Optional data frame of jackknifed data model results for acceleration correction.}
   \item{trait}{Optional label for the phenotypic trait.}
@@ -48,13 +48,13 @@ data(chinook_bootL) #Chinook salmon offspring length
 ciMANA(comp=chinook_bootL)
 
 #Extract bias corrected confidence interval
-ciMANA(comp=chinook_bootL,bias=c(0.0000000,0.7192253,0.2029684))
+ciMANA(comp=chinook_bootL,bias=c(0,0.7192,0.2030))
 #see details for 'bias' fail
 
 #Extract bias and accelerated corrected confidence interval
 #Import jackknife resampled data model results
 data(chinook_jackL)
 #
-ciMANA(comp=chinook_bootL,bias=c(0.0000000,0.7192253,0.2029684),accel=chinook_jackL)
+ciMANA(comp=chinook_bootL,bias=c(0,0.7192,0.2030),accel=chinook_jackL)
 #see details for 'bias' fail
 }

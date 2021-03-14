@@ -11,12 +11,11 @@ observGlmer3(observ, dam, sire, response, fam_link, remain, quasi = F, iter = 10
 }
 \arguments{
   \item{observ}{Data frame of observed data.}
-  \item{dam}{Column name containing dam(female) parent identity information.}
-  \item{sire}{Column name containing sire(male) parent identity information.}
+  \item{dam}{Column name containing dam (female) parent identity information.}
+  \item{sire}{Column name containing sire (male) parent identity information.}
   \item{response}{Column name containing the offspring (response) phenotype values.}
   \item{fam_link}{
-The family and link in family(link) format.
-Supported options are binomial(logit), binomial(probit), poisson(log), and poisson (sqrt).
+The family and link in family(link) format. Supported options are binomial(link="logit"), binomial(link="probit"), poisson(link="log"), and poisson(link="sqrt").
 }
   \item{remain}{Remaining formula using \emph{lme4} package format.}
   \item{quasi}{Incorporate overdispersion or quasi-error structure.}
@@ -39,8 +38,8 @@ bootstrap method (Bolker et al. 2009) from the \emph{mixed} function of the \emp
 \value{
 A list object containing the raw variance components, the variance components as a percentage
 of the total variance component. Contains the difference in AIC and BIC, likelihood ratio
-test Chi-square and p-value for both random and fixed effects. Also contains the parametric
-bootstrap p-value for fixed effects.
+test Chi-square and p-value for random and/or fixed effects. Also contains the parametric
+bootstrap Chi-square and p-value for any fixed effects.
 }
 \references{
 Atkins DC, Baldwin SA, Zheng C, Gallop RJ, Neighbors C. 2013. A tutorial on count regression and
@@ -74,7 +73,6 @@ data(chinook_survival) #Chinook salmon offspring survival
 chinook_survival2<- buildBinary(dat=chinook_survival,copy=c(2:6,9),one="alive",zero="dead")
 #just a few iterations for the p-value of fixed effect
 \dontrun{survival_mod3<- observGlmer3(observ=chinook_survival2,dam="dam",sire="sire",
-response="status",fam_link=binomial(logit),remain="egg_size + (1|tray)",iter=5)
-
+response="status",fam_link=binomial(link="logit"),remain="egg_size + (1|tray)",iter=5)
 survival_mod3}
 }

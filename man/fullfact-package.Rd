@@ -29,8 +29,9 @@ This package will facilitate the analyses of full factorial mating designs in R,
 for the analysis of binary, proportion, and/or count data types and for the ability to incorporate
 additional random and fixed effects and power analyses.
 
-The paper associated with the package including worked examples is:
+There are now six vignettes containing detailed examples: browseVignettes(package="fullfact"). 
 
+The paper associated with the package including worked examples is:
 Houde ALS, Pitcher TE. 2016. fullfact: an R package for the analysis of genetic and maternal variance components
 from full factorial mating designs. Ecology and evolution 6 (6), 1656-1665. doi: 10.1002/ece3.1943.
 
@@ -113,12 +114,12 @@ ciMANA(comp=chinook_bootL)
 \dontrun{length_jack<- JackLmer(observ=chinook_length,dam="dam",sire="sire",
 response="length")}
 
-#ciMANA(comp=length_rcomp,bias=c(0.0000000,0.7192253,0.2029684),accel=length_jack)
+#ciMANA(comp=length_rcomp,bias=c(0,0.7192,0.2030),accel=length_jack)
 data(chinook_jackL)  #similar to length_jack, but all observations
-ciMANA(comp=chinook_bootL,bias=c(0.0000000,0.7192253,0.2029684),accel=chinook_jackL)
+ciMANA(comp=chinook_bootL,bias=c(0,0.7192,0.2030),accel=chinook_jackL)
 
 ##3. Jackknife 95% confidence interval
 
-#ciJack(comp=length_jack,full=c(0.0000000,0.7192253,0.2029684,1.0404425))
-ciJack(comp=chinook_jackL,full=c(0.0000000,0.7192253,0.2029684,1.0404425))
+#ciJack(comp=length_jack,full=c(0,0.7192,0.2030,1.0404))
+ciJack(comp=chinook_jackL,full=c(0,0.7192,0.2030,1.0404))
 }

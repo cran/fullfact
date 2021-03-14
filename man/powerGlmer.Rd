@@ -10,14 +10,12 @@ generalized linear mixed-effect model using the \emph{glmer} function of the
 powerGlmer(varcomp, nval, fam_link, alpha = 0.05, nsim = 100, poisLog = NULL)
 }
 \arguments{
-  \item{varcomp}{Vector of known dam, sire, and dam by sire variance components, i.e. c(dam,sire,ds).}
-  \item{nval}{Vector of known dam, sire, and offspring per family sample sizes, i.e. c(dam,sire,
-  offspring).}
-  \item{fam_link}{ The family and link in family(link) format. Supported options are binomial(logit),
-  binomial(probit), poisson(log), and poisson (sqrt).}
+  \item{varcomp}{Vector of known dam, sire, and dam by sire variance components, i.e. c(dam, sire, dam x sire).}
+  \item{nval}{Vector of known dam, sire, and offspring per family sample sizes, i.e. c(dam, sire, offspring).}
+  \item{fam_link}{The family and link in family(link) format. Supported options are binomial(link="logit"), binomial(link="probit"), poisson(link="log"), and poisson(link="sqrt").}
   \item{alpha}{Statistical significance value. Default is 0.05.}
   \item{nsim}{Number of simulations. Default is 100.}
-  \item{poisLog}{Known poisson(log) variance component value.}
+  \item{poisLog}{The residual variance component value if using poisson(link="log").}
 }
 \details{
 Extracts the dam, sire, dam, and dam by sire power values.
@@ -55,5 +53,6 @@ increasing number of random effects.
 \seealso{ \code{\link{powerGlmer2}}, \code{\link{powerGlmer3}} }
 \examples{
 #100 simulations
-\dontrun{powerGlmer(varcomp=c(1,0.15,0.11),nval=c(10,10,20),fam_link=binomial(logit)) }
+\dontrun{powerGlmer(varcomp=c(0.7930,0.1664,0.1673),nval=c(11,11,300),
+fam_link=binomial(link="logit))}
 }

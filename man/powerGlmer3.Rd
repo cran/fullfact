@@ -12,24 +12,23 @@ powerGlmer3(var_rand, n_rand, design, remain, fam_link, var_fix = NULL, n_fix = 
 }
 \arguments{
   \item{var_rand}{Vector of known dam, sire, dam by sire, and remaining random
-  variance components, i.e. c(dam,sire,ds,rand1,rand2,...).}
+  variance components, i.e. c(dam,sire, dam by sire, rand1, rand2, etc.).}
   \item{n_rand}{Vector of known dam, sire, family, and remaining random sample sizes,
-  i.e. c(dam,sire,family,rand1,rand2,...).}
+  i.e. c(dam, sire, family, rand1, rand2,etc.).}
   \item{design}{A data frame of the experimental design, using only integers. First
   three columns must contain and be named "dam", "sire", "family". Remaining columns are
   the random effects followed by the fixed effects. Continuous fixed effects are a column
   containing the values 1:nrow(design).}
   \item{remain}{Remaining formula using \emph{lme4} package format. Must be random effects
   followed by fixed effects. No interactions or random slopes; formulate as intercepts in design.}
-  \item{fam_link}{ The family and link in family(link) format. Supported options are binomial(logit),
-  binomial(probit), poisson(log), and poisson (sqrt).}
-  \item{var_fix}{Vector of known fixed variance components, i.e. c(fix1,fix2,...).
+  \item{fam_link}{The family and link in family(link) format. Supported options are binomial(link="logit"), binomial(link="probit"), poisson(link="log"), and poisson(link="sqrt").}
+  \item{var_fix}{Vector of known fixed variance components, i.e. c(fix1, fix2, etc.).
   Continous fixed random values are sorted to match column values.}
-  \item{n_fix}{Vector of known fixed sample sizes, i.e. c(fix1,fix2,...). Continuous fixed
+  \item{n_fix}{Vector of known fixed sample sizes, i.e. c(fix1, fix2, etc.). Continuous fixed
   effects must have a sample size of 1.}
   \item{alpha}{Statistical significance value. Default is 0.05.}
   \item{nsim}{Number of simulations. Default is 100.}
-  \item{poisLog}{Known poisson(log) variance component value.}
+  \item{poisLog}{The residual variance component value if using poisson(link="log").}
   \item{ftest}{Default is "LR" for likelihood ratio test for fixed effects. Option "PB" is for parametric
   bootstrap.}
   \item{iter}{Number of iterations for computing the parametric bootstrap significance value
@@ -73,22 +72,21 @@ increasing number of random effects.
 \seealso{ \code{\link{powerGlmer}}, \code{\link{powerGlmer2}} }
 \examples{
 ##design object: 2 remaining random effects and 1 continous fixed effect
-block=c(2,2); blocN=10; position=2; posN=10; offN=20
+block=c(2,2); blocN=4; position=16; posN=20; offN=20
 dam0<- stack(as.data.frame(matrix(1:(block[1]*blocN),ncol=blocN,nrow=block[1])))
 sire0<- stack(as.data.frame(matrix(1:(block[2]*blocN),ncol=blocN,nrow=block[2])))
 observ0<- merge(dam0,sire0, by="ind")
 levels(observ0[,1])<- 1:blocN; colnames(observ0)<- c("block","dam","sire")
 observ0$family<- 1:nrow(observ0)  #add family
-#expand for position
-observ1<- do.call("rbind", replicate(position,observ0,simplify=FALSE));rm(observ0)
-observ1$position<- sample(rep(1:posN,each=position)) #random assignment
-#expand for offspring
-observ<- do.call("rbind", replicate(offN,observ1,simplify=FALSE)); rm(observ1)
-desn<- observ[,c(2,3,4,5,1)];rm(observ) #dam,sire,family,position,block
+#expand for offspring, observ0 x offN
+observ1<- do.call("rbind", replicate(offN,observ0,simplify=FALSE))
+observ1$position<- rep(1:position,each=posN)
+observ1$position<- sample(observ1$position,nrow(observ1)) #shuffle
+desn<- observ1[,c(2,3,4,5,1)];rm(observ0,observ1) #dam,sire,family,position,block
 desn$egg_size<- 1:nrow(desn)
-colnames(desn)[6]<- "egg_size"
 
 #100 simulations
-\dontrun{powerGlmer3(var_rand=c(1,0.15,0.11,0.5,0.3),n_rand=c(20,20,40,10,10),fam_link=binomial(logit),
-  var_fix=0.1,n_fix=1,design=desn,remain="(1|position)+(1|block)+egg_size") }
+\dontrun{powerGlmer3(var_rand=c(1,0.15,0.11,0.5,0.3),n_rand=c(8,8,16,16,4),
+fam_link=binomial(link="logit"),var_fix=0.1,n_fix=1,design=desn,
+remain="(1|position)+(1|block)+egg_size") }
 }
