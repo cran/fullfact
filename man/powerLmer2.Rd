@@ -56,7 +56,7 @@ parameters, but is the preferred method for analyzing large data sets with compl
 \examples{
 #100 simulations
 #position only, e.g. 8 tanks
-\dontrun{powerLmer2(varcomp=c(0.2030,0,0.1798,0.5499,0.1077),nval=c(8,8,20,40),position=8)}
+\dontrun{powerLmer2(varcomp=c(0.2030,0,0.1798,0.5499,0.1077),nval=c(8,8,20,160),position=8)}
 #block only, e.g. four 2 x 2
 \dontrun{powerLmer2(varcomp=c(0.2030,0,0.1798,0.5499,0.1077),nval=c(8,8,20,4),block=c(2,2))}
 #position and block

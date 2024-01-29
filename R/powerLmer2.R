@@ -3,12 +3,15 @@ function(varcomp,nval,alpha=0.05,nsim=100,position=NULL,block=NULL,ml=F) {
   if (missing(varcomp)) stop("Need the variance component vector")  #dam,sire,dxs,res,(position),(block)
   if (missing(nval)) stop("Need the sample size vector") #dam,sire,off
   print(time1<- Sys.time()) #start time
+#NULL to appease R check
 dam<- NULL; sire<- NULL; famil<- NULL
 damK<- varcomp[1];sireK<- varcomp[2];dxsK<- varcomp[3];resK<- varcomp[4]
 damN<- nval[1];sireN<- nval[2];offN<- nval[3]
+###No position or block
 if (is.null(position) && is.null(block)) {
 sim_dat<- data.frame(dam_var=numeric(nsim), dam_pval=numeric(nsim), sire_var=numeric(nsim), sire_pval=numeric(nsim),
   dam.sire_var=numeric(nsim),dam.sire_pval=numeric(nsim),residual=numeric(nsim))
+##Start nothing loop
 for (i in 1:nsim) {
 print(paste0("Starting simulation: ", i))
   damR<- rnorm(damN,0,sd=sqrt(damK));sireR<- rnorm(sireN,0,sd=sqrt(sireK));dxsR<- rnorm(damN*sireN,0,sd=sqrt(dxsK))
@@ -23,6 +26,7 @@ sim_dat$dam_var[i]<- comp$variance[which(comp$effect=="dam")]
 sim_dat$sire_var[i]<- comp$variance[which(comp$effect=="sire")]
 sim_dat$dam.sire_var[i]<- comp$variance[which(comp$effect=="dam:sire")]
 sim_dat$residual[i]<- attr(VarCorr(m),"sc")^2
+#
 p_rand<- randLmer(model=m,observ=observ)
 sim_dat$dam_pval[i]<- p_rand$p.value[which(p_rand$term=="(1 | dam)")]
 sim_dat$sire_pval[i]<- p_rand$p.value[which(p_rand$term=="(1 | sire)")]
@@ -34,10 +38,12 @@ pwr_res<- data.frame(term=c("dam","sire","dam.sire","residual"), n= c(nval[c(1,2
   power=c(sum(sim_dat$dam_pval < alpha)/nsim,sum(sim_dat$sire_pval < alpha)/nsim,
    sum(sim_dat$dam.sire_pval < alpha)/nsim,NA))
 } #end nothing
+###Position only
 if (!is.null(position) && is.null(block)) { posK<- varcomp[5]; posN<- nval[4]
 sim_dat<- data.frame(dam_var=numeric(nsim), dam_pval=numeric(nsim), sire_var=numeric(nsim), sire_pval=numeric(nsim),
   dam.sire_var=numeric(nsim),dam.sire_pval=numeric(nsim),pos_var=numeric(nsim),pos_pval=numeric(nsim),
   residual=numeric(nsim))
+##Start position only loop
 for (i in 1:nsim) {
 print(paste0("Starting simulation: ", i))
   damR<- rnorm(damN,0,sd=sqrt(damK));sireR<- rnorm(sireN,0,sd=sqrt(sireK));dxsR<- rnorm(damN*sireN,0,sd=sqrt(dxsK))
@@ -56,6 +62,7 @@ sim_dat$sire_var[i]<- comp$variance[which(comp$effect=="sire")]
 sim_dat$dam.sire_var[i]<- comp$variance[which(comp$effect=="dam:sire")]
 sim_dat$pos_var[i]<- comp$variance[which(comp$effect=="position")]
 sim_dat$residual[i]<- attr(VarCorr(m),"sc")^2
+#
 p_rand<- randLmer(model=m,observ=observ)
 sim_dat$dam_pval[i]<- p_rand$p.value[which(p_rand$term=="(1 | dam)")]
 sim_dat$sire_pval[i]<- p_rand$p.value[which(p_rand$term=="(1 | sire)")]
@@ -68,16 +75,19 @@ pwr_res<- data.frame(term=c("dam","sire","dam.sire","position","residual"), n= c
   mean(sim_dat$residual)), power=c(sum(sim_dat$dam_pval < alpha)/nsim,sum(sim_dat$sire_pval < alpha)/nsim,
   sum(sim_dat$dam.sire_pval < alpha)/nsim,sum(sim_dat$pos_pval < alpha)/nsim,NA))
 } #end position only
+###Block only
 if (is.null(position) && !is.null(block)) { blocK<- varcomp[5]; blocN<- nval[4]
 if (damN != block[1]*blocN) stop("Sample size of dams does not match block design")
 if (sireN != block[2]*blocN) stop("Sample size of sires does not match block design")
 sim_dat<- data.frame(dam_var=numeric(nsim), dam_pval=numeric(nsim), sire_var=numeric(nsim), sire_pval=numeric(nsim),
   dam.sire_var=numeric(nsim),dam.sire_pval=numeric(nsim),bloc_var=numeric(nsim),bloc_pval=numeric(nsim),
   residual=numeric(nsim))
+##Start block only loop
 for (i in 1:nsim) {
 print(paste0("Starting simulation: ", i))
   damR<- rnorm(damN,0,sd=sqrt(damK));sireR<- rnorm(sireN,0,sd=sqrt(sireK));dxsR<- rnorm(block[1]*block[2]*blocN,0,sd=sqrt(dxsK))
   blocR<- rnorm(blocN,0,sd=sqrt(blocK))
+#
 dam0<- stack(as.data.frame(matrix(1:(block[1]*blocN),ncol=blocN,nrow=block[1])))
 sire0<- stack(as.data.frame(matrix(1:(block[2]*blocN),ncol=blocN,nrow=block[2])))
 observ0<- merge(dam0,sire0, by="ind")
@@ -94,6 +104,7 @@ sim_dat$sire_var[i]<- comp$variance[which(comp$effect=="sire")]
 sim_dat$dam.sire_var[i]<- comp$variance[which(comp$effect=="dam:sire")]
 sim_dat$bloc_var[i]<- comp$variance[which(comp$effect=="block")]
 sim_dat$residual[i]<- attr(VarCorr(m),"sc")^2
+#
 p_rand<- randLmer(model=m,observ=observ)
 sim_dat$dam_pval[i]<- p_rand$p.value[which(p_rand$term=="(1 | dam)")]
 sim_dat$sire_pval[i]<- p_rand$p.value[which(p_rand$term=="(1 | sire)")]
@@ -106,17 +117,20 @@ pwr_res<- data.frame(term=c("dam","sire","dam.sire","block","residual"),
   mean(sim_dat$residual)), power=c(sum(sim_dat$dam_pval < alpha)/nsim,sum(sim_dat$sire_pval < alpha)/nsim,
   sum(sim_dat$dam.sire_pval < alpha)/nsim,sum(sim_dat$bloc_pval < alpha)/nsim,NA))
 } #end block only
+###Position and Block
 if (!is.null(position) && !is.null(block)) { posK<- varcomp[5]; blocK<- varcomp[6]; posN<- nval[4]; blocN<- nval[5]
 if (damN != block[1]*blocN) stop("Sample size of dams does not match block design")
 if (sireN != block[2]*blocN) stop("Sample size of sires does not match block design")
 sim_dat<- data.frame(dam_var=numeric(nsim), dam_pval=numeric(nsim), sire_var=numeric(nsim), sire_pval=numeric(nsim),
   dam.sire_var=numeric(nsim),dam.sire_pval=numeric(nsim),pos_var=numeric(nsim),pos_pval=numeric(nsim),
   bloc_var=numeric(nsim),bloc_pval=numeric(nsim),residual=numeric(nsim))
+##Start position and block loop
 for (i in 1:nsim) {
 print(paste0("Starting simulation: ", i))
   damR<- rnorm(damN,0,sd=sqrt(damK));sireR<- rnorm(sireN,0,sd=sqrt(sireK))
   dxsR<- rnorm(block[1]*block[2]*blocN,0,sd=sqrt(dxsK));posR<- rnorm(position,0,sd=sqrt(posK))
   blocR<- rnorm(blocN,0,sd=sqrt(blocK))
+#
 dam0<- stack(as.data.frame(matrix(1:(block[1]*blocN),ncol=blocN,nrow=block[1])))
 sire0<- stack(as.data.frame(matrix(1:(block[2]*blocN),ncol=blocN,nrow=block[2])))
 observ0<- merge(dam0,sire0, by="ind")
@@ -136,6 +150,7 @@ sim_dat$dam.sire_var[i]<- comp$variance[which(comp$effect=="dam:sire")]
 sim_dat$pos_var[i]<- comp$variance[which(comp$effect=="position")]
 sim_dat$bloc_var[i]<- comp$variance[which(comp$effect=="block")]
 sim_dat$residual[i]<- attr(VarCorr(m),"sc")^2
+#
 p_rand<- randLmer(model=m,observ=observ)
 sim_dat$dam_pval[i]<- p_rand$p.value[which(p_rand$term=="(1 | dam)")]
 sim_dat$sire_pval[i]<- p_rand$p.value[which(p_rand$term=="(1 | sire)")]
@@ -150,6 +165,7 @@ pwr_res<- data.frame(term=c("dam","sire","dam.sire","position","block","residual
   sum(sim_dat$sire_pval < alpha)/nsim,sum(sim_dat$dam.sire_pval < alpha)/nsim,sum(sim_dat$pos_pval < alpha)/nsim,
   sum(sim_dat$bloc_pval < alpha)/nsim,NA))
 } #end position and block
+#finish
   print(Sys.time()- time1) #end time
   return(pwr_res)  #after time
 }

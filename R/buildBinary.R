@@ -6,6 +6,7 @@ function(dat,copy,one,zero){  #label object, 'one' column, 'zero' column
  if (missing(zero)) stop("Need column name of 'zero' counts")
   labels_one<- cbind(1,dat[,copy]);colnames(labels_one)[1]<- "status"
   labels_zero<- cbind(0,dat[,copy]);colnames(labels_zero)[1]<- "status"
+#column number
 one2<- which(colnames(dat)==one)
 zero2<- which(colnames(dat)==zero)
   dat_one<- labels_one[rep(1:length(dat[,one2]),dat[,one2][1:length(dat[,one2])]),]

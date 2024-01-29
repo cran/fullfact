@@ -1,7 +1,7 @@
 ---
 title: "Expert Non-Normal Data Example"
 author: "Aimee Lee Houde"
-date: "2021-03-07"
+date: "2024-01-27"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Expert Non-Normal Data Example}
@@ -112,46 +112,46 @@ Bolker BM, Brooks ME, Clark CJ, Geange SW, Poulsen JR, Stevens MHH, White J-SS. 
 #>remain="egg_size + (1|tray)",fam_link=binomial(link="logit"),iter=1000) #full
 survival_mod3<- observGlmer3(observ=chinook_survival2,dam="dam",sire="sire",response="status",
 remain="egg_size + (1|tray)",fam_link=binomial(link="logit"),iter=2)
-#> [1] "2021-03-07 18:24:47 PST"
+#> [1] "2024-01-27 13:03:45 PST"
 #> Fitting 2 (g)lmer() models:
 #> [..]
 #> Obtaining 1 p-values:
 #> [.]
-#> Time difference of 2.699524 mins
+#> Time difference of 2.824386 mins
 survival_mod3
 #> $fixed
 #>     effect  variance  percent   Chi.sq   p.value
 #> 1 egg_size        NA       NA 1.835545 0.3333333
-#> 2  Fix_Tot 0.1385683 3.138611       NA        NA
+#> 2  Fix_Tot 0.1385809 3.138889       NA        NA
 #> 
 #> $LRT.fixed
 #>       term      d.AIC     d.BIC   Chi.sq   p.value
-#> 1 egg_size 0.07303496 -8.426538 2.073035 0.1499229
+#> 1 egg_size 0.07303497 -8.426538 2.073035 0.1499229
 #> 
 #> $random
-#>     effect     effect2    variance     percent
-#> 1 dam:sire (Intercept) 0.167155158  3.78611063
-#> 2     tray (Intercept) 0.003628056  0.08217647
-#> 3     sire (Intercept) 0.166049854  3.76107519
-#> 4      dam (Intercept) 0.649687501 14.71560185
+#>     effect     effect2    variance    percent
+#> 1 dam:sire (Intercept) 0.167153112  3.7860580
+#> 2     tray (Intercept) 0.003627962  0.0821742
+#> 3     sire (Intercept) 0.166049890  3.7610697
+#> 4      dam (Intercept) 0.649684444 14.7155081
 #> 
 #> $LRT.random
 #>             term      d.AIC      d.BIC     Chi.sq       p.value
 #> 1      (1 | dam) 127.178423 118.678850 129.178423  6.198801e-30
 #> 2     (1 | sire)  44.316215  35.816642  46.316215  1.006277e-11
-#> 3 (1 | dam:sire) 597.476560 588.976987 599.476560 2.175962e-132
+#> 3 (1 | dam:sire) 597.476561 588.976987 599.476561 2.175962e-132
 #> 4     (1 | tray)   1.264515  -7.235058   3.264515  7.079397e-02
 #> 
 #> $other
-#>   component variance   percent
-#> 1  Residual 3.289868  74.51642
-#> 2     Total 4.414957 100.00000
+#>   component variance  percent
+#> 1  Residual 3.289868  74.5163
+#> 2     Total 4.414964 100.0000
 #> 
 #> $calculation
 #>   component  variance  percent
-#> 1  additive 0.6641994 15.04430
-#> 2    nonadd 0.6686206 15.14444
-#> 3  maternal 0.4836376 10.95453
+#> 1  additive 0.6641996 15.04428
+#> 2    nonadd 0.6686124 15.14423
+#> 3  maternal 0.4836346 10.95444
 ```
 
 Produces a list object containing up to six data frames. Fixed, random, other, and calculation data frames contain the raw variance components and the variance components as a percentage of the total variance component. The fixed data frame also contains the parametric bootstrap Chi-square and p-value for any fixed effects. LRT.random and LRT.fixed data frames contain the difference in AIC and BIC, and likelihood ratio test Chi-square and p-value for random and any fixed effects, respectively.
@@ -200,12 +200,12 @@ desn$tray<- sample(desn$tray,nrow(desn)) #shuffle tray numbers
 desn$egg_size<- desn$dam #egg size is related to dam
 head(desn)
 #>   dam sire family tray egg_size
-#> 1   1    1      1    2        1
-#> 2   1    2      2    8        1
-#> 3   1    3      3   13        1
-#> 4   1    4      4    6        1
-#> 5   1    5      5    1        1
-#> 6   1    6      6   11        1
+#> 1   1    1      1    7        1
+#> 2   1    2      2   10        1
+#> 3   1    3      3    5        1
+#> 4   1    4      4    1        1
+#> 5   1    5      5   13        1
+#> 6   1    6      6    3        1
 #full with LR
 #>powerGlmer3(var_rand=c(0.6497,0.1660,0.1672,0.0036),n_rand=c(11,11,121,15),var_fix=0.1386,
 #>n_fix=11,design=desn,remain="(1|tray) + egg_size",fam_link=binomial(link="logit")) 
@@ -216,24 +216,24 @@ head(desn)
 #2 simulations with LR
 powerGlmer3(var_rand=c(0.6497,0.1660,0.1672,0.0036),n_rand=c(11,11,121,15),var_fix=0.1386,
 n_fix=11,design=desn,remain="(1|tray) + egg_size",fam_link=binomial(link="logit"),nsim=2) 
-#> [1] "2021-03-07 18:27:29 PST"
+#> [1] "2024-01-27 13:06:35 PST"
 #> [1] "Starting simulation: 1"
 #> [1] "Starting simulation: 2"
-#> Time difference of 5.065947 mins
+#> Time difference of 5.193628 mins
 #> $group
-#>     group var_in           var_out
-#> 1 fix_eff 0.1386 0.113031165144425
+#>     group var_in            var_out
+#> 1 fix_eff 0.1386 0.0261938356834879
 #> 
 #> $fixed
 #>       term  n power
-#> 1 egg_size 11   0.5
+#> 1 egg_size 11     0
 #> 
 #> $random
 #>       term    n           var_in             var_out power
-#> 1      dam   11           0.6497   0.373995857325755     1
-#> 2     sire   11            0.166   0.166542134252494     1
-#> 3 dam.sire  121           0.1672   0.146612391187079     1
-#> 4     tray   15           0.0036 0.00338364662811213     1
+#> 1      dam   11           0.6497    0.46353343557577     1
+#> 2     sire   11            0.166   0.114263999248828     1
+#> 3 dam.sire  121           0.1672   0.188126087295939     1
+#> 4     tray   15           0.0036 0.00550079955549665     1
 #> 5 residual <NA> 3.28986813369645    3.28986813369645  <NA>
 ```
 
@@ -260,13 +260,13 @@ desn_2$egg_size<- desn_2$dam #egg size is related to dam
 #2 simulations with LR
 powerGlmer3(var_rand=c(0.6497,0.1660,0.1672,0.0036),n_rand=c(7,7,49,15),var_fix=0.1386,
 n_fix=11,design=desn_2,remain="(1|tray) + egg_size",fam_link=binomial(link="logit"),nsim=2) 
-#> [1] "2021-03-07 18:32:33 PST"
+#> [1] "2024-01-27 13:11:47 PST"
 #> [1] "Starting simulation: 1"
 #> [1] "Starting simulation: 2"
-#> Time difference of 1.885774 mins
+#> Time difference of 1.878168 mins
 #> $group
 #>     group var_in           var_out
-#> 1 fix_eff 0.1386 0.102067915961321
+#> 1 fix_eff 0.1386 0.076014769554941
 #> 
 #> $fixed
 #>       term  n power
@@ -274,10 +274,10 @@ n_fix=11,design=desn_2,remain="(1|tray) + egg_size",fam_link=binomial(link="logi
 #> 
 #> $random
 #>       term    n           var_in             var_out power
-#> 1      dam    7           0.6497   0.673070884284637     1
-#> 2     sire    7            0.166  0.0883748578482399     1
-#> 3 dam.sire   49           0.1672   0.187892618359212     1
-#> 4     tray   15           0.0036 0.00445226881736903   0.5
+#> 1      dam    7           0.6497   0.556900164956591     1
+#> 2     sire    7            0.166   0.172588132749706     1
+#> 3 dam.sire   49           0.1672   0.208364904041513     1
+#> 4     tray   15           0.0036 0.00937301917301838     1
 #> 5 residual <NA> 3.28986813369645    3.28986813369645  <NA>
 ```
 
@@ -325,30 +325,30 @@ Full analysis is 1000 iterations. Example has 2 iterations.
 #>remain="egg_size# + (1|tray#)",fam_link=binomial(link="logit"),start=1,end=1000) #full
 data(chinook_resampS) #5 iterations
 head(chinook_resampS)
-#>   status1 dam1 sire1 tray1 cell1 egg_size1 status2 dam2 sire2 tray2 cell2 egg_size2 status3 dam3 sire3 tray3 cell3 egg_size3 status4 dam4 sire4 tray4 cell4 egg_size4 status5 dam5
-#> 1       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1
-#> 2       1   d1    s1    t7    1A      7.27       0   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1
-#> 3       1   d1    s1    t7    1A      7.27       0   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1
-#> 4       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1
-#> 5       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1
-#> 6       0   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1
-#>   sire5 tray5 cell5 egg_size5
-#> 1    s1    t7    1A      7.27
-#> 2    s1    t7    1A      7.27
-#> 3    s1    t7    1A      7.27
-#> 4    s1    t7    1A      7.27
-#> 5    s1    t7    1A      7.27
-#> 6    s1    t7    1A      7.27
+#>   status1 dam1 sire1 tray1 cell1 egg_size1 status2 dam2 sire2 tray2 cell2 egg_size2 status3 dam3 sire3 tray3 cell3
+#> 1       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A
+#> 2       1   d1    s1    t7    1A      7.27       0   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A
+#> 3       1   d1    s1    t7    1A      7.27       0   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A
+#> 4       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A
+#> 5       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A
+#> 6       0   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A
+#>   egg_size3 status4 dam4 sire4 tray4 cell4 egg_size4 status5 dam5 sire5 tray5 cell5 egg_size5
+#> 1      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27
+#> 2      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27
+#> 3      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27
+#> 4      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27
+#> 5      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27
+#> 6      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27
 survival_rcomp3<- resampGlmer3(resamp=chinook_resampS,dam="dam",sire="sire",response="status",
 remain="egg_size# + (1|tray#)",fam_link=binomial(link="logit"),start=1,end=2)
-#> [1] "2021-03-07 18:34:26 PST"
+#> [1] "2024-01-27 13:13:39 PST"
 #> [1] "Working on model: 1"
 #> [1] "Working on model: 2"
-#> Time difference of 1.180813 mins
+#> Time difference of 1.213041 mins
 survival_rcomp3[1:2,]
 #>    dam:sire        tray      sire       dam Residual     Fixed    Total  additive    nonadd  maternal
-#> 1 0.1914824 0.005140434 0.1714110 0.6368913 3.289868 0.1392874 4.434081 0.6856439 0.7659295 0.4654803
-#> 2 0.1778347 0.004455350 0.1655555 0.6429658 3.289868 0.1395516 4.420231 0.6622219 0.7113389 0.4774103
+#> 1 0.1914808 0.005140357 0.1714167 0.6369151 3.289868 0.1392749 4.434096 0.6856669 0.7659231 0.4654983
+#> 2 0.1778365 0.004455345 0.1655534 0.6429755 3.289868 0.1395704 4.420259 0.6622136 0.7113459 0.4774221
 ```
 
 The function provides a data frame with columns containing the raw variance components for dam, sire, dam by sire, residual, total, additive genetic, non-additive genetic, and maternal. Also columns containing the raw variance components for any additional fixed and/or random effects. The number of rows in the data frame matches the number of iterations in the resampled data set and each row represents a model number.
@@ -462,14 +462,14 @@ Full analysis uses all observations. Example has the first 2 observations.
 #first 2
 survival_jack3<- JackGlmer3(observ=chinook_survival2,dam="dam",sire="sire",response="status",
 remain="egg_size + (1|tray)",fam_link=binomial(link="logit"),size=30,first=2)
-#> [1] "2021-03-07 18:35:37 PST"
+#> [1] "2024-01-27 13:14:52 PST"
 #> [1] "Removing block: 1 of 1210"
 #> [1] "Removing block: 2 of 1210"
-#> Time difference of 1.544883 mins
+#> Time difference of 1.560357 mins
 survival_jack3[1:2,]
 #>    dam:sire        tray      sire       dam Residual     Fixed    Total  additive    nonadd  maternal
-#> 1 0.1676668 0.003537403 0.1661823 0.6497133 3.289868 0.1388575 4.415825 0.6647291 0.6706673 0.4835310
-#> 2 0.1675595 0.003607241 0.1667513 0.6501687 3.289868 0.1383342 4.416289 0.6670051 0.6702380 0.4834174
+#> 1 0.1666708 0.003546198 0.1659570 0.6498629 3.289868 0.1385018 4.414407 0.6638281 0.6666833 0.4839059
+#> 2 0.1671279 0.003687812 0.1661198 0.6497729 3.289868 0.1387407 4.415317 0.6644790 0.6685114 0.4836531
 ```
 
 Extract the jackknife confidence intervals (CI) and median for the additive genetic, non-additive genetic, and maternal values from the data frame of models produced using `JackGlmer3`. Also extracts any additional fixed effect and/or random effect variance components.
@@ -531,7 +531,7 @@ barMANA(ci_dat=survival_ci) #basic, top
 barMANA(ci_dat=survival_ci,bar_len=0.3,yunit=4,ymax=20,cex_ylab=1.3) #modified, bottom
 ```
 
-![plot of chunk barplot](barplot.png)
+![plot of chunk barplot](figure/barplot-1.png)
 
 Different traits can also be combined on the same bar plot using `trait` specified in `ciMANA` or `ciJack`. The information is combined into a list object. For the example, the jackknife CI is duplicated to simulate 'different traits'.
 
@@ -546,7 +546,7 @@ percentage=rbind(survival_ci1$percentage,survival_ci2$percentage))
 barMANA(ci_dat=comb_bar,bar_len=0.3,yunit=4,ymax=20,cex_ylab=1.3)
 ```
 
-![plot of chunk barplot-comb](barplot-comb.png)
+![plot of chunk barplot-comb](figure/barplot-comb-1.png)
 
 The legend is slightly off in the presented html version but is fine with the R plotting device.
 
@@ -561,7 +561,7 @@ boxMANA(comp=chinook_bootS) #from resampGlmer3, basic, top
 boxMANA(comp=chinook_bootS,yunit=2,ymin=10,ymax=22,cex_ylab=1.3,leg="topleft") #modified, bottom
 ```
 
-![plot of chunk boxplot](boxplot.png)
+![plot of chunk boxplot](figure/boxplot-1.png)
 
 Different traits can also be combined on the same box plot by adding a "trait" column to the resampling data set. For the example, the bootstrap-t data frame is duplicated to simulate 'different traits'.
 
@@ -574,6 +574,6 @@ comb_boot$trait<- as.factor(comb_boot$trait)
 boxMANA(comb_boot,yunit=2,ymin=10,ymax=22,cex_ylab=1.3,leg="topleft")
 ```
 
-![plot of chunk boxplot-comb](boxplot-comb.png)
+![plot of chunk boxplot-comb](figure/boxplot-comb-1.png)
 
 This marks the end of the six vignettes for the `fullfact` package.

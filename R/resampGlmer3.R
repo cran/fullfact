@@ -9,14 +9,17 @@ function(resamp,dam,sire,response,fam_link,start,end,remain,quasi=F) {
   if (missing(end)) stop("Need the ending model number")
   if (missing(remain)) stop("Need the remain model formula with #")
   print(time1<- Sys.time()) #start time
+#error component constants
   if(paste(fam_link)[2]== "logit") { m_err<- (pi^2)/3 }
   if(paste(fam_link)[2]== "probit") { m_err<- 1 }
   if(paste(fam_link)[2]== "sqrt") { m_err<- 0.25 }
+#column labels
   response2<- colnames(resamp)[grep(paste(response), colnames(resamp))]
   dam2<- colnames(resamp)[grep(paste(dam), colnames(resamp))]
   sire2<- colnames(resamp)[grep(paste(sire), colnames(resamp))]
   mdl<- matrix(0,ncol=1,nrow=length(response2))
     for (i in 1:length(response2)) { mdl[i,]<- gsub("#",i,remain)  }
+#variable matrices
   var_fixed<- matrix(0,ncol=1,nrow=length(response2))   #variance of fixed effects
  if (quasi == F) {
     rand_l<- nchar(remain)- nchar(gsub(")","",remain))  #number of random effects
@@ -26,6 +29,7 @@ function(resamp,dam,sire,response,fam_link,start,end,remain,quasi=F) {
     var_rand<- matrix(0,ncol=rand_l+3,nrow=length(response2))
     resamp$dispersion<- as.factor(1:length(resamp[,1])) }
   res<- matrix(0,ncol=1,nrow=length(response2))   #for poisson(log)
+#model
   for (j in start:end) {
     print(paste("Working on model: ", j, sep=""))
  if (quasi == F) {
@@ -45,6 +49,7 @@ function(resamp,dam,sire,response,fam_link,start,end,remain,quasi=F) {
   var_fixed[j,] <- var(as.vector(fixef(m) %*% t(m@pp$X)))  #total variation of fixed effects
   var_rand[j,]<- colSums(diag(VarCorr(m)))
   col_names<- as.data.frame(VarCorr(m))$grp; rm(m)  }
+#combining together
 if (sum(var_fixed[,1]) != 0) {
   if(paste(fam_link)[2]!= "log") { comp<- as.data.frame(cbind(var_rand,m_err,var_fixed)) }
   if(paste(fam_link)[2]== "log") { comp<- as.data.frame(cbind(var_rand,res,var_fixed)) }
@@ -54,7 +59,9 @@ if (sum(var_fixed[,1]) == 0) {
   if(paste(fam_link)[2]== "log") { comp<- as.data.frame(cbind(var_rand,res)) }
   colnames(comp)<- c(col_names,"Residual") }
 comp$Total<- rowSums(comp)
+#remove last number
 colnames(comp)<- gsub(end,'', colnames(comp))
+#Maternal, additive, nonadditive
   temp<- comp #to not override column names
   colnames(temp)[which(colnames(temp)==dam)]<- "dam"
   colnames(temp)[which(colnames(temp)==sire)]<- "sire"
@@ -62,6 +69,7 @@ colnames(comp)<- gsub(end,'', colnames(comp))
   comp$additive<- 4*temp$sire
   comp$nonadd<- 4*temp$'dam:sire'
   comp$maternal<- temp$dam- temp$sire
+#
    print(Sys.time()- time1) #end time, keep no quote in one line
    invisible(comp)  #after time
 }

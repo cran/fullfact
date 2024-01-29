@@ -1,7 +1,7 @@
 ---
 title: "Advanced Non-Normal Data Example"
 author: "Aimee Lee Houde"
-date: "2021-03-07"
+date: "2024-01-27"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Advanced Non-Normal Data Example}
@@ -109,26 +109,26 @@ For this example, we explore position (tray) effects for Chinook salmon survival
 ```r
 survival_mod2<- observGlmer2(observ=chinook_survival2,dam="dam",sire="sire",response="status",
 fam_link=binomial(link="logit"),position="tray")
-#> [1] "2021-03-07 18:17:04 PST"
-#> Time difference of 1.423471 mins
+#> [1] "2024-01-27 12:56:12 PST"
+#> Time difference of 1.338003 mins
 survival_mod2
 #> $random
 #>     effect    variance     percent      d.AIC      d.BIC     Chi.sq       p.value
-#> 1 dam:sire 0.167061144  3.78375942 595.885940 587.386367 597.885940 4.826421e-132
-#> 2     tray 0.003668137  0.08307945   1.291355  -7.208218   3.291355  6.964552e-02
-#> 3     sire 0.166654232  3.77454330  44.385729  35.886156  46.385729  9.712031e-12
-#> 4      dam 0.787964155 17.84656040 126.128476 117.628903 128.128476  1.052074e-29
+#> 1 dam:sire 0.167061285  3.78378550 595.885940 587.386367 597.885940 4.826421e-132
+#> 2     tray 0.003668016  0.08307721   1.291355  -7.208218   3.291355  6.964552e-02
+#> 3     sire 0.166654347  3.77456873  44.385729  35.886156  46.385729  9.712031e-12
+#> 4      dam 0.787937313 17.84606041 126.128476 117.628903 128.128476  1.052074e-29
 #> 
 #> $other
 #>   component variance   percent
-#> 1  Residual 3.289868  74.51206
-#> 2     Total 4.415216 100.00000
+#> 1  Residual 3.289868  74.51251
+#> 2     Total 4.415189 100.00000
 #> 
 #> $calculation
 #>   component  variance  percent
-#> 1  additive 0.6666169 15.09817
-#> 2    nonadd 0.6682446 15.13504
-#> 3  maternal 0.6213099 14.07202
+#> 1  additive 0.6666174 15.09827
+#> 2    nonadd 0.6682451 15.13514
+#> 3  maternal 0.6212830 14.07149
 ```
 
 Produces a list object containing three data frames. Each data frame contains the raw variance components and the variance components as a percentage of the total variance component. The first data frame also contains the difference in AIC and BIC, and likelihood ratio test Chi-square and p-value for all random effects.
@@ -167,15 +167,15 @@ Full analysis is 100 simulations. Example has 2 simulations.
 #2 simulations
 powerGlmer2(varcomp=c(0.7880,0.1667,0.1671,0.0037),nval=c(11,11,300,2420),
 fam_link=binomial(link="logit"),position=15,nsim=2) 
-#> [1] "2021-03-07 18:18:29 PST"
+#> [1] "2024-01-27 12:57:33 PST"
 #> [1] "Starting simulation: 1"
 #> [1] "Starting simulation: 2"
-#> Time difference of 3.17545 mins
+#> Time difference of 3.108018 mins
 #>       term   n   var_in     var_out power
-#> 1      dam  11 0.788000 0.464459438     1
-#> 2     sire  11 0.166700 0.288416005     1
-#> 3 dam.sire 121 0.167100 0.157086305     1
-#> 4 position  15 0.003700 0.006327075     1
+#> 1      dam  11 0.788000 1.072130283     1
+#> 2     sire  11 0.166700 0.180743178     1
+#> 3 dam.sire 121 0.167100 0.207502496     1
+#> 4 position  15 0.003700 0.003502962     1
 #> 5 residual  NA 3.289868 3.289868134    NA
 
 #Block examples using 8 dams, 8 sires (as four 2x2 blocks), and 20 offspring per family
@@ -197,16 +197,16 @@ Taking the reverse approach (can the sample size of dam, sire, or offspring be r
 #2 simulations
 powerGlmer2(varcomp=c(0.7880,0.1667,0.1671,0.0037),nval=c(7,7,300,980),
 fam_link=binomial(link="logit"),position=15,nsim=2)
-#> [1] "2021-03-07 18:21:40 PST"
+#> [1] "2024-01-27 13:00:39 PST"
 #> [1] "Starting simulation: 1"
 #> [1] "Starting simulation: 2"
-#> Time difference of 1.080765 mins
-#>       term  n   var_in      var_out power
-#> 1      dam  7 0.788000 0.6241817259     1
-#> 2     sire  7 0.166700 0.1235435416     1
-#> 3 dam.sire 49 0.167100 0.1677680138     1
-#> 4 position 15 0.003700 0.0003377859     0
-#> 5 residual NA 3.289868 3.2898681337    NA
+#> Time difference of 1.062281 mins
+#>       term  n   var_in     var_out power
+#> 1      dam  7 0.788000 0.276665384   1.0
+#> 2     sire  7 0.166700 0.176126942   1.0
+#> 3 dam.sire 49 0.167100 0.120607315   1.0
+#> 4 position 15 0.003700 0.005058561   0.5
+#> 5 residual NA 3.289868 3.289868134    NA
 ```
 
 ## Bootstrap confidence intervals
@@ -251,30 +251,30 @@ Full analysis is 1000 iterations. Example has 2 iterations.
 #>fam_link=binomial(logit),position="tray",start=1,end=1000) #full
 data(chinook_resampS) #5 iterations
 head(chinook_resampS)
-#>   status1 dam1 sire1 tray1 cell1 egg_size1 status2 dam2 sire2 tray2 cell2 egg_size2 status3 dam3 sire3 tray3 cell3 egg_size3 status4 dam4 sire4 tray4 cell4 egg_size4 status5 dam5
-#> 1       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1
-#> 2       1   d1    s1    t7    1A      7.27       0   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1
-#> 3       1   d1    s1    t7    1A      7.27       0   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1
-#> 4       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1
-#> 5       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1
-#> 6       0   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1
-#>   sire5 tray5 cell5 egg_size5
-#> 1    s1    t7    1A      7.27
-#> 2    s1    t7    1A      7.27
-#> 3    s1    t7    1A      7.27
-#> 4    s1    t7    1A      7.27
-#> 5    s1    t7    1A      7.27
-#> 6    s1    t7    1A      7.27
+#>   status1 dam1 sire1 tray1 cell1 egg_size1 status2 dam2 sire2 tray2 cell2 egg_size2 status3 dam3 sire3 tray3 cell3
+#> 1       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A
+#> 2       1   d1    s1    t7    1A      7.27       0   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A
+#> 3       1   d1    s1    t7    1A      7.27       0   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A
+#> 4       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A
+#> 5       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A
+#> 6       0   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A
+#>   egg_size3 status4 dam4 sire4 tray4 cell4 egg_size4 status5 dam5 sire5 tray5 cell5 egg_size5
+#> 1      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27
+#> 2      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27
+#> 3      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27
+#> 4      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27
+#> 5      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27
+#> 6      7.27       1   d1    s1    t7    1A      7.27       1   d1    s1    t7    1A      7.27
 survival_rcomp2<- resampGlmer2(resamp=chinook_resampS,dam="dam",sire="sire",response="status",
 fam_link=binomial(link="logit"),position="tray",start=1,end=2)
-#> [1] "2021-03-07 18:22:45 PST"
+#> [1] "2024-01-27 13:01:43 PST"
 #> [1] "Working on model: 1"
 #> [1] "Working on model: 2"
-#> Time difference of 55.46729 secs
+#> Time difference of 54.80829 secs
 survival_rcomp2[1:2,]
 #>    dam:sire        tray      sire       dam Residual    Total  additive    nonadd  maternal
-#> 1 0.1913722 0.005188151 0.1720971 0.7757232 3.289868 4.434249 0.6883885 0.7654886 0.6036261
-#> 2 0.1776875 0.004506265 0.1661610 0.7820687 3.289868 4.420292 0.6646439 0.7107498 0.6159077
+#> 1 0.1913733 0.005188036 0.1721041 0.7757233 3.289868 4.434257 0.6884163 0.7654933 0.6036192
+#> 2 0.1776859 0.004506256 0.1661613 0.7820526 3.289868 4.420274 0.6646453 0.7107437 0.6158912
 ```
 
 The function provides a data frame with columns containing the raw variance components for dam, sire, dam by sire, residual, total, additive genetic, non-additive genetic, and maternal. Also columns containing the raw variance components for the options of position and/or block. The number of rows in the data frame matches the number of iterations in the resampled data set and each row represents a model number.
@@ -386,14 +386,14 @@ Full analysis uses all observations. Example has the first 2 observations.
 #first 2
 survival_jack2<- JackGlmer2(observ=chinook_survival2,dam="dam",sire="sire",response="status",
 fam_link=binomial(link="logit"),position="tray",size=30,first=2)
-#> [1] "2021-03-07 18:23:40 PST"
+#> [1] "2024-01-27 13:02:38 PST"
 #> [1] "Removing block: 1 of 1210"
 #> [1] "Removing block: 2 of 1210"
-#> Time difference of 1.094448 mins
+#> Time difference of 1.111731 mins
 survival_jack2[1:2,]
 #>    dam:sire        tray      sire       dam Residual    Total  additive    nonadd  maternal
-#> 1 0.1675943 0.003742422 0.1666872 0.7873304 3.289868 4.415222 0.6667488 0.6703770 0.6206432
-#> 2 0.1677440 0.003514032 0.1665987 0.7889941 3.289868 4.416719 0.6663947 0.6709758 0.6223954
+#> 1 0.1669653 0.003631804 0.1666722 0.7870674 3.289868 4.414205 0.6666890 0.6678611 0.6203952
+#> 2 0.1670151 0.003576008 0.1665160 0.7883108 3.289868 4.415286 0.6660641 0.6680604 0.6217948
 ```
 
 Extract the jackknife confidence intervals (CI) and median for the additive genetic, non-additive genetic, and maternal values from the data frame of models produced using `JackGlmer2`.
@@ -452,7 +452,7 @@ barMANA(ci_dat=survival_ci) #basic, top
 barMANA(ci_dat=survival_ci,bar_len=0.3,yunit=4,ymax=20,cex_ylab=1.3) #modified, bottom
 ```
 
-![plot of chunk barplot](barplot.png)
+![plot of chunk barplot](figure/barplot-1.png)
 
 Different traits can also be combined on the same bar plot using `trait` specified in `ciMANA` or `ciJack`. The information is combined into a list object. For the example, the jackknife CI is duplicated to simulate 'different traits'.
 
@@ -467,7 +467,7 @@ percentage=rbind(survival_ci1$percentage,survival_ci2$percentage))
 barMANA(ci_dat=comb_bar,bar_len=0.3,yunit=4,ymax=20,cex_ylab=1.3)
 ```
 
-![plot of chunk barplot-comb](barplot-comb.png)
+![plot of chunk barplot-comb](figure/barplot-comb-1.png)
 
 The legend is slightly off in the presented html version but is fine with the R plotting device.
 
@@ -482,7 +482,7 @@ boxMANA(comp=chinook_bootS) #from resampGlmer2, basic, top
 boxMANA(comp=chinook_bootS,yunit=2,ymin=10,ymax=22,cex_ylab=1.3,leg="topleft") #modified, bottom
 ```
 
-![plot of chunk boxplot](boxplot.png)
+![plot of chunk boxplot](figure/boxplot-1.png)
 
 Different traits can also be combined on the same box plot by adding a "trait" column to the resampling data set. For the example, the bootstrap-t data frame is duplicated to simulate 'different traits'.
 
@@ -495,6 +495,6 @@ comb_boot$trait<- as.factor(comb_boot$trait)
 boxMANA(comb_boot,yunit=2,ymin=10,ymax=22,cex_ylab=1.3,leg="topleft")
 ```
 
-![plot of chunk boxplot-comb](boxplot-comb.png)
+![plot of chunk boxplot-comb](figure/boxplot-comb-1.png)
 
 The recommended follow-up vignette is the **Expert Non-Normal Data Example**, covering the standard model with the ability of the user to include additional fixed and/or random effects, such as a model including environment treatments and their interactions.

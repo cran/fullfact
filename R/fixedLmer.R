@@ -1,7 +1,9 @@
 fixedLmer <-
 function(model,observ) {
+#objects
   rand_terms<- sapply(findbars(formula(model)),function(x) paste0("(", deparse(x), ")"))
   drop_form<- list()
+#drop1 fixed term
   resp_term<- sapply(nobars(formula(model)),function(x) deparse(x))[2]
   fixed_terms<- paste(attributes(terms(model))$term.labels)
   ftable<- data.frame(term=fixed_terms)
@@ -11,5 +13,6 @@ function(model,observ) {
   m_new<- lmer(formula=drop_form[[i]],data=observ,REML=F)
   p_mod<- anova(model,m_new)
   ftable[,-1][i,]<-c(p_mod$AIC[1]-p_mod$AIC[2],p_mod$BIC[1]-p_mod$BIC[2],p_mod$Chisq[2],p_mod$'Pr(>Chisq)'[2]) }
+#finish
   invisible(ftable)
 }

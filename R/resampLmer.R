@@ -7,9 +7,11 @@ function(resamp,dam,sire,response,start,end,ml=F) {
   if (missing(start)) stop("Need the starting model number")
   if (missing(end)) stop("Need the ending model number")
   print(time1<- Sys.time()) #start time
+#column labels
   response2<- colnames(resamp)[grep(paste(response), colnames(resamp))]
   dam2<- colnames(resamp)[grep(paste(dam), colnames(resamp))]
   sire2<- colnames(resamp)[grep(paste(sire), colnames(resamp))]
+#Model
   mod<- matrix(0,ncol=4,nrow=length(response2))   #variance
  for (j in start:end) { 
   print(paste("Working on model: ", j, sep=""))
@@ -21,10 +23,13 @@ function(resamp,dam,sire,response,start,end,ml=F) {
     data=resamp, REML=F) } 
   mod[j,]<- c(colSums(diag(VarCorr(m))),attr(VarCorr(m),"sc")^2)
   col_names<- as.data.frame(VarCorr(m))$grp; rm(m)   }
+#combining together
    comp<- as.data.frame(mod)
    colnames(comp)<- col_names
    comp$Total<- rowSums(comp)
+#remove last number
 colnames(comp)<- gsub(end,'', colnames(comp))
+#Maternal, additive, nonadditive
   temp<- comp #to not override column names
   colnames(temp)[which(colnames(temp)==dam)]<- "dam"
   colnames(temp)[which(colnames(temp)==sire)]<- "sire"
@@ -32,6 +37,7 @@ colnames(comp)<- gsub(end,'', colnames(comp))
   comp$additive<- 4*temp$sire
   comp$nonadd<- 4*temp$'dam:sire'
   comp$maternal<- temp$dam- temp$sire
+#
    print(Sys.time()- time1) #end time
    invisible(comp)  #after time
 }

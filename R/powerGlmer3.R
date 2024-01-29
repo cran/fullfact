@@ -11,20 +11,25 @@ function(var_rand,n_rand,design,remain,fam_link,var_fix=NULL,n_fix=NULL,alpha=0.
   if (paste(fam_link)[2]== "log" && is.null(poisLog)) stop("Need the poisLog variance component")
   if (ftest=="PB" && is.null(iter)) stop("Need the iter for ftest PB")
   print(time1<- Sys.time()) #start time
+#NULL to appease R check
 resp<- NULL
+#known variance components
 damK<- var_rand[1];sireK<- var_rand[2];dxsK<- var_rand[3]
 if(paste(fam_link)[2]== "logit") { resK<- (pi^2)/3 }
 if(paste(fam_link)[2]== "probit") { resK<- 1 }
 if(paste(fam_link)[2]== "sqrt") { resK<- 0.25 }
 if(paste(fam_link)[2]== "log") { resK<- poisLog }
 randK<- rep(0,length(var_rand)-3); for (i in 1:length(randK)) { randK[i]<- var_rand[3+i] }
+#known n values
 damN<- n_rand[1];sireN<- n_rand[2];famN<- n_rand[3]
 randN<- rep(0,length(n_rand)-3); for (i in 1:length(randN)) { randN[i]<- n_rand[3+i] }
+#hold names, simulation variance and p-values
 rNames0<- colnames(design)[-c(1:3)]; rNames<- rNames0[1:length(randN)]
 randWith0<- list(); for (w in 1:length(randN)) { randWith0[[w]]<- paste0("randR[[",w,"]][",rNames[w],"]") }
 randWith<- noquote(paste(unlist(randWith0),"+ ",collapse=""))
 sim_varR<- matrix(0,ncol=length(var_rand)+1,nrow=nsim) #+ residual
 sim_pvalR<- matrix(0,ncol=length(n_rand),nrow=nsim) #NA residual
+##fixed effects
 if (!is.null(var_fix)) {
   fixK<- rep(0,length(var_fix)); for (i in 1:length(fixK)) { fixK[i]<- var_fix[i] }
   fixN<- rep(0,length(n_fix)); for (i in 1:length(fixN)) { fixN[i]<- n_fix[i] }
@@ -34,10 +39,13 @@ fixWith<- noquote(paste(unlist(fixWith0),"+ ",collapse=""))
 sim_varF<- numeric(nsim) #total fix var in a column
 sim_pvalF<- matrix(0,ncol=length(n_fix),nrow=nsim) #p-value each effect
 } #end fixed effects
+##Start loop
 for (i in 1:nsim) {
   print(paste0("Starting simulation: ", i))
+#simulation data (using lme4 simulate function does not seem to be accurate)
   damR<- rnorm(damN,0,sd=sqrt(damK));sireR<- rnorm(sireN,0,sd=sqrt(sireK));dxsR<- rnorm(famN,0,sd=sqrt(dxsK))
   randR<- list(); for (r in 1:length(randN)) { randR[[r]]<- rnorm(randN[r],0,sd=sqrt(randK[r])) }
+#model
 observ<- design
 if (is.null(var_fix)) { observ<- within(observ, {
  eval(parse(text=paste0("resp<- ",randWith,"damR[dam] + sireR[sire] + dxsR[family]"))) } )  #reverse, do not add resR
@@ -57,7 +65,9 @@ observ<- within(observ, {
   if(paste(fam_link)[2]== "sqrt") { observ<- within(observ, {resp2<- rpois(nrow(observ),resp^2)}) }
   if(paste(fam_link)[2]== "log") { observ<- within(observ, {resp2<- rpois(nrow(observ),exp(resp))}) }
 } #end var fix
+#
 m<- glmer(formula= noquote(paste0("resp2~ (1|dam) + (1|sire) + (1|dam:sire) +", remain)), family=fam_link, data=observ)
+#copy variance for random effect
 comp<- data.frame(effect= as.data.frame(VarCorr(m))$grp, effect2=as.data.frame(VarCorr(m))$var1,
   variance= as.data.frame(VarCorr(m))$vcov)
 sim_varR[,1][i]<- comp$variance[which(comp$effect=="dam")]
@@ -69,11 +79,13 @@ if(paste(fam_link)[2]== "log") {
     rand.formula <- reformulate(sapply(findbars(formula(m)),function(x) paste0("(", deparse(x), ")")),response=".")
     null.m <- update(m, rand.formula)
     sim_varR[,(length(comp$effect)+1)][i]<- log(1/exp(fixef(null.m)[1]) + 1) }
+#internal p-value function for random effects
 p_rand<- randGlmer(model=m,observ=observ,fam_link=fam_link)
 sim_pvalR[,1][i]<- p_rand$p.value[which(p_rand$term=="(1 | dam)")]
 sim_pvalR[,2][i]<- p_rand$p.value[which(p_rand$term=="(1 | sire)")]
 sim_pvalR[,3][i]<- p_rand$p.value[which(p_rand$term=="(1 | dam:sire)")]
 for (p in 1:length(randN)) { sim_pvalR[,(3+p)][i]<- p_rand$p.value[which(p_rand$term==paste0("(1 | ",rNames[p],")"))] }
+#copy variance for fixed effects
 if (!is.null(var_fix)) {  
   sim_varF[i]<- var(unique(as.vector(fixef(m) %*% t(m@pp$X))))
 if (ftest=="LR") { f_rand<- fixedGlmer(model=m,observ=observ,fam_link=fam_link) 
@@ -81,6 +93,7 @@ if (ftest=="LR") { f_rand<- fixedGlmer(model=m,observ=observ,fam_link=fam_link)
 if (ftest=="PB") { f_rand<- mixed(m,data=observ,method = "PB",args_test = list(nsim = iter))$anova_table 
   for (p in 1:length(fixN)) { sim_pvalF[,p][i]<- as.numeric(f_rand[which(rownames(f_rand)==paste0(fNames[p])),][4]) } }  } #end fixed
 } #end loop
+##power calculation
 pwr_rand<- matrix(0,ncol=5,nrow=length(var_rand)+1)
 pwr_rand[,1]<- c("dam","sire","dam.sire",rNames,"residual")
 pwr_rand[,2]<- c(n_rand,NA)
@@ -90,6 +103,7 @@ for(y in 1:length(n_rand)) { pwr_rand[,5][y]<- sum(sim_pvalR[,y] < alpha)/nsim }
 pwr_rand[,5][length(n_rand)+1]<- NA            #residual
 pwr_rand<- as.data.frame(pwr_rand); colnames(pwr_rand)<- c("term","n","var_in","var_out","power")
 pwr_res<- pwr_rand
+#
 if (!is.null(var_fix)) {
 pwr_fix1<- matrix(0,ncol=3,nrow=1)
   pwr_fix1[,1]<- "fix_eff"; pwr_fix1[,2]<- sum(var_fix); pwr_fix1[,3]<- mean(sim_varF)
@@ -99,6 +113,7 @@ pwr_fix2<- matrix(0,ncol=3,nrow=length(n_fix))
   for(y in 1:length(n_fix)) { pwr_fix2[,3][y]<- sum(sim_pvalF[,y] < alpha)/nsim }
   pwr_fix2<- as.data.frame(pwr_fix2); colnames(pwr_fix2)<- c("term","n","power")
   pwr_res<- list(group=pwr_fix1, fixed=pwr_fix2, random=pwr_rand)  } #end fixed
+#finish
   print(Sys.time()- time1) #end time
   return(pwr_res)  #after time
 }
