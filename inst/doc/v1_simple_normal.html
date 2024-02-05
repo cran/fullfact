@@ -12,7 +12,7 @@
 
 <meta name="author" content="Aimee Lee Houde" />
 
-<meta name="date" content="2024-01-27" />
+<meta name="date" content="2024-02-04" />
 
 <title>Simple Normal Data Example</title>
 
@@ -340,7 +340,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Simple Normal Data Example</h1>
 <h4 class="author">Aimee Lee Houde</h4>
-<h4 class="date">2024-01-27</h4>
+<h4 class="date">2024-02-04</h4>
 
 
 
@@ -408,8 +408,8 @@ White J-SS. 2009. Generalized linear mixed models: a practical guide for
 ecology and evolution. Trends in Ecology and Evolution 24(3): 127-135.
 DOI: 10.1016/j.tree.2008.10.008</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>length_mod1<span class="ot">&lt;-</span> <span class="fu">observLmer</span>(<span class="at">observ=</span>chinook_length,<span class="at">dam=</span><span class="st">&quot;dam&quot;</span>,<span class="at">sire=</span><span class="st">&quot;sire&quot;</span>,<span class="at">response=</span><span class="st">&quot;length&quot;</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-01-27 18:11:33 PST&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.2684782 secs</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-02-04 15:48:23 PST&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; Time difference of 1.15672 secs</span></span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>length_mod1</span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; $random</span></span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt;     effect     variance      percent     d.AIC      d.BIC       Chi.sq</span></span>
@@ -477,7 +477,7 @@ and the sample size of the Chinook salmon data set (i.e. dam= 11, sire=
 <p>Full analysis is 100 simulations. Example has 25 simulations.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co">#&gt;powerLmer(varcomp=c(0.1900,0,0.1719,0.6315),nval=c(11,11,10)) #full</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">powerLmer</span>(<span class="at">varcomp=</span><span class="fu">c</span>(<span class="fl">0.1900</span>,<span class="dv">0</span>,<span class="fl">0.1719</span>,<span class="fl">0.6315</span>),<span class="at">nval=</span><span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">11</span>,<span class="dv">10</span>),<span class="at">nsim=</span><span class="dv">25</span>) <span class="co">#25 simulations</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-01-27 18:11:34 PST&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-02-04 15:48:24 PST&quot;</span></span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 1&quot;</span></span>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 2&quot;</span></span>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 3&quot;</span></span>
@@ -503,12 +503,12 @@ and the sample size of the Chinook salmon data set (i.e. dam= 11, sire=
 <span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 23&quot;</span></span>
 <span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 24&quot;</span></span>
 <span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 25&quot;</span></span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a><span class="co">#&gt; Time difference of 4.323996 secs</span></span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a><span class="co">#&gt; Time difference of 4.383722 secs</span></span>
 <span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a><span class="co">#&gt;       term   n var_in     var_out power</span></span>
-<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a><span class="co">#&gt; 1      dam  11 0.1900 0.199706674     1</span></span>
-<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a><span class="co">#&gt; 2     sire  11 0.0000 0.003859588     0</span></span>
-<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a><span class="co">#&gt; 3 dam.sire 121 0.1719 0.167766731     1</span></span>
-<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a><span class="co">#&gt; 4 residual  NA 0.6315 0.629703490    NA</span></span></code></pre></div>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a><span class="co">#&gt; 1      dam  11 0.1900 0.169688375     1</span></span>
+<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a><span class="co">#&gt; 2     sire  11 0.0000 0.003465225     0</span></span>
+<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a><span class="co">#&gt; 3 dam.sire 121 0.1719 0.156794485     1</span></span>
+<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a><span class="co">#&gt; 4 residual  NA 0.6315 0.636592380    NA</span></span></code></pre></div>
 <p>There is sufficient power (<span class="math inline">\(\ge\)</span>
 0.8) for dam and dam by sire variance components, whereas there is
 insufficient power (&lt; 0.8) for the sire variance component. Albeit,
@@ -521,7 +521,7 @@ variance components and offspring sample size, dam and sire sample sizes
 could be reduced from 11 to 7.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co">#&gt;powerLmer(varcomp=c(0.1900,0,0.1719,0.6315),nval=c(7,7,10)) #full</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">powerLmer</span>(<span class="at">varcomp=</span><span class="fu">c</span>(<span class="fl">0.1900</span>,<span class="dv">0</span>,<span class="fl">0.1719</span>,<span class="fl">0.6315</span>),<span class="at">nval=</span><span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">7</span>,<span class="dv">10</span>),<span class="at">nsim=</span><span class="dv">25</span>) <span class="co">#25 simulations</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-01-27 18:11:38 PST&quot;</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-02-04 15:48:28 PST&quot;</span></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 1&quot;</span></span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 2&quot;</span></span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 3&quot;</span></span>
@@ -547,12 +547,12 @@ could be reduced from 11 to 7.</p>
 <span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 23&quot;</span></span>
 <span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 24&quot;</span></span>
 <span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 25&quot;</span></span>
-<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="co">#&gt; Time difference of 3.114836 secs</span></span>
-<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="co">#&gt;       term  n var_in    var_out power</span></span>
-<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="co">#&gt; 1      dam  7 0.1900 0.22157961  0.92</span></span>
-<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="co">#&gt; 2     sire  7 0.0000 0.01066344  0.04</span></span>
-<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a><span class="co">#&gt; 3 dam.sire 49 0.1719 0.16436797  1.00</span></span>
-<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a><span class="co">#&gt; 4 residual NA 0.6315 0.64422751    NA</span></span></code></pre></div>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="co">#&gt; Time difference of 3.205772 secs</span></span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="co">#&gt;       term  n var_in     var_out power</span></span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="co">#&gt; 1      dam  7 0.1900 0.164639547  0.92</span></span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="co">#&gt; 2     sire  7 0.0000 0.008090698  0.04</span></span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a><span class="co">#&gt; 3 dam.sire 49 0.1719 0.159179025  1.00</span></span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a><span class="co">#&gt; 4 residual NA 0.6315 0.625006352    NA</span></span></code></pre></div>
 </div>
 <div id="bootstrap-confidence-intervals" class="section level2">
 <h2>Bootstrap confidence intervals</h2>
@@ -625,13 +625,13 @@ be specified.</p>
 <span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="co">#&gt; 6    22.0      7.27   d1    s1    t8    1A    22.4      7.27</span></span>
 <span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a>length_rcomp1<span class="ot">&lt;-</span> <span class="fu">resampLmer</span>(<span class="at">resamp=</span>chinook_resampL,<span class="at">dam=</span><span class="st">&quot;dam&quot;</span>,<span class="at">sire=</span><span class="st">&quot;sire&quot;</span>,<span class="at">response=</span><span class="st">&quot;length&quot;</span>,</span>
 <span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a><span class="at">start=</span><span class="dv">1</span>,<span class="at">end=</span><span class="dv">5</span>)</span>
-<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-01-27 18:11:41 PST&quot;</span></span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-02-04 15:48:31 PST&quot;</span></span>
 <span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Working on model: 1&quot;</span></span>
 <span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Working on model: 2&quot;</span></span>
 <span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Working on model: 3&quot;</span></span>
 <span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Working on model: 4&quot;</span></span>
 <span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Working on model: 5&quot;</span></span>
-<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.2557919 secs</span></span>
+<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.2547581 secs</span></span>
 <span id="cb6-36"><a href="#cb6-36" tabindex="-1"></a>length_rcomp1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span>
 <span id="cb6-37"><a href="#cb6-37" tabindex="-1"></a><span class="co">#&gt;    dam:sire         sire       dam  Residual     Total     additive    nonadd</span></span>
 <span id="cb6-38"><a href="#cb6-38" tabindex="-1"></a><span class="co">#&gt; 1 0.2144147 2.515484e-03 0.1732970 0.5674395 0.9576666 1.006194e-02 0.8576587</span></span>
@@ -743,7 +743,7 @@ observations.</p>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co">#&gt;length_jack1&lt;- JackLmer(observ=chinook_length,dam=&quot;dam&quot;,sire=&quot;sire&quot;,response=&quot;length&quot;)</span></span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#first 10 observations</span></span>
 <span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>length_jack1<span class="ot">&lt;-</span> <span class="fu">JackLmer</span>(<span class="at">observ=</span>chinook_length,<span class="at">dam=</span><span class="st">&quot;dam&quot;</span>,<span class="at">sire=</span><span class="st">&quot;sire&quot;</span>,<span class="at">response=</span><span class="st">&quot;length&quot;</span>,<span class="at">first=</span><span class="dv">10</span>) </span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-01-27 18:11:42 PST&quot;</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-02-04 15:48:32 PST&quot;</span></span>
 <span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing observation: 1 of 1210&quot;</span></span>
 <span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing observation: 2 of 1210&quot;</span></span>
 <span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing observation: 3 of 1210&quot;</span></span>
@@ -754,7 +754,7 @@ observations.</p>
 <span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing observation: 8 of 1210&quot;</span></span>
 <span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing observation: 9 of 1210&quot;</span></span>
 <span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing observation: 10 of 1210&quot;</span></span>
-<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.588006 secs</span></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.7191651 secs</span></span>
 <span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a><span class="fu">head</span>(length_jack1)</span>
 <span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a><span class="co">#&gt;    dam:sire         sire       dam  Residual     Total     additive    nonadd</span></span>
 <span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a><span class="co">#&gt; 1 0.1719272 1.130054e-10 0.1899717 0.6320471 0.9939461 4.520215e-10 0.6877089</span></span>
@@ -784,7 +784,7 @@ observations.</p>
 <span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co">#first 10</span></span>
 <span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>length_jack1D<span class="ot">&lt;-</span> <span class="fu">JackLmer</span>(<span class="at">observ=</span>chinook_length,<span class="at">dam=</span><span class="st">&quot;dam&quot;</span>,<span class="at">sire=</span><span class="st">&quot;sire&quot;</span>,<span class="at">response=</span><span class="st">&quot;length&quot;</span>,</span>
 <span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="at">size=</span><span class="dv">5</span>,<span class="at">first=</span><span class="dv">10</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-01-27 18:11:42 PST&quot;</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-02-04 15:48:33 PST&quot;</span></span>
 <span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing block: 1 of 242&quot;</span></span>
 <span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing block: 2 of 242&quot;</span></span>
 <span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing block: 3 of 242&quot;</span></span>
@@ -795,22 +795,22 @@ observations.</p>
 <span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing block: 8 of 242&quot;</span></span>
 <span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing block: 9 of 242&quot;</span></span>
 <span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing block: 10 of 242&quot;</span></span>
-<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.5917308 secs</span></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.586534 secs</span></span>
 <span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a><span class="fu">head</span>(length_jack1D)</span>
 <span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a><span class="co">#&gt;    dam:sire         sire       dam  Residual     Total     additive    nonadd</span></span>
-<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a><span class="co">#&gt; 1 0.1711176 2.108377e-04 0.1907001 0.6325421 0.9945707 8.433510e-04 0.6844704</span></span>
-<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a><span class="co">#&gt; 2 0.1728529 1.966446e-10 0.1903099 0.6324619 0.9956246 7.865785e-10 0.6914114</span></span>
-<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a><span class="co">#&gt; 3 0.1690794 4.186075e-04 0.1917583 0.6302201 0.9914765 1.674430e-03 0.6763177</span></span>
-<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a><span class="co">#&gt; 4 0.1715337 1.142441e-04 0.1917410 0.6325957 0.9959846 4.569764e-04 0.6861347</span></span>
-<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a><span class="co">#&gt; 5 0.1738125 4.179300e-09 0.1901544 0.6327202 0.9966871 1.671720e-08 0.6952499</span></span>
-<span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a><span class="co">#&gt; 6 0.1716925 8.889637e-11 0.1895103 0.6333064 0.9945093 3.555855e-10 0.6867702</span></span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a><span class="co">#&gt; 1 0.1724557 2.738820e-04 0.1873491 0.6298571 0.9899358 1.095528e-03 0.6898227</span></span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a><span class="co">#&gt; 2 0.1722088 3.706721e-04 0.1898717 0.6323838 0.9948350 1.482688e-03 0.6888352</span></span>
+<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a><span class="co">#&gt; 3 0.1720427 0.000000e+00 0.1896242 0.6330576 0.9947245 0.000000e+00 0.6881709</span></span>
+<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a><span class="co">#&gt; 4 0.1706830 0.000000e+00 0.1891575 0.6333865 0.9932270 0.000000e+00 0.6827322</span></span>
+<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a><span class="co">#&gt; 5 0.1723912 1.125891e-10 0.1907481 0.6326380 0.9957772 4.503564e-10 0.6895646</span></span>
+<span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a><span class="co">#&gt; 6 0.1713051 0.000000e+00 0.1925064 0.6324205 0.9962320 0.000000e+00 0.6852202</span></span>
 <span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a><span class="co">#&gt;    maternal</span></span>
-<span id="cb11-27"><a href="#cb11-27" tabindex="-1"></a><span class="co">#&gt; 1 0.1904893</span></span>
-<span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a><span class="co">#&gt; 2 0.1903099</span></span>
-<span id="cb11-29"><a href="#cb11-29" tabindex="-1"></a><span class="co">#&gt; 3 0.1913397</span></span>
-<span id="cb11-30"><a href="#cb11-30" tabindex="-1"></a><span class="co">#&gt; 4 0.1916268</span></span>
-<span id="cb11-31"><a href="#cb11-31" tabindex="-1"></a><span class="co">#&gt; 5 0.1901544</span></span>
-<span id="cb11-32"><a href="#cb11-32" tabindex="-1"></a><span class="co">#&gt; 6 0.1895103</span></span></code></pre></div>
+<span id="cb11-27"><a href="#cb11-27" tabindex="-1"></a><span class="co">#&gt; 1 0.1870752</span></span>
+<span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a><span class="co">#&gt; 2 0.1895010</span></span>
+<span id="cb11-29"><a href="#cb11-29" tabindex="-1"></a><span class="co">#&gt; 3 0.1896242</span></span>
+<span id="cb11-30"><a href="#cb11-30" tabindex="-1"></a><span class="co">#&gt; 4 0.1891575</span></span>
+<span id="cb11-31"><a href="#cb11-31" tabindex="-1"></a><span class="co">#&gt; 5 0.1907481</span></span>
+<span id="cb11-32"><a href="#cb11-32" tabindex="-1"></a><span class="co">#&gt; 6 0.1925064</span></span></code></pre></div>
 <p>Extract the jackknife confidence intervals (CI) and median for the
 additive genetic, non-additive genetic, and maternal values from the
 data frame of models produced using <code>JackLmer</code>.</p>

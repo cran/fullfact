@@ -414,7 +414,7 @@ barMANA(ci_dat=survival_ci) #basic, top
 barMANA(ci_dat=survival_ci,bar_len=0.3,yunit=4,ymax=20,cex_ylab=1.3) #modified, bottom
 ```
 
-![plot of chunk barplot](figure/barplot-1.png)
+![plot of chunk barplot](barplot-1.png)
 
 Different traits can also be combined on the same bar plot using `trait` specified in `ciMANA` or `ciJack`. The information is combined into a list object. For the example, the jackknife CI is duplicated to simulate 'different traits'.
 
@@ -427,7 +427,7 @@ percentage=rbind(survival_ci1$percentage,survival_ci2$percentage))
 barMANA(ci_dat=comb_bar,bar_len=0.3,yunit=4,ymax=20,cex_ylab=1.3)
 ```
 
-![plot of chunk barplot-comb](figure/barplot-comb-1.png)
+![plot of chunk barplot-comb](barplot-comb-1.png)
 
 The legend is slightly off in the presented html version but is fine with the R plotting device.
 
@@ -442,7 +442,7 @@ boxMANA(comp=chinook_bootS) #from resampGlmer, basic, top
 boxMANA(comp=chinook_bootS,yunit=2,ymin=10,ymax=22,cex_ylab=1.3,leg="topleft") #modified, bottom
 ```
 
-![plot of chunk boxplot](figure/boxplot-1.png)
+![plot of chunk boxplot](boxplot-1.png)
 
 Different traits can also be combined on the same box plot by adding a "trait" column to the resampling data set. For the example, the bootstrap-t data frame is duplicated to simulate 'different traits'.
 
@@ -455,6 +455,6 @@ comb_boot$trait<- as.factor(comb_boot$trait)
 boxMANA(comb_boot,yunit=2,ymin=10,ymax=22,cex_ylab=1.3,leg="topleft")
 ```
 
-![plot of chunk boxplot-comb](figure/boxplot-comb-1.png)
+![plot of chunk boxplot-comb](boxplot-comb-1.png)
 
 The recommended follow-up vignette is the **Advanced Non-Normal Data Example**, covering the standard model with the options of including additional random effects for one position (e.g. tank) and/or one block effect (e.g. several blocks of 2 $\times$ 2 factorial matings).

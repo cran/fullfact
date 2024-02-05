@@ -29,7 +29,7 @@ This package will facilitate the analyses of full factorial mating designs in R,
 for the analysis of binary, proportion, and/or count data types and for the ability to incorporate
 additional random and fixed effects and power analyses.
 
-There are now six vignettes containing detailed examples: browseVignettes(package="fullfact"). 
+The package contains six vignettes containing detailed examples: browseVignettes(package="fullfact"). 
 
 The paper associated with the package including worked examples is:
 Houde ALS, Pitcher TE. 2016. fullfact: an R package for the analysis of genetic and maternal variance components

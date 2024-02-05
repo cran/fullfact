@@ -12,7 +12,7 @@
 
 <meta name="author" content="Aimee Lee Houde" />
 
-<meta name="date" content="2024-01-27" />
+<meta name="date" content="2024-02-04" />
 
 <title>Expert Normal Data Example</title>
 
@@ -340,7 +340,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Expert Normal Data Example</h1>
 <h4 class="author">Aimee Lee Houde</h4>
-<h4 class="date">2024-01-27</h4>
+<h4 class="date">2024-02-04</h4>
 
 
 
@@ -429,13 +429,13 @@ DOI: 10.1016/j.tree.2008.10.008</p>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#&gt;remain=&quot;egg_size + (1|tray)&quot;,iter=1000) #full</span></span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>length_mod3<span class="ot">&lt;-</span> <span class="fu">observLmer3</span>(<span class="at">observ=</span>chinook_length,<span class="at">dam=</span><span class="st">&quot;dam&quot;</span>,<span class="at">sire=</span><span class="st">&quot;sire&quot;</span>,<span class="at">response=</span><span class="st">&quot;length&quot;</span>,</span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="at">remain=</span><span class="st">&quot;egg_size + (1|tray)&quot;</span>,<span class="at">iter=</span><span class="dv">100</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-01-27 18:12:01 PST&quot;</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; Time difference of 9.863723 secs</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-02-04 15:49:06 PST&quot;</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; Time difference of 11.26486 secs</span></span>
 <span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>length_mod3</span>
 <span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; $fixed</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt;     effect   variance  percent   Chi.sq   p.value</span></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; 1 egg_size         NA       NA 3.273533 0.1584158</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; 2  Fix_Tot 0.05967965 5.660793       NA        NA</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt;     effect   variance  percent   Chi.sq    p.value</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; 1 egg_size         NA       NA 3.273533 0.07920792</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; 2  Fix_Tot 0.05967965 5.660793       NA         NA</span></span>
 <span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt; $LRT.fixed</span></span>
 <span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co">#&gt;       term    d.AIC     d.BIC   Chi.sq    p.value</span></span>
@@ -551,12 +551,12 @@ then the sample size would be 1 for the simulation.</p>
 <span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>desn<span class="sc">$</span>egg_size<span class="ot">&lt;-</span> desn<span class="sc">$</span>dam <span class="co">#egg size is related to dam</span></span>
 <span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="fu">head</span>(desn)</span>
 <span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt;   dam sire family tray egg_size</span></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; 1   1    1      1   10        1</span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt; 2   1    2      2    7        1</span></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co">#&gt; 3   1    3      3    9        1</span></span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="co">#&gt; 4   1    4      4    9        1</span></span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="co">#&gt; 5   1    5      5    3        1</span></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co">#&gt; 6   1    6      6    9        1</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; 1   1    1      1    8        1</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt; 2   1    2      2    3        1</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co">#&gt; 3   1    3      3    7        1</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="co">#&gt; 4   1    4      4    3        1</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="co">#&gt; 5   1    5      5    7        1</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co">#&gt; 6   1    6      6    1        1</span></span>
 <span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="co">#&gt;powerLmer3(var_rand=c(0.1461,0,0.1788,0.5499,0.1198),n_rand=c(11,11,121,11),var_fix=0.0597,</span></span>
 <span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="co">#&gt;n_fix=11,design=desn,remain=&quot;(1|tray) + egg_size&quot;) #full with LR</span></span>
 <span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="co">#full with PB and 1000 iterations</span></span>
@@ -564,7 +564,7 @@ then the sample size would be 1 for the simulation.</p>
 <span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="co">#&gt;n_fix=11,design=desn,remain=&quot;(1|tray) + egg_size&quot;,ftest=&quot;PB&quot;,iter=1000) </span></span>
 <span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a><span class="fu">powerLmer3</span>(<span class="at">var_rand=</span><span class="fu">c</span>(<span class="fl">0.1461</span>,<span class="dv">0</span>,<span class="fl">0.1788</span>,<span class="fl">0.5499</span>,<span class="fl">0.1198</span>),<span class="at">n_rand=</span><span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">11</span>,<span class="dv">121</span>,<span class="dv">11</span>),<span class="at">var_fix=</span><span class="fl">0.0597</span>,</span>
 <span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a><span class="at">n_fix=</span><span class="dv">11</span>,<span class="at">design=</span>desn,<span class="at">remain=</span><span class="st">&quot;(1|tray) + egg_size&quot;</span>,<span class="at">nsim=</span><span class="dv">25</span>) <span class="co">#25 simulations with LR</span></span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-01-27 18:12:11 PST&quot;</span></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-02-04 15:49:18 PST&quot;</span></span>
 <span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 1&quot;</span></span>
 <span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 2&quot;</span></span>
 <span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 3&quot;</span></span>
@@ -590,22 +590,22 @@ then the sample size would be 1 for the simulation.</p>
 <span id="cb3-47"><a href="#cb3-47" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 23&quot;</span></span>
 <span id="cb3-48"><a href="#cb3-48" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 24&quot;</span></span>
 <span id="cb3-49"><a href="#cb3-49" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 25&quot;</span></span>
-<span id="cb3-50"><a href="#cb3-50" tabindex="-1"></a><span class="co">#&gt; Time difference of 11.73846 secs</span></span>
+<span id="cb3-50"><a href="#cb3-50" tabindex="-1"></a><span class="co">#&gt; Time difference of 12.43282 secs</span></span>
 <span id="cb3-51"><a href="#cb3-51" tabindex="-1"></a><span class="co">#&gt; $group</span></span>
 <span id="cb3-52"><a href="#cb3-52" tabindex="-1"></a><span class="co">#&gt;     group var_in            var_out</span></span>
-<span id="cb3-53"><a href="#cb3-53" tabindex="-1"></a><span class="co">#&gt; 1 fix_eff 0.0597 0.0184824094573149</span></span>
+<span id="cb3-53"><a href="#cb3-53" tabindex="-1"></a><span class="co">#&gt; 1 fix_eff 0.0597 0.0222310889901148</span></span>
 <span id="cb3-54"><a href="#cb3-54" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb3-55"><a href="#cb3-55" tabindex="-1"></a><span class="co">#&gt; $fixed</span></span>
 <span id="cb3-56"><a href="#cb3-56" tabindex="-1"></a><span class="co">#&gt;       term  n power</span></span>
 <span id="cb3-57"><a href="#cb3-57" tabindex="-1"></a><span class="co">#&gt; 1 egg_size 11  0.08</span></span>
 <span id="cb3-58"><a href="#cb3-58" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb3-59"><a href="#cb3-59" tabindex="-1"></a><span class="co">#&gt; $random</span></span>
-<span id="cb3-60"><a href="#cb3-60" tabindex="-1"></a><span class="co">#&gt;       term    n var_in             var_out power</span></span>
-<span id="cb3-61"><a href="#cb3-61" tabindex="-1"></a><span class="co">#&gt; 1      dam   11 0.1461   0.166787259754233     1</span></span>
-<span id="cb3-62"><a href="#cb3-62" tabindex="-1"></a><span class="co">#&gt; 2     sire   11      0 0.00280025482176156     0</span></span>
-<span id="cb3-63"><a href="#cb3-63" tabindex="-1"></a><span class="co">#&gt; 3 dam.sire  121 0.1788   0.185104951271876     1</span></span>
-<span id="cb3-64"><a href="#cb3-64" tabindex="-1"></a><span class="co">#&gt; 4     tray   11 0.1198   0.129355395028561     1</span></span>
-<span id="cb3-65"><a href="#cb3-65" tabindex="-1"></a><span class="co">#&gt; 5 residual &lt;NA&gt; 0.5499    0.54384870215202  &lt;NA&gt;</span></span></code></pre></div>
+<span id="cb3-60"><a href="#cb3-60" tabindex="-1"></a><span class="co">#&gt;       term    n var_in            var_out power</span></span>
+<span id="cb3-61"><a href="#cb3-61" tabindex="-1"></a><span class="co">#&gt; 1      dam   11 0.1461  0.224844825853844     1</span></span>
+<span id="cb3-62"><a href="#cb3-62" tabindex="-1"></a><span class="co">#&gt; 2     sire   11      0 0.0060524340096173     0</span></span>
+<span id="cb3-63"><a href="#cb3-63" tabindex="-1"></a><span class="co">#&gt; 3 dam.sire  121 0.1788  0.173533124995259     1</span></span>
+<span id="cb3-64"><a href="#cb3-64" tabindex="-1"></a><span class="co">#&gt; 4     tray   11 0.1198  0.136720128827227     1</span></span>
+<span id="cb3-65"><a href="#cb3-65" tabindex="-1"></a><span class="co">#&gt; 5 residual &lt;NA&gt; 0.5499  0.535497995336952  &lt;NA&gt;</span></span></code></pre></div>
 <p>There is sufficient power (<span class="math inline">\(\ge\)</span>
 0.8) for dam and dam by sire variance components, whereas there is
 insufficient power (&lt; 0.8) for the sire variance component. Albeit,
@@ -637,7 +637,7 @@ reduced accordingly to match the change in dam sample size.</p>
 <span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt;n_fix=7,design=desn_2,remain=&quot;(1|tray) + egg_size&quot;,ftest=&quot;PB&quot;,iter=1000) </span></span>
 <span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="fu">powerLmer3</span>(<span class="at">var_rand=</span><span class="fu">c</span>(<span class="fl">0.1461</span>,<span class="dv">0</span>,<span class="fl">0.1788</span>,<span class="fl">0.5499</span>,<span class="fl">0.1198</span>),<span class="at">n_rand=</span><span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">7</span>,<span class="dv">49</span>,<span class="dv">10</span>),<span class="at">var_fix=</span><span class="fl">0.0597</span>,</span>
 <span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="at">n_fix=</span><span class="dv">7</span>,<span class="at">design=</span>desn_2,<span class="at">remain=</span><span class="st">&quot;(1|tray) + egg_size&quot;</span>,<span class="at">nsim=</span><span class="dv">25</span>) <span class="co">#25 simulations with LR</span></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-01-27 18:12:23 PST&quot;</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-02-04 15:49:30 PST&quot;</span></span>
 <span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 1&quot;</span></span>
 <span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 2&quot;</span></span>
 <span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 3&quot;</span></span>
@@ -663,22 +663,22 @@ reduced accordingly to match the change in dam sample size.</p>
 <span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 23&quot;</span></span>
 <span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 24&quot;</span></span>
 <span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Starting simulation: 25&quot;</span></span>
-<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a><span class="co">#&gt; Time difference of 7.414674 secs</span></span>
+<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a><span class="co">#&gt; Time difference of 7.957783 secs</span></span>
 <span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a><span class="co">#&gt; $group</span></span>
 <span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a><span class="co">#&gt;     group var_in            var_out</span></span>
-<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a><span class="co">#&gt; 1 fix_eff 0.0597 0.0195921215446812</span></span>
+<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a><span class="co">#&gt; 1 fix_eff 0.0597 0.0415828511017653</span></span>
 <span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a><span class="co">#&gt; $fixed</span></span>
 <span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a><span class="co">#&gt;       term n power</span></span>
-<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a><span class="co">#&gt; 1 egg_size 7     0</span></span>
+<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a><span class="co">#&gt; 1 egg_size 7  0.16</span></span>
 <span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a><span class="co">#&gt; $random</span></span>
 <span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a><span class="co">#&gt;       term    n var_in             var_out power</span></span>
-<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a><span class="co">#&gt; 1      dam    7 0.1461   0.220504607674111     1</span></span>
-<span id="cb4-53"><a href="#cb4-53" tabindex="-1"></a><span class="co">#&gt; 2     sire    7      0 0.00854469479449168  0.04</span></span>
-<span id="cb4-54"><a href="#cb4-54" tabindex="-1"></a><span class="co">#&gt; 3 dam.sire   49 0.1788   0.164011041119292     1</span></span>
-<span id="cb4-55"><a href="#cb4-55" tabindex="-1"></a><span class="co">#&gt; 4     tray   10 0.1198    0.12482062307077     1</span></span>
-<span id="cb4-56"><a href="#cb4-56" tabindex="-1"></a><span class="co">#&gt; 5 residual &lt;NA&gt; 0.5499   0.553381923199604  &lt;NA&gt;</span></span></code></pre></div>
+<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a><span class="co">#&gt; 1      dam    7 0.1461   0.168882750794075   0.8</span></span>
+<span id="cb4-53"><a href="#cb4-53" tabindex="-1"></a><span class="co">#&gt; 2     sire    7      0 0.00548358319542521     0</span></span>
+<span id="cb4-54"><a href="#cb4-54" tabindex="-1"></a><span class="co">#&gt; 3 dam.sire   49 0.1788   0.174208501240021     1</span></span>
+<span id="cb4-55"><a href="#cb4-55" tabindex="-1"></a><span class="co">#&gt; 4     tray   10 0.1198   0.117153234207914     1</span></span>
+<span id="cb4-56"><a href="#cb4-56" tabindex="-1"></a><span class="co">#&gt; 5 residual &lt;NA&gt; 0.5499   0.545370141358096  &lt;NA&gt;</span></span></code></pre></div>
 </div>
 <div id="bootstrap-confidence-intervals" class="section level2">
 <h2>Bootstrap confidence intervals</h2>
@@ -753,13 +753,13 @@ package format with # sign, e.g. fixed# + (1|random#).</p>
 <span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="co">#&gt; 6    22.0      7.27   d1    s1    t8    1A    22.4      7.27</span></span>
 <span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a>length_rcomp3<span class="ot">&lt;-</span> <span class="fu">resampLmer3</span>(<span class="at">resamp=</span>chinook_resampL,<span class="at">dam=</span><span class="st">&quot;dam&quot;</span>,<span class="at">sire=</span><span class="st">&quot;sire&quot;</span>,<span class="at">response=</span><span class="st">&quot;length&quot;</span>,</span>
 <span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a><span class="at">remain=</span><span class="st">&quot;egg_size# + (1|tray#)&quot;</span>,<span class="at">start=</span><span class="dv">1</span>,<span class="at">end=</span><span class="dv">5</span>)</span>
-<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-01-27 18:12:30 PST&quot;</span></span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-02-04 15:49:38 PST&quot;</span></span>
 <span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Working on model: 1&quot;</span></span>
 <span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Working on model: 2&quot;</span></span>
 <span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Working on model: 3&quot;</span></span>
 <span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Working on model: 4&quot;</span></span>
 <span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Working on model: 5&quot;</span></span>
-<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.4190831 secs</span></span>
+<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.4564121 secs</span></span>
 <span id="cb6-36"><a href="#cb6-36" tabindex="-1"></a>length_rcomp3[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span>
 <span id="cb6-37"><a href="#cb6-37" tabindex="-1"></a><span class="co">#&gt;    dam:sire      tray         sire       dam  Residual      Fixed     Total</span></span>
 <span id="cb6-38"><a href="#cb6-38" tabindex="-1"></a><span class="co">#&gt; 1 0.2138559 0.1160011 0.000000e+00 0.1340714 0.4995956 0.06131461 1.0248386</span></span>
@@ -898,7 +898,7 @@ observations.</p>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co">#&gt;remain=&quot;egg_size + (1|tray)&quot;) #full, all observations</span></span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>length_jack3<span class="ot">&lt;-</span> <span class="fu">JackLmer3</span>(<span class="at">observ=</span>chinook_length,<span class="at">dam=</span><span class="st">&quot;dam&quot;</span>,<span class="at">sire=</span><span class="st">&quot;sire&quot;</span>,<span class="at">response=</span><span class="st">&quot;length&quot;</span>,</span>
 <span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="at">remain=</span><span class="st">&quot;egg_size + (1|tray)&quot;</span>,<span class="at">first=</span><span class="dv">10</span>) <span class="co">#first 10 observations</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-01-27 18:12:31 PST&quot;</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-02-04 15:49:39 PST&quot;</span></span>
 <span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing observation: 1 of 1210&quot;</span></span>
 <span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing observation: 2 of 1210&quot;</span></span>
 <span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing observation: 3 of 1210&quot;</span></span>
@@ -909,7 +909,7 @@ observations.</p>
 <span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing observation: 8 of 1210&quot;</span></span>
 <span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing observation: 9 of 1210&quot;</span></span>
 <span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing observation: 10 of 1210&quot;</span></span>
-<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.878648 secs</span></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.9954109 secs</span></span>
 <span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a><span class="fu">head</span>(length_jack3)</span>
 <span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a><span class="co">#&gt;    dam:sire      tray         sire       dam  Residual      Fixed    Total</span></span>
 <span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a><span class="co">#&gt; 1 0.1788309 0.1198896 5.116505e-09 0.1461743 0.5503600 0.05955364 1.054808</span></span>
@@ -939,7 +939,7 @@ observations.</p>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co">#&gt;remain=&quot;egg_size + (1|tray)&quot;,size=5) #full</span></span>
 <span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>length_jack3D<span class="ot">&lt;-</span> <span class="fu">JackLmer3</span>(<span class="at">observ=</span>chinook_length,<span class="at">dam=</span><span class="st">&quot;dam&quot;</span>,<span class="at">sire=</span><span class="st">&quot;sire&quot;</span>,<span class="at">response=</span><span class="st">&quot;length&quot;</span>,</span>
 <span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="at">remain=</span><span class="st">&quot;egg_size + (1|tray)&quot;</span>,<span class="at">size=</span><span class="dv">5</span>,<span class="at">first=</span><span class="dv">10</span>) <span class="co">#first 10 </span></span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-01-27 18:12:32 PST&quot;</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2024-02-04 15:49:40 PST&quot;</span></span>
 <span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing block: 1 of 242&quot;</span></span>
 <span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing block: 2 of 242&quot;</span></span>
 <span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing block: 3 of 242&quot;</span></span>
@@ -950,22 +950,22 @@ observations.</p>
 <span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing block: 8 of 242&quot;</span></span>
 <span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing block: 9 of 242&quot;</span></span>
 <span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Removing block: 10 of 242&quot;</span></span>
-<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.9213579 secs</span></span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a><span class="co">#&gt; Time difference of 1.550363 secs</span></span>
 <span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a><span class="fu">head</span>(length_jack3D)</span>
 <span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a><span class="co">#&gt;    dam:sire      tray         sire       dam  Residual      Fixed    Total</span></span>
-<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a><span class="co">#&gt; 1 0.1784433 0.1209501 3.077189e-10 0.1449169 0.5503811 0.05912807 1.053820</span></span>
-<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a><span class="co">#&gt; 2 0.1784202 0.1198218 7.402486e-08 0.1476568 0.5508850 0.05983743 1.056621</span></span>
-<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a><span class="co">#&gt; 3 0.1792390 0.1201915 0.000000e+00 0.1446802 0.5517327 0.05963993 1.055483</span></span>
-<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a><span class="co">#&gt; 4 0.1794928 0.1193948 0.000000e+00 0.1478523 0.5505191 0.05876307 1.056022</span></span>
-<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a><span class="co">#&gt; 5 0.1795098 0.1196502 1.164000e-08 0.1449555 0.5508311 0.05859306 1.053540</span></span>
-<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a><span class="co">#&gt; 6 0.1802367 0.1199763 4.549738e-10 0.1455886 0.5514117 0.05929402 1.056507</span></span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a><span class="co">#&gt; 1 0.1787138 0.1199980 2.882837e-07 0.1462634 0.5520360 0.05917780 1.056189</span></span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a><span class="co">#&gt; 2 0.1769191 0.1211236 1.455383e-09 0.1466239 0.5511235 0.05957517 1.055365</span></span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a><span class="co">#&gt; 3 0.1789981 0.1194060 0.000000e+00 0.1466029 0.5521988 0.05950103 1.056707</span></span>
+<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a><span class="co">#&gt; 4 0.1798751 0.1200773 1.136096e-09 0.1454655 0.5492563 0.05990084 1.054575</span></span>
+<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a><span class="co">#&gt; 5 0.1783032 0.1196376 0.000000e+00 0.1482163 0.5508447 0.06049623 1.057498</span></span>
+<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a><span class="co">#&gt; 6 0.1782257 0.1201585 0.000000e+00 0.1463628 0.5504652 0.06062335 1.055836</span></span>
 <span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a><span class="co">#&gt;       additive    nonadd  maternal</span></span>
-<span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a><span class="co">#&gt; 1 1.230876e-09 0.7137731 0.1449169</span></span>
-<span id="cb11-27"><a href="#cb11-27" tabindex="-1"></a><span class="co">#&gt; 2 2.960994e-07 0.7136807 0.1476567</span></span>
-<span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a><span class="co">#&gt; 3 0.000000e+00 0.7169559 0.1446802</span></span>
-<span id="cb11-29"><a href="#cb11-29" tabindex="-1"></a><span class="co">#&gt; 4 0.000000e+00 0.7179713 0.1478523</span></span>
-<span id="cb11-30"><a href="#cb11-30" tabindex="-1"></a><span class="co">#&gt; 5 4.656000e-08 0.7180393 0.1449555</span></span>
-<span id="cb11-31"><a href="#cb11-31" tabindex="-1"></a><span class="co">#&gt; 6 1.819895e-09 0.7209470 0.1455886</span></span></code></pre></div>
+<span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a><span class="co">#&gt; 1 1.153135e-06 0.7148552 0.1462631</span></span>
+<span id="cb11-27"><a href="#cb11-27" tabindex="-1"></a><span class="co">#&gt; 2 5.821532e-09 0.7076763 0.1466239</span></span>
+<span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a><span class="co">#&gt; 3 0.000000e+00 0.7159922 0.1466029</span></span>
+<span id="cb11-29"><a href="#cb11-29" tabindex="-1"></a><span class="co">#&gt; 4 4.544386e-09 0.7195006 0.1454655</span></span>
+<span id="cb11-30"><a href="#cb11-30" tabindex="-1"></a><span class="co">#&gt; 5 0.000000e+00 0.7132130 0.1482163</span></span>
+<span id="cb11-31"><a href="#cb11-31" tabindex="-1"></a><span class="co">#&gt; 6 0.000000e+00 0.7129028 0.1463628</span></span></code></pre></div>
 <p>Extract the jackknife confidence intervals (CI) and median for the
 additive genetic, non-additive genetic, and maternal values from the
 data frame of models produced using <code>JackLmer3</code>. Also
